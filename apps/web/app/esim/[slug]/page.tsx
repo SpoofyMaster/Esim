@@ -1,3 +1,4 @@
+import { DESTINATION_IMAGES, DESTINATION_VIDEOS, MOROCCO_GALLERY } from "@/lib/media";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DestinationPage } from "@/components/DestinationPage";
@@ -25,5 +26,5 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const c = countryBySlug((await params).slug);
   if (!c?.iso2) notFound();
   const plans = await serverCatalog.country(c.iso2);
-  return <DestinationPage kind="country" name={c.names.en} iso2={c.iso2} path={`/esim/${slugOf(c)}`} globeHref={`/?d=${c.iso2.toLowerCase()}`} plans={plans} />;
+  return <DestinationPage kind="country" name={c.names.en} iso2={c.iso2} path={`/esim/${slugOf(c)}`} globeHref={`/?d=${c.iso2.toLowerCase()}`} plans={plans} image={DESTINATION_IMAGES[c.iso2]} video={DESTINATION_VIDEOS[c.iso2]} gallery={c.iso2 === "MA" ? MOROCCO_GALLERY : undefined} />;
 }

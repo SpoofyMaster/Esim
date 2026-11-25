@@ -1,3 +1,4 @@
+import { DESTINATION_IMAGES } from "@/lib/media";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DestinationPage } from "@/components/DestinationPage";
@@ -15,5 +16,5 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
   const r = regionById((await params).id);
   if (!r) notFound();
   const plans = await serverCatalog.region(r.id);
-  return <DestinationPage kind="region" name={r.names.en} path={`/esim/region/${r.id}`} globeHref={`/?r=${r.id}`} plans={plans} />;
+  return <DestinationPage kind="region" name={r.names.en} path={`/esim/region/${r.id}`} globeHref={`/?r=${r.id}`} plans={plans} image={DESTINATION_IMAGES[`region:${r.id}`]} />;
 }

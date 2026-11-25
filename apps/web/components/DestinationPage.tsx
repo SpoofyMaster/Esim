@@ -4,6 +4,7 @@ import { CommerceShell } from "@/components/commerce/Shell";
 import { PlanTable } from "@/components/PlanTable";
 import { formatPrice } from "@/lib/catalog-format";
 import { SITE, slugOf } from "@/lib/server-catalog";
+import { type MediaImage, type MediaVideo, src, srcSet } from "@/lib/media";
 
 export interface DestinationPageProps {
   kind: "country" | "region" | "global";
@@ -12,9 +13,12 @@ export interface DestinationPageProps {
   globeHref: string;
   iso2?: string;
   plans: Plan[];
+  image?: MediaImage;
+  video?: MediaVideo;
+  gallery?: MediaImage[];
 }
 
-export function DestinationPage({ kind, name, path, globeHref, iso2, plans }: DestinationPageProps) {
+export function DestinationPage({ kind, name, path, globeHref, iso2, plans, image, video, gallery }: DestinationPageProps) {
   const cheapest = plans.reduce<Plan | null>((a, b) => (!a || b.price.amount < a.price.amount ? b : a), null);
   const sample = plans[0];
   const coverage = sample ? sample.coverage : [];
@@ -48,6 +52,13 @@ export function DestinationPage({ kind, name, path, globeHref, iso2, plans }: De
     <CommerceShell>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       <nav aria-label="Breadcrumb" className="text-sm text-[var(--fg-muted)]"><a href="/" className="hover:underline">Home</a> / <a href="/destinations" className="hover:underline">Destinations</a> / <span aria-current="page">{name}</span></nav>
+      {image && (
+        <figure className="relative mt-6 overflow-hidden rounded-3xl bg-[var(--bg-subtle)]">
+          {video && <video aria-hidden className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden" src={video.src} poster={video.poster} autoPlay muted loop playsInline preload="metadata" />}
+          <img src={src(image)} srcSet={srcSet(image)} sizes="(min-width: 1024px) 960px, 100vw" alt={image.alt} width={1200} height={670} fetchPriority="high" className={`aspect-[21/9] w-full object-cover ${video ? "motion-safe:invisible" : ""}`} />
+          <figcaption className="absolute bottom-2 right-3 rounded-full bg-black/50 px-2 py-0.5 text-[11px] text-white/80">Illustrative image</figcaption>
+        </figure>
+      )}
       <header className="mt-6 flex items-center gap-4">
         <span aria-hidden className="grid size-14 place-items-center rounded-2xl bg-[var(--bg-subtle)] text-3xl">{iso2 ? flagEmoji(iso2) : kind === "region" ? "◎" : "◍"}</span>
         <div>
@@ -87,6 +98,16 @@ export function DestinationPage({ kind, name, path, globeHref, iso2, plans }: De
           <ul className="mt-4 flex flex-wrap gap-2 text-sm">
             {coveredCountries.map((c) => <li key={c!.iso2}><a href={`/esim/${slugOf(c!)}`} className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 hover:bg-white/5"><span aria-hidden>{flagEmoji(c!.iso2!)}</span>{c!.names.en}</a></li>)}
           </ul>
+        </section>
+      )}
+
+      {gallery && gallery.length > 0 && (
+        <section aria-labelledby="gal-h" className="mt-12">
+          <h2 id="gal-h" className="font-display text-2xl font-semibold tracking-tight">{name}, from the north to the Sahara</h2>
+          <ul className="mt-5 grid grid-cols-2 gap-3 md:grid-cols-4">
+            {gallery.map((g) => <li key={g.base}><img src={src(g)} alt={g.alt} loading="lazy" width={1200} height={675} className="aspect-[4/3] w-full rounded-2xl object-cover" /></li>)}
+          </ul>
+          <p className="mt-2 text-xs text-[var(--fg-muted)]">Illustrative images.</p>
         </section>
       )}
 

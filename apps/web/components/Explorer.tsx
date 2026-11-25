@@ -123,9 +123,11 @@ function HoverTip({ prices }: { prices: Record<string, { amount: number; currenc
 }
 
 function StaticEarth() {
+  // No-WebGL fallback: a generated orbit loop (muted, decorative). Reduced motion gets the still poster only.
   return (
-    <div className="absolute inset-0 grid place-items-center">
-      <div aria-hidden className="aspect-square w-[min(86vw,720px)] rounded-full bg-[url('/earth/day-2k.jpg')] bg-[length:200%_100%] bg-[position:35%_50%] shadow-[0_0_120px_30px_rgba(0,87,255,0.35),inset_-60px_-30px_120px_rgba(2,11,31,0.95)] md:translate-x-[18%]" />
+    <div aria-hidden className="absolute inset-0">
+      <img src="/media/hero-earth-orbit-loop-16x9-poster.webp" alt="" className="absolute inset-0 h-full w-full object-cover object-[70%_50%]" />
+      <video className="absolute inset-0 h-full w-full object-cover object-[70%_50%] motion-reduce:hidden" src="/media/hero-earth-orbit-loop-16x9-720.mp4" poster="/media/hero-earth-orbit-loop-16x9-poster.webp" autoPlay muted loop playsInline preload="metadata" />
     </div>
   );
 }

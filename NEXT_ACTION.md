@@ -1,3 +1,14 @@
+# Next action (updated 2026-11-25 21:00 UTC)
+
+Done this step: SSR destination pages + SEO; Western Sahara merged into Morocco; repo on GitHub (SpoofyMaster/Esim) with CI; Higgsfield assets (600 credits) wired into pages.
+
+Next, in order:
+1. Admin dashboard (milestone 12): orders, eSIMs, suppliers, plans, audit log; role ADMIN.
+2. i18n UI with Arabic RTL (milestone 13) — then add real hreflang alternates via `langAlternates()`.
+3. Email verification + password reset (T-072), Redis provisioning queue (T-042).
+4. Use the vertical Earth video + brand banner for app splash / OG images when the mobile app starts.
+
+---
 # Next action
 
 Done this session: API (Fastify) + Prisma schema/migration/seed; web reads catalog from API when NEXT_PUBLIC_API_URL is set.
