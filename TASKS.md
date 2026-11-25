@@ -17,7 +17,8 @@
 | T-018 | KTX2 textures + 8k tier, progressive loading | P2 | T-011 | Perf | measured gain | PENDING | — |
 | T-019 | Real-time sun position option | P3 | T-011 | 3D | toggle | PENDING | — |
 | T-020 | Brand book: logo variants, app icon, type scale, components | P1 | — | Design | DESIGN_SYSTEM complete | IN_PROGRESS | — |
-| T-030 | API scaffold (NestJS), Prisma schema, migrations | P0 | — | Backend | `pnpm --filter api test` green | PENDING | — |
+| T-030 | API scaffold (Fastify), Prisma 7 schema (24 models), init migration, seed | P0 | — | Backend | `pnpm --filter @bleusim/api test` green | TESTED | vitest 5/5 |
+| T-033 | Web reads catalog from API via @bleusim/api-client (fixture fallback) | P0 | T-030 | Frontend | e2e green against API | TESTED | e2e 12/12 |
 | T-031 | Provider adapter interface + sandbox provider | P0 | T-030 | eSIM | provision/usage/top-up in sandbox | PENDING | — |
 | T-032 | Supplier research (eSIM Go, 1GLOBAL, Gigs, …) from official docs | P1 | — | eSIM | comparison doc | PENDING | — |
 | T-040 | Stripe test-mode checkout + webhooks + idempotency | P0 | T-030 | Payments | sandbox order end to end | PENDING | — |

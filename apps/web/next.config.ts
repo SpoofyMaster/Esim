@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 const config: NextConfig = {
-  transpilePackages: ["@bleusim/geospatial", "@bleusim/catalog", "@bleusim/design-tokens"],
+  transpilePackages: ["@bleusim/geospatial", "@bleusim/catalog", "@bleusim/design-tokens", "@bleusim/api-client"],
   reactStrictMode: true,
   poweredByHeader: false,
   async headers() {

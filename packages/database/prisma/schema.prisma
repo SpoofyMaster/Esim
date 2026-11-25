@@ -1,0 +1,366 @@
+// BLEUSIM central data model (spec §24). Money is stored in minor units (Int) with an ISO currency.
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  CUSTOMER
+  SUPPORT
+  CATALOG_MANAGER
+  FINANCE
+  ADMIN
+}
+
+enum DestinationKind {
+  COUNTRY
+  REGION
+  GLOBAL
+}
+
+enum OfferSource {
+  DEV_FIXTURE
+  SUPPLIER
+}
+
+enum OrderStatus {
+  PENDING_PAYMENT
+  PAID
+  PROVISIONING
+  FULFILLED
+  PROVISIONING_FAILED
+  PAYMENT_FAILED
+  REFUND_PENDING
+  REFUNDED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  REQUIRES_ACTION
+  PROCESSING
+  SUCCEEDED
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum EsimStatus {
+  PROVISIONED
+  INSTALLED
+  ACTIVE
+  DEPLETED
+  EXPIRED
+  SUSPENDED
+}
+
+enum TicketStatus {
+  OPEN
+  PENDING_CUSTOMER
+  RESOLVED
+  CLOSED
+}
+
+model User {
+  id               String          @id @default(cuid())
+  email            String          @unique
+  emailVerifiedAt  DateTime?
+  passwordHash     String?
+  name             String?
+  locale           String          @default("en")
+  currency         String          @default("USD")
+  role             Role            @default(CUSTOMER)
+  mfaSecret        String?
+  marketingConsent Boolean         @default(false)
+  referralCode     String          @unique @default(cuid())
+  referredById     String?
+  referredBy       User?           @relation("Referrals", fields: [referredById], references: [id])
+  referrals        User[]          @relation("Referrals")
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+  deletedAt        DateTime?
+  sessions         Session[]
+  accounts         OAuthAccount[]
+  orders           Order[]
+  esims            EsimProfile[]
+  tickets          SupportTicket[]
+  notifications    Notification[]
+  auditLogs        AuditLog[]      @relation("Actor")
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  userAgent String?
+  ip        String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+}
+
+model OAuthAccount {
+  id                String @id @default(cuid())
+  userId            String
+  user              User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  provider          String // apple | google
+  providerAccountId String
+
+  @@unique([provider, providerAccountId])
+}
+
+/// Geography: one row per country (ISO 3166-1 alpha-2). Separate from commercial coverage.
+model Country {
+  iso2      String   @id
+  iso3      String?
+  names     Json // { en, fr, es, de, ar, pt, it }
+  lat       Float
+  lng       Float
+  coverages Coverage[]
+}
+
+/// A sellable destination: a country, a commercial region, or global.
+model Destination {
+  id        String          @id // "jp", "region:europe", "global"
+  kind      DestinationKind
+  slug      String          @unique
+  names     Json
+  active    Boolean         @default(true)
+  plans     RetailPlan[]
+  createdAt DateTime        @default(now())
+}
+
+model Supplier {
+  id            String         @id // "dev-sandbox", "esimgo", ...
+  name          String
+  adapter       String // adapter key in packages/provider-adapters
+  enabled       Boolean        @default(false)
+  priority      Int            @default(100)
+  isSandbox     Boolean        @default(true)
+  supplierPlans SupplierPlan[]
+  createdAt     DateTime       @default(now())
+}
+
+model SupplierPlan {
+  id             String       @id @default(cuid())
+  supplierId     String
+  supplier       Supplier     @relation(fields: [supplierId], references: [id])
+  externalId     String
+  name           String
+  dataMb         Int? // null = unlimited
+  fairUsage      String?
+  validityDays   Int
+  wholesaleMinor Int
+  currency       String
+  hotspot        Boolean      @default(true)
+  topUp          Boolean      @default(true)
+  kycRequired    Boolean      @default(false)
+  activationPolicy String     @default("on_first_connection")
+  activationWindowDays Int    @default(180)
+  raw            Json?
+  syncedAt       DateTime     @default(now())
+  coverages      Coverage[]
+  retailPlans    RetailPlan[]
+
+  @@unique([supplierId, externalId])
+}
+
+model Coverage {
+  supplierPlanId String
+  supplierPlan   SupplierPlan @relation(fields: [supplierPlanId], references: [id], onDelete: Cascade)
+  countryIso2    String
+  country        Country      @relation(fields: [countryIso2], references: [iso2])
+  operators      Json // [{ name, tech: ["4G","5G"] }]
+
+  @@id([supplierPlanId, countryIso2])
+  @@index([countryIso2])
+}
+
+model RetailPlan {
+  id             String       @id
+  destinationId  String
+  destination    Destination  @relation(fields: [destinationId], references: [id])
+  supplierPlanId String
+  supplierPlan   SupplierPlan @relation(fields: [supplierPlanId], references: [id])
+  priceMinor     Int
+  currency       String
+  active         Boolean      @default(true)
+  source         OfferSource
+  sortOrder      Int          @default(0)
+  orderItems     OrderItem[]
+  updatedAt      DateTime     @updatedAt
+
+  @@index([destinationId, active])
+}
+
+model Promotion {
+  id          String    @id @default(cuid())
+  code        String    @unique
+  percentOff  Int?
+  amountMinor Int?
+  currency    String?
+  maxUses     Int?
+  usedCount   Int       @default(0)
+  startsAt    DateTime?
+  endsAt      DateTime?
+  active      Boolean   @default(true)
+  orders      Order[]
+}
+
+model Order {
+  id             String      @id @default(cuid())
+  number         String      @unique
+  userId         String?
+  user           User?       @relation(fields: [userId], references: [id])
+  email          String
+  status         OrderStatus @default(PENDING_PAYMENT)
+  currency       String
+  subtotalMinor  Int
+  discountMinor  Int         @default(0)
+  taxMinor       Int         @default(0)
+  totalMinor     Int
+  promotionId    String?
+  promotion      Promotion?  @relation(fields: [promotionId], references: [id])
+  idempotencyKey String      @unique
+  items          OrderItem[]
+  payments       Payment[]
+  refunds        Refund[]
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
+
+  @@index([userId, createdAt])
+  @@index([status])
+}
+
+model OrderItem {
+  id                 String       @id @default(cuid())
+  orderId            String
+  order              Order        @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  retailPlanId       String
+  retailPlan         RetailPlan   @relation(fields: [retailPlanId], references: [id])
+  quantity           Int          @default(1)
+  unitPriceMinor     Int
+  wholesaleMinor     Int
+  supplierId         String
+  supplierOrderRef   String?
+  provisionAttempts  Int          @default(0)
+  provisionedAt      DateTime?
+  esim               EsimProfile?
+  topUpOfEsimId      String?
+}
+
+model Payment {
+  id               String        @id @default(cuid())
+  orderId          String
+  order            Order         @relation(fields: [orderId], references: [id])
+  provider         String // stripe | paypal | sandbox
+  providerRef      String        @unique
+  status           PaymentStatus
+  amountMinor      Int
+  currency         String
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+}
+
+model Refund {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id])
+  amountMinor Int
+  reason      String
+  providerRef String?  @unique
+  status      String
+  createdAt   DateTime @default(now())
+}
+
+/// Activation material (LPA string / SM-DP+ address + matching ID) is stored encrypted (AES-256-GCM, app-level key).
+model EsimProfile {
+  id                  String       @id @default(cuid())
+  userId              String?
+  user                User?        @relation(fields: [userId], references: [id])
+  orderItemId         String       @unique
+  orderItem           OrderItem    @relation(fields: [orderItemId], references: [id])
+  supplierId          String
+  iccid               String       @unique
+  activationEncrypted String
+  status              EsimStatus   @default(PROVISIONED)
+  isSandbox           Boolean      @default(true)
+  dataTotalMb         Int?
+  dataUsedMb          Int          @default(0)
+  activatedAt         DateTime?
+  expiresAt           DateTime?
+  usage               UsageRecord[]
+  createdAt           DateTime     @default(now())
+
+  @@index([userId])
+}
+
+model UsageRecord {
+  id         String      @id @default(cuid())
+  esimId     String
+  esim       EsimProfile @relation(fields: [esimId], references: [id], onDelete: Cascade)
+  usedMb     Int
+  remainingMb Int?
+  observedAt DateTime    @default(now())
+
+  @@index([esimId, observedAt])
+}
+
+model SupportTicket {
+  id        String       @id @default(cuid())
+  userId    String?
+  user      User?        @relation(fields: [userId], references: [id])
+  email     String
+  orderId   String?
+  subject   String
+  status    TicketStatus @default(OPEN)
+  messages  Json
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+}
+
+model Notification {
+  id        String    @id @default(cuid())
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kind      String
+  payload   Json
+  readAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([userId, readAt])
+}
+
+model WebhookEvent {
+  id          String   @id // provider event id → idempotent processing
+  provider    String
+  type        String
+  payload     Json
+  processedAt DateTime?
+  error       String?
+  receivedAt  DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  actorId   String?
+  actor     User?    @relation("Actor", fields: [actorId], references: [id])
+  action    String
+  target    String?
+  meta      Json?
+  ip        String?
+  createdAt DateTime @default(now())
+
+  @@index([target])
+}
+
+model Setting {
+  key       String   @id
+  value     Json
+  updatedAt DateTime @updatedAt
+}
