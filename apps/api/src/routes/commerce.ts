@@ -32,7 +32,7 @@ export async function commerceRoutes(app: FastifyInstance, deps: CommerceDeps) {
     const number = "BS-" + Date.now().toString(36).toUpperCase() + "-" + token(3).toUpperCase();
     const order = await db.order.create({
       data: {
-        number, email: body.email.toLowerCase(), currency: plan.currency,
+        number, email: body.email.toLowerCase(), currency: plan.currency, userId: req.user?.id ?? null,
         subtotalMinor: plan.priceMinor, totalMinor: plan.priceMinor,
         idempotencyKey: body.idempotencyKey, accessTokenHash: sha256(accessToken),
         items: { create: { retailPlanId: plan.id, unitPriceMinor: plan.priceMinor, wholesaleMinor: plan.supplierPlan.wholesaleMinor, supplierId: plan.supplierPlan.supplierId } },
@@ -89,7 +89,17 @@ export async function commerceRoutes(app: FastifyInstance, deps: CommerceDeps) {
     const order = await db.order.findUniqueOrThrow({ where: { id: orderId }, include: { items: { include: { retailPlan: { include: { supplierPlan: true } }, esim: true } } } });
     try {
       for (const item of order.items) {
-        if (item.esim) continue; // never provision twice
+        if (item.esim || item.provisionedAt) continue; // never provision twice
+        if (item.topUpOfEsimId) {
+          const target = await db.esimProfile.findUniqueOrThrow({ where: { id: item.topUpOfEsimId } });
+          const sp = item.retailPlan.supplierPlan;
+          const r = await provider.topUp(target.iccid, sp.externalId, item.id);
+          await db.$transaction([
+            db.orderItem.update({ where: { id: item.id }, data: { supplierOrderRef: r.supplierOrderRef, provisionAttempts: 1, provisionedAt: new Date() } }),
+            db.esimProfile.update({ where: { id: target.id }, data: { dataTotalMb: target.dataTotalMb === null || sp.dataMb === null ? null : target.dataTotalMb + sp.dataMb } }),
+          ]);
+          continue;
+        }
         const sp = item.retailPlan.supplierPlan;
         let attempt = 0;
         for (;;) {

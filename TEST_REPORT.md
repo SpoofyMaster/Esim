@@ -17,3 +17,7 @@
 - `apps/api` vitest: **14 passed** (catalog 6, commerce 8: idempotent checkout, success → exactly one sandbox eSIM, duplicate webhook ignored, encrypted activation at rest, failed payment, bad HMAC 401, token-guarded order lookup, input validation, supplier failure → PROVISIONING_FAILED after 3 attempts).
 - Playwright: **16 passed, 2 skipped** (adds full sandbox purchase and declined payment on desktop + mobile).
 - geospatial vitest 7 passed. `tsc --noEmit` clean for api and web.
+
+## 2026-11-25, accounts
+- `apps/api` vitest: **20 passed** (adds auth + account: cookie flags, scrypt hash, duplicate/weak/wrong password, /me, signed-in purchase in My eSIMs, top-up adds data exactly once on duplicate webhook, cross-destination top-up refused, other user can't read install details, logout).
+- Playwright: **18 passed, 2 skipped** (adds register → signed-in purchase → My eSIMs usage → top-up → install QR, desktop + mobile).

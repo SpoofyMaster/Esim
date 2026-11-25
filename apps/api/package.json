@@ -12,17 +12,18 @@
   "dependencies": {
     "@bleusim/catalog": "workspace:*",
     "@bleusim/database": "workspace:*",
+    "@bleusim/provider-adapters": "workspace:*",
+    "@fastify/cookie": "11.1.5",
     "@fastify/cors": "11.4.3",
     "@fastify/helmet": "13.2.0",
     "@fastify/rate-limit": "11.3.0",
     "fastify": "5.12.8",
-    "zod": "4.6.7",
-    "@bleusim/provider-adapters": "workspace:*"
+    "zod": "4.6.7"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0",
-    "vitest": "^3.2.0",
-    "@types/node": "^22.0.0"
+    "vitest": "^3.2.0"
   }
 }

@@ -68,7 +68,7 @@ export function Explorer() {
         </nav>
         {heroHidden && <div className="reveal absolute left-1/2 top-4 hidden w-[min(440px,36vw)] -translate-x-1/2 lg:block md:top-5"><SearchBox size="md" /></div>}
         <div className="flex items-center gap-2">
-          <a href="#account" className="rounded-full border border-white/15 px-4 py-2 text-sm text-ice-100 transition hover:border-white/35 hover:text-white">Sign in</a>
+          <a href="/account" className="rounded-full border border-white/15 px-4 py-2 text-sm text-ice-100 transition hover:border-white/35 hover:text-white">My eSIMs</a>
         </div>
       </header>
 

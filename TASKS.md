@@ -26,3 +26,6 @@
 | T-042 | Move provisioning to a Redis-backed job queue + reconciliation job | P1 | T-040 | Backend | retry/backoff, admin requeue | PENDING | — |
 | T-050 | Higgsfield cinematic assets | P2 | approval | Creative | registry entries | BLOCKED (budget approval) | — |
 | T-060 | GitHub repo + CI | P1 | approval | DevOps | pushed, CI green | BLOCKED (approval) | — |
+| T-070 | Accounts: email+password (scrypt), httpOnly session cookies, /me, logout, rate-limited auth | P0 | T-030 | Backend | register/login/logout tests | TESTED | vitest 6 + e2e |
+| T-071 | My eSIMs: live usage (recorded), install details (owner-only), purchase history, top-ups through sandbox payment | P0 | T-070 | Full-stack | e2e register→buy→top-up | TESTED | vitest + e2e 2 |
+| T-072 | Email verification + magic link, password reset, Apple/Google sign-in | P1 | T-070 | Backend | flows tested | PENDING (needs email provider) | — |

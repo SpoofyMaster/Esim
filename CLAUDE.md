@@ -36,7 +36,7 @@ Headless WebGL needs `--use-angle=swiftshader --enable-unsafe-swiftshader` (alre
 ## Environment facts
 - Cloud container: npm registry reachable; saily.com, NASA, unpkg NOT reachable. Use Claude's built-in browser on Badr's Mac for web research.
 - Earth textures come from the `three-globe` npm package (NASA Blue/Black Marble derivatives). Country shapes from `world-atlas` (Natural Earth, public domain).
-- Durable copy: Badr's Mac `~/Projects/bleusim` (synced by tarball). No GitHub repo yet.
+- Durable copies: git bundle `/mnt/project-files/bleusim/bleusim.bundle`; snapshots on Badr's Mac `~/Projects/bleusim/source-<commit>` (see LATEST.txt). No GitHub repo yet.
 
 ## Coding standards
 TypeScript strict, `noUncheckedIndexedAccess`. Accessible primitives (labels, roles, focus rings). Tokens only from `@bleusim/design-tokens`. Universe A (cinematic, dark) for globe/marketing; Universe B (clean, legible) for commerce/account/admin.

@@ -22,6 +22,7 @@ export function CheckoutForm() {
     if (!API_URL) { setErr("Checkout needs the BLEUSIM API (NEXT_PUBLIC_API_URL is not set)."); return; }
     if (!/^[a-z0-9-]{3,80}$/.test(planId)) { setErr("No plan selected."); return; }
     api<PlanDetail>(`/v1/plans/${planId}`).then(setPlan).catch((e: Error) => setErr(e.message));
+    api<{ user: { email: string } }>("/v1/me").then((m) => setEmail((v) => v || m.user.email)).catch(() => { /* guest checkout */ });
   }, [planId]);
 
   async function submit(e: React.FormEvent) {
@@ -55,7 +56,7 @@ export function CheckoutForm() {
               <label htmlFor="email" className="block text-sm font-medium">Email for your eSIM</label>
               <input id="email" type="email" required autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)}
                 className="mt-1.5 h-12 w-full rounded-xl border border-[var(--border)] bg-[var(--bg-subtle)] px-4 outline-none focus:border-[var(--focus)]" />
-              <p className="mt-1.5 text-xs text-[var(--fg-muted)]">We send your QR code and installation steps here.</p>
+              <p className="mt-1.5 text-xs text-[var(--fg-muted)]">We send your QR code and installation steps here. <a href={`/login?next=${encodeURIComponent(`/checkout?plan=${planId}`)}`} className="underline">Sign in</a> to keep it in My eSIMs.</p>
             </div>
             <label className="flex items-start gap-3 text-sm">
               <input type="checkbox" required checked={compat} onChange={(e) => setCompat(e.target.checked)} className="mt-0.5 size-4 accent-[var(--accent)]" />

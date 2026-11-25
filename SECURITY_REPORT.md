@@ -1,2 +1,4 @@
 # Security report
 2026-11-25: frontend-only prototype, no secrets, no auth, no user data. `poweredByHeader` off. Recent searches stored in localStorage (non-sensitive, try/catch). Pending: CSP, dependency audit in CI, API security (milestone 08+).
+
+2026-11-25 (API): helmet headers, CORS allowlist with credentials, global rate limit 300/min + 10/min on auth, zod validation on every input, Prisma (parameterised SQL), scrypt N=2^15 password hashing, session tokens stored as SHA-256 hashes, httpOnly SameSite=Lax cookies (Secure in production), HMAC-SHA256 webhook verification with timing-safe compare, idempotent webhooks/orders, AES-256-GCM activation material at rest, owner checks on eSIM reads, order lookups require an access token (sent in URL fragment, not to servers). Open: CSRF tokens for state-changing cookie-auth routes beyond SameSite=Lax, email verification, MFA for admin roles, dependency audit in CI, CSP on web.
