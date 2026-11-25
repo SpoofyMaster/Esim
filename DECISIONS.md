@@ -16,3 +16,5 @@
 | 2026-11-25 | Morocco shown as one country including its Sahara provinces: Natural Earth "W. Sahara" merged into Morocco at data build (no internal border, no separate pick/search entry; "Sahara", "Laayoune", "Dakhla" resolve to Morocco) | Badr's decision, 2026-11-25 20:08 UTC |
 | 2026-11-25 | Code hosted at github.com/SpoofyMaster/Esim (private), CI on GitHub Actions | Badr created the repo |
 | 2026-11-25 | Higgsfield: Badr approved spending the full credit balance on brand/hero assets | Badr, 2026-11-25 20:08 UTC |
+| 2026-11-25 | Back office lives at `/admin` inside apps/web for now (not a separate apps/admin) | Same session cookie and design system, one deploy; split later if the team or attack surface grows |
+| 2026-11-25 | Staff roles: SUPPORT (orders, eSIMs, retry provisioning), CATALOG_MANAGER (plans, view suppliers), FINANCE (orders, overview), ADMIN (all). Enforced in `apps/api/src/routes/admin.ts`; first admin only via `pnpm --filter @bleusim/api grant-role` | Least privilege; no HTTP path to self-promote |

@@ -1,11 +1,11 @@
 // Sandbox commerce: checkout → (sandbox) payment → signed webhook → provisioning → order fulfilled.
 // No real money moves: the only payment provider wired here is "sandbox". Stripe test mode plugs into the same
 // webhook path once keys exist (BLOCKERS B-4).
+import { createProvisioner } from "../provisioning";
 import type { FastifyInstance } from "fastify";
 import { z } from "zod";
 import type { Db } from "@bleusim/database";
 import type { EsimProvider } from "@bleusim/provider-adapters";
-import { ProviderError } from "@bleusim/provider-adapters";
 import { hmac, sha256, token, verifyHmac, type Sealer } from "../crypto";
 
 export interface CommerceDeps { db: Db; provider: EsimProvider; sealer: Sealer; webhookSecret: string }
@@ -17,6 +17,7 @@ const CheckoutBody = z.object({
 });
 
 export async function commerceRoutes(app: FastifyInstance, deps: CommerceDeps) {
+  const provisionOrder = createProvisioner(deps);
   const { db, provider, sealer, webhookSecret } = deps;
 
   app.post("/checkout", async (req, reply) => {
@@ -83,47 +84,6 @@ export async function commerceRoutes(app: FastifyInstance, deps: CommerceDeps) {
     await db.webhookEvent.update({ where: { id: evt.id }, data: { processedAt: new Date() } });
     return { received: true };
   });
-
-  async function provisionOrder(orderId: string) {
-    await db.order.update({ where: { id: orderId }, data: { status: "PROVISIONING" } });
-    const order = await db.order.findUniqueOrThrow({ where: { id: orderId }, include: { items: { include: { retailPlan: { include: { supplierPlan: true } }, esim: true } } } });
-    try {
-      for (const item of order.items) {
-        if (item.esim || item.provisionedAt) continue; // never provision twice
-        if (item.topUpOfEsimId) {
-          const target = await db.esimProfile.findUniqueOrThrow({ where: { id: item.topUpOfEsimId } });
-          const sp = item.retailPlan.supplierPlan;
-          const r = await provider.topUp(target.iccid, sp.externalId, item.id);
-          await db.$transaction([
-            db.orderItem.update({ where: { id: item.id }, data: { supplierOrderRef: r.supplierOrderRef, provisionAttempts: 1, provisionedAt: new Date() } }),
-            db.esimProfile.update({ where: { id: target.id }, data: { dataTotalMb: target.dataTotalMb === null || sp.dataMb === null ? null : target.dataTotalMb + sp.dataMb } }),
-          ]);
-          continue;
-        }
-        const sp = item.retailPlan.supplierPlan;
-        let attempt = 0;
-        for (;;) {
-          attempt++;
-          try {
-            const r = await provider.provision({ supplierPlanExternalId: sp.externalId, idempotencyKey: item.id, customerRef: order.id });
-            await db.$transaction([
-              db.orderItem.update({ where: { id: item.id }, data: { supplierOrderRef: r.supplierOrderRef, provisionAttempts: attempt, provisionedAt: new Date() } }),
-              db.esimProfile.create({ data: { orderItemId: item.id, userId: order.userId, supplierId: provider.id, iccid: r.iccid, activationEncrypted: sealer.seal(r.lpa), isSandbox: r.isSandbox, dataTotalMb: sp.dataMb } }),
-            ]);
-            break;
-          } catch (e) {
-            if (e instanceof ProviderError && e.retryable && attempt < 3) continue;
-            throw e;
-          }
-        }
-      }
-      await db.order.update({ where: { id: orderId }, data: { status: "FULFILLED" } });
-      await db.auditLog.create({ data: { action: "order.fulfilled", target: orderId } });
-    } catch (e) {
-      await db.order.update({ where: { id: orderId }, data: { status: "PROVISIONING_FAILED" } });
-      await db.auditLog.create({ data: { action: "order.provisioning_failed", target: orderId, meta: { message: e instanceof Error ? e.message : String(e) } } });
-    }
-  }
 
   // Order status for the buyer: requires the access token returned at checkout (or, later, a signed-in owner).
   app.get("/orders/:id", async (req, reply) => {

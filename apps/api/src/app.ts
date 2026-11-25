@@ -5,6 +5,8 @@ import rateLimit from "@fastify/rate-limit";
 import cookie from "@fastify/cookie";
 import { installUserResolver, authRoutes } from "./auth";
 import { accountRoutes } from "./routes/account";
+import { adminRoutes } from "./routes/admin";
+import { createProvisioner } from "./provisioning";
 import type { Db } from "@bleusim/database";
 import { ZodError } from "zod";
 import { catalogRoutes } from "./routes/catalog";
@@ -32,5 +34,6 @@ export async function buildApp({ db, provider, sealer, webhookSecret, corsOrigin
   await app.register(commerceRoutes, { prefix: "/v1", db, provider, sealer, webhookSecret });
   await app.register(authRoutes, { prefix: "/v1", db, secureCookies: process.env.NODE_ENV === "production" });
   await app.register(accountRoutes, { prefix: "/v1", db, provider, sealer });
+  await app.register(adminRoutes, { prefix: "/v1", db, provisionOrder: createProvisioner({ db, provider, sealer }) });
   return app;
 }

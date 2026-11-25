@@ -3,7 +3,7 @@
 Done this step: SSR destination pages + SEO; Western Sahara merged into Morocco; repo on GitHub (SpoofyMaster/Esim) with CI; Higgsfield assets (600 credits) wired into pages.
 
 Next, in order:
-1. Admin dashboard (milestone 12): orders, eSIMs, suppliers, plans, audit log; role ADMIN.
+1. ~~Admin dashboard~~ done 2026-11-25 (/admin). Follow-ups: staff MFA, refunds UI (needs real payments), support tickets.
 2. i18n UI with Arabic RTL (milestone 13) — then add real hreflang alternates via `langAlternates()`.
 3. Email verification + password reset (T-072), Redis provisioning queue (T-042).
 4. Use the vertical Earth video + brand banner for app splash / OG images when the mobile app starts.
