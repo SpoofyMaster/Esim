@@ -1,0 +1,41 @@
+{
+  "name": "@bleusim/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3000",
+    "build": "next build",
+    "start": "next start -p 3000",
+    "typecheck": "tsc --noEmit",
+    "prepare-assets": "node scripts/prepare-assets.mjs"
+  },
+  "dependencies": {
+    "@bleusim/catalog": "workspace:*",
+    "@bleusim/design-tokens": "workspace:*",
+    "@bleusim/geospatial": "workspace:*",
+    "@fontsource-variable/inter": "5.3.0",
+    "@fontsource-variable/sora": "5.3.0",
+    "@fontsource/ibm-plex-sans-arabic": "5.3.0",
+    "@react-three/drei": "10.7.9",
+    "@react-three/fiber": "9.8.2",
+    "d3-geo": "3.1.2",
+    "gsap": "3.15.1",
+    "next": "16.4.6",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "three": "0.187.0",
+    "topojson-client": "3.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.3.5",
+    "@types/d3-geo": "^3.1.0",
+    "@types/geojson": "7946.0.16",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.187.0",
+    "@types/topojson-client": "^3.1.0",
+    "tailwindcss": "4.3.5",
+    "typescript": "^5.9.0"
+  }
+}

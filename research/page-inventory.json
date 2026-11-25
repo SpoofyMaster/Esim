@@ -1,0 +1,1259 @@
+{
+ "generated": "2026-11-25",
+ "source": "https://saily.com/sitemap.xml (929 URLs: 620 blog posts, ~190 country, 10 region, 12 city, 12 legal, misc)",
+ "pages": [
+  {
+   "url": "https://saily.com/",
+   "title": "Homepage",
+   "category": "home",
+   "observed_sections": "Brand promise, destination search, top-10 tabs (Country/Region/Ultra/New/Cruise), benefits, how-it-works, app download, reviews, FAQ, referral, footer",
+   "screenshots": "research/screenshots/desktop/home-hero.jpg",
+   "status": "INSPECTED_RENDERED"
+  },
+  {
+   "url": "https://saily.com/esim-japan/",
+   "title": "Japan eSIM",
+   "category": "country",
+   "observed_sections": "Plan grid (unlimited w/ day stepper + fixed GB), sticky summary + Go to Checkout, device compat, tabs (Key features/Description/Technical details incl. KDDI/SoftBank), how-to, regional upsell, comparison table, reviews, FAQ",
+   "screenshots": "research/screenshots/desktop/esim-japan-plans.jpg; research/screenshots/desktop/esim-japan-checkout-cta.jpg",
+   "status": "INSPECTED_RENDERED"
+  },
+  {
+   "url": "https://saily.com/esim-europe/",
+   "title": "Europe eSIM",
+   "category": "region",
+   "observed_sections": "Same template + 'View country list (35)', Turkey app-access notice, 50 GB/90 day tier",
+   "screenshots": "research/screenshots/desktop/esim-europe-plans.jpg",
+   "status": "INSPECTED_RENDERED"
+  },
+  {
+   "url": "https://saily.com/esim-morocco/",
+   "title": "Morocco eSIM",
+   "category": "country",
+   "observed_sections": "Mobile 390px: stacked plan rows, discount strike-through 'Save 20%', shared-data note (up to 4 people), sticky checkout CTA",
+   "screenshots": "research/screenshots/mobile/esim-morocco-390-top.jpg; research/screenshots/mobile/esim-morocco-390-cta.jpg",
+   "status": "INSPECTED_RENDERED"
+  },
+  {
+   "url": "(dialog) Destinations",
+   "title": "Destination search dialog",
+   "category": "component",
+   "observed_sections": "Overlay with input 'Where are you travelling to?', tabs Top10/Country/Region/Ultra/Cruise, flag+name+from-price grid, compat link, View All",
+   "screenshots": "research/screenshots/desktop/destinations-search-dialog.jpg",
+   "status": "INSPECTED_RENDERED"
+  },
+  {
+   "url": "https://saily.com/all-destinations/",
+   "category": "directory",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/esim-global/",
+   "category": "global",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/esim-ultra-plan/",
+   "category": "subscription",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/esim-supported-devices/",
+   "category": "compatibility",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/what-is-esim/",
+   "category": "education",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/download-esim-app/",
+   "category": "app",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/data-usage-calculator/",
+   "category": "tool",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/refer-a-friend/",
+   "category": "referral",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/esim-for-business/",
+   "category": "b2b",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/esim-phone-number/",
+   "category": "product",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/security-features/",
+   "category": "product",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/auto-refund-center/",
+   "category": "support",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/about-us/",
+   "category": "company",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/affiliate/",
+   "category": "partner",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/esim-unlimited-data/",
+   "category": "product",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://saily.com/esim-cruise-ships/",
+   "category": "product",
+   "status": "INSPECTED_OUTLINE (SSR headings + meta via same-origin fetch)"
+  },
+  {
+   "url": "https://support.saily.com/hc/en-us",
+   "category": "help-center",
+   "observed_sections": "Search, 4 categories (Getting Started, Plans and Payments, Troubleshooting, FAQ), popular articles",
+   "status": "INSPECTED_RENDERED"
+  },
+  {
+   "url": "https://apps.apple.com/us/app/saily-esim-data-for-travel/id6475045151",
+   "category": "app-store",
+   "status": "INSPECTED_TEXT"
+  },
+  {
+   "url": "https://saily.com/esim-afghanistan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-albania/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-algeria/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-andorra/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-anguilla/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-antigua-and-barbuda/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-argentina/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-armenia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-aruba/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-australia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-austria/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-azerbaijan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bahamas/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bahrain/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bangladesh/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-barbados/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-belgium/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-belize/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-benin/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bermuda/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bolivia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bonaire/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bosnia-and-herzegovina/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-botswana/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-brazil/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-british-virgin-islands/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-brunei/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-bulgaria/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-burkina-faso/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-cambodia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-cameroon/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-canada/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-cape-verde/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-cayman-islands/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-central-african-republic/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-chad/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-chile/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-china/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-colombia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-costa-rica/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-cote-d-ivoire/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-croatia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-curacao/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-cyprus/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-czech-republic/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-democratic-republic-of-congo/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-denmark/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-dominica/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-dominican-republic/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-east-timor/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-ecuador/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-egypt/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-el-salvador/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-estonia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-eswatini/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-faroe-islands/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-fiji/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-finland/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-france/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-french-guiana/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-french-polynesia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-gabon/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-gambia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-georgia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-germany/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-ghana/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-gibraltar/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-greece/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-greenland/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-grenada/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-guadeloupe/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-guam/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-guatemala/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-guernsey/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-guinea/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-guinea-bissau/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-guyana/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-haiti/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-honduras/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-hong-kong/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-hungary/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-iceland/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-india/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-indonesia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-iraq/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-ireland/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-isle-of-man/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-israel/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-italy/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-jamaica/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-jersey/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-jordan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-kazakhstan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-kenya/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-kosovo/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-kuwait/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-kyrgyzstan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-laos/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-latvia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-lesotho/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-liberia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-liechtenstein/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-lithuania/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-luxembourg/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-macau/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-macedonia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-madagascar/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-malawi/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-malaysia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-maldives/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-mali/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-malta/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-martinique/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-mauritania/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-mauritius/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-mayotte/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-mexico/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-moldova/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-monaco/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-mongolia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-montenegro/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-montserrat/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-mozambique/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-nauru/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-nepal/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-netherlands/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-netherlands-antilles/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-new-zealand/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-nicaragua/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-niger/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-nigeria/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-northern-mariana-islands/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-norway/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-oman/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-pakistan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-panama/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-papua-new-guinea/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-paraguay/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-peru/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-philippines/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-poland/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-portugal/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-puerto-rico/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-qatar/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-republic-of-congo/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-reunion/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-romania/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-rwanda/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-saint-barthelemy/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-saint-kitts-and-nevis/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-saint-lucia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-saint-martin/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-saint-vincent-and-grenadines/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-samoa/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-san-marino/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-saudi-arabia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-senegal/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-serbia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-seychelles/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-sierra-leone/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-singapore/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-sint-maarten/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-slovakia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-slovenia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-south-africa/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-south-korea/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-south-sudan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-spain/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-sri-lanka/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-sudan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-suriname/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-sweden/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-switzerland/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-taiwan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-tajikistan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-tanzania/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-thailand/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-togo/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-tonga/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-trinidad-and-tobago/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-tunisia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-turkey/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-turks-and-caicos-islands/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-uganda/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-ukraine/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-united-arab-emirates/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-united-kingdom/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-united-states/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-uruguay/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-us-virgin-islands/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-uzbekistan/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-vanuatu/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-venezuela/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-vietnam/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-zambia/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-zimbabwe/",
+   "category": "country",
+   "status": "DISCOVERED (sitemap) \u2014 same template as Japan/Morocco"
+  },
+  {
+   "url": "https://saily.com/esim-africa/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-asia-and-oceania/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-balkans/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-caribbean-islands/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-latin-america/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-middle-east-and-north-africa/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-north-america/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-scandinavia/",
+   "category": "region",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-spain/tenerife/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-indonesia/bali/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-spain/mallorca/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-portugal/azores/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-united-states/los-angeles/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-spain/canary-islands/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-france/paris/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-united-states/hawaii/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-united-arab-emirates/dubai/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-thailand/bangkok/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-portugal/madeira/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  },
+  {
+   "url": "https://saily.com/esim-united-states/new-york/",
+   "category": "city-landing",
+   "status": "DISCOVERED (sitemap)"
+  }
+ ],
+ "excluded": [
+  {
+   "pattern": "/*checkout",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/*login",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/search",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/api/",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/_next/data/",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/embed/",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/*?planId=",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/*saily-com/",
+   "reason": "robots.txt Disallow"
+  },
+  {
+   "pattern": "/*saily-app/",
+   "reason": "robots.txt Disallow"
+  }
+ ],
+ "blog": {
+  "count": 620,
+  "status": "DISCOVERED, not individually inspected"
+ }
+}
