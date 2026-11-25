@@ -2185,6 +2185,7 @@ export const OrderScalarFieldEnum = {
   totalMinor: 'totalMinor',
   promotionId: 'promotionId',
   idempotencyKey: 'idempotencyKey',
+  accessTokenHash: 'accessTokenHash',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const

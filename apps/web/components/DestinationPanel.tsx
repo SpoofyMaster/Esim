@@ -110,10 +110,16 @@ export function DestinationPanel() {
 
       {plan && (
         <footer className="border-t border-white/10 px-6 py-4">
-          <button disabled aria-describedby="checkout-note" className="h-12 w-full rounded-xl bg-blue-500 font-medium text-white opacity-90 disabled:cursor-not-allowed">
-            Continue · {formatPrice(plan.price.amount, plan.price.currency)}
-          </button>
-          <p id="checkout-note" className="mt-2 text-center text-xs text-ice-400">Sandbox checkout arrives in the commerce milestone.</p>
+          {process.env.NEXT_PUBLIC_API_URL ? (
+            <a href={`/checkout?plan=${plan.id}`} className="flex h-12 w-full items-center justify-center rounded-xl bg-blue-500 font-medium text-white transition hover:bg-blue-400">
+              Continue · {formatPrice(plan.price.amount, plan.price.currency)}
+            </a>
+          ) : (
+            <>
+              <button disabled aria-describedby="checkout-note" className="h-12 w-full rounded-xl bg-blue-500 font-medium text-white opacity-70 disabled:cursor-not-allowed">Continue · {formatPrice(plan.price.amount, plan.price.currency)}</button>
+              <p id="checkout-note" className="mt-2 text-center text-xs text-ice-400">Checkout needs the BLEUSIM API in this environment.</p>
+            </>
+          )}
         </footer>
       )}
     </aside>

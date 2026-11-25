@@ -19,8 +19,10 @@
 | T-020 | Brand book: logo variants, app icon, type scale, components | P1 | — | Design | DESIGN_SYSTEM complete | IN_PROGRESS | — |
 | T-030 | API scaffold (Fastify), Prisma 7 schema (24 models), init migration, seed | P0 | — | Backend | `pnpm --filter @bleusim/api test` green | TESTED | vitest 5/5 |
 | T-033 | Web reads catalog from API via @bleusim/api-client (fixture fallback) | P0 | T-030 | Frontend | e2e green against API | TESTED | e2e 12/12 |
-| T-031 | Provider adapter interface + sandbox provider | P0 | T-030 | eSIM | provision/usage/top-up in sandbox | PENDING | — |
+| T-031 | Provider adapter interface + sandbox provider (.invalid SM-DP+, fake ICCID range) | P0 | T-030 | eSIM | provision/usage/top-up in sandbox | TESTED (provision); usage/top-up API not exposed yet | vitest |
 | T-032 | Supplier research (eSIM Go, 1GLOBAL, Gigs, …) from official docs | P1 | — | eSIM | comparison doc | PENDING | — |
-| T-040 | Stripe test-mode checkout + webhooks + idempotency | P0 | T-030 | Payments | sandbox order end to end | PENDING | — |
+| T-040 | Sandbox checkout: idempotent orders, HMAC-signed idempotent webhooks, provisioning with retries, AES-GCM eSIM details, order page with QR | P0 | T-030 | Payments | sandbox order end to end | TESTED | vitest 8 + e2e 4 |
+| T-041 | Stripe test-mode adapter on the same webhook path | P1 | B-4 | Payments | Stripe test card → FULFILLED | BLOCKED (keys) | — |
+| T-042 | Move provisioning to a Redis-backed job queue + reconciliation job | P1 | T-040 | Backend | retry/backoff, admin requeue | PENDING | — |
 | T-050 | Higgsfield cinematic assets | P2 | approval | Creative | registry entries | BLOCKED (budget approval) | — |
 | T-060 | GitHub repo + CI | P1 | approval | DevOps | pushed, CI green | BLOCKED (approval) | — |

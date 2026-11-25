@@ -12,3 +12,8 @@
   - `?nogl` fallback: no canvas, search + panel + directory work
 - Visual: 6 viewports + Japan/Europe/Morocco, no console errors. Files in `documentation/qa/2026-11-25/`.
 - Not yet tested: touch rotation/pinch on real devices, keyboard globe control (not built), performance on real GPUs, screen readers.
+
+## 2026-11-25, later (same environment, local Postgres 16 seeded, API on :4000, web built with NEXT_PUBLIC_API_URL)
+- `apps/api` vitest: **14 passed** (catalog 6, commerce 8: idempotent checkout, success → exactly one sandbox eSIM, duplicate webhook ignored, encrypted activation at rest, failed payment, bad HMAC 401, token-guarded order lookup, input validation, supplier failure → PROVISIONING_FAILED after 3 attempts).
+- Playwright: **16 passed, 2 skipped** (adds full sandbox purchase and declined payment on desktop + mobile).
+- geospatial vitest 7 passed. `tsc --noEmit` clean for api and web.

@@ -18,12 +18,12 @@ export function Symbol({ className = "", title }: { className?: string; title?: 
   );
 }
 
-export function Logo({ className = "" }: { className?: string }) {
+export function Logo({ className = "", adaptive = false }: { className?: string; adaptive?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2.5 ${className}`}>
       <Symbol className="h-full w-auto" />
-      <span className="font-display text-[1.15em] font-semibold leading-none tracking-[0.08em] text-white">
-        BLEU<span className="font-normal text-cyan-300">SIM</span>
+      <span className={`font-display text-[1.15em] font-semibold leading-none tracking-[0.08em] ${adaptive ? "text-[var(--fg)]" : "text-white"}`}>
+        BLEU<span className={`font-normal ${adaptive ? "text-[var(--accent)]" : "text-cyan-300"}`}>SIM</span>
       </span>
     </span>
   );

@@ -54,4 +54,17 @@ export async function catalogRoutes(app: FastifyInstance, opts: { db: Db }) {
     reply.header("Cache-Control", "public, max-age=60, stale-while-revalidate=300");
     return { destination: { id: dest.id, kind: dest.kind, names: dest.names }, plans };
   });
+
+  app.get("/plans/:id", async (req, reply) => {
+    const { id } = z.object({ id: z.string().regex(/^[a-z0-9-]{3,80}$/) }).parse(req.params);
+    const r = await db.retailPlan.findFirst({ where: { id, active: true }, include: { supplierPlan: { include: { coverages: true } }, destination: true } });
+    if (!r) return reply.status(404).send({ error: "not_found", message: "Plan not found" });
+    const sp = r.supplierPlan;
+    return {
+      id: r.id, destination: { id: r.destination.id, kind: r.destination.kind, names: r.destination.names },
+      dataGb: sp.dataMb === null ? null : sp.dataMb / 1024, fairUsage: sp.fairUsage, validityDays: sp.validityDays,
+      price: { amount: r.priceMinor / 100, currency: r.currency }, coverageCount: sp.coverages.length,
+      activation: { policy: sp.activationPolicy, windowDays: sp.activationWindowDays }, hotspot: sp.hotspot, kycRequired: sp.kycRequired, source: r.source,
+    };
+  });
 }

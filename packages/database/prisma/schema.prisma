@@ -227,6 +227,7 @@ model Order {
   promotionId    String?
   promotion      Promotion?  @relation(fields: [promotionId], references: [id])
   idempotencyKey String      @unique
+  accessTokenHash String
   items          OrderItem[]
   payments       Payment[]
   refunds        Refund[]

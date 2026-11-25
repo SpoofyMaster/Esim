@@ -53,6 +53,7 @@ export type OrderMinAggregateOutputType = {
   totalMinor: number | null
   promotionId: string | null
   idempotencyKey: string | null
+  accessTokenHash: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -70,6 +71,7 @@ export type OrderMaxAggregateOutputType = {
   totalMinor: number | null
   promotionId: string | null
   idempotencyKey: string | null
+  accessTokenHash: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -87,6 +89,7 @@ export type OrderCountAggregateOutputType = {
   totalMinor: number
   promotionId: number
   idempotencyKey: number
+  accessTokenHash: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -120,6 +123,7 @@ export type OrderMinAggregateInputType = {
   totalMinor?: true
   promotionId?: true
   idempotencyKey?: true
+  accessTokenHash?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -137,6 +141,7 @@ export type OrderMaxAggregateInputType = {
   totalMinor?: true
   promotionId?: true
   idempotencyKey?: true
+  accessTokenHash?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -154,6 +159,7 @@ export type OrderCountAggregateInputType = {
   totalMinor?: true
   promotionId?: true
   idempotencyKey?: true
+  accessTokenHash?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -258,6 +264,7 @@ export type OrderGroupByOutputType = {
   totalMinor: number
   promotionId: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt: Date
   updatedAt: Date
   _count: OrderCountAggregateOutputType | null
@@ -298,6 +305,7 @@ export type OrderWhereInput = {
   totalMinor?: Prisma.IntFilter<"Order"> | number
   promotionId?: Prisma.StringNullableFilter<"Order"> | string | null
   idempotencyKey?: Prisma.StringFilter<"Order"> | string
+  accessTokenHash?: Prisma.StringFilter<"Order"> | string
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -320,6 +328,7 @@ export type OrderOrderByWithRelationInput = {
   totalMinor?: Prisma.SortOrder
   promotionId?: Prisma.SortOrderInput | Prisma.SortOrder
   idempotencyKey?: Prisma.SortOrder
+  accessTokenHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
@@ -345,6 +354,7 @@ export type OrderWhereUniqueInput = Prisma.AtLeast<{
   taxMinor?: Prisma.IntFilter<"Order"> | number
   totalMinor?: Prisma.IntFilter<"Order"> | number
   promotionId?: Prisma.StringNullableFilter<"Order"> | string | null
+  accessTokenHash?: Prisma.StringFilter<"Order"> | string
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
@@ -367,6 +377,7 @@ export type OrderOrderByWithAggregationInput = {
   totalMinor?: Prisma.SortOrder
   promotionId?: Prisma.SortOrderInput | Prisma.SortOrder
   idempotencyKey?: Prisma.SortOrder
+  accessTokenHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.OrderCountOrderByAggregateInput
@@ -392,6 +403,7 @@ export type OrderScalarWhereWithAggregatesInput = {
   totalMinor?: Prisma.IntWithAggregatesFilter<"Order"> | number
   promotionId?: Prisma.StringNullableWithAggregatesFilter<"Order"> | string | null
   idempotencyKey?: Prisma.StringWithAggregatesFilter<"Order"> | string
+  accessTokenHash?: Prisma.StringWithAggregatesFilter<"Order"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Order"> | Date | string
 }
@@ -407,6 +419,7 @@ export type OrderCreateInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutOrdersInput
@@ -429,6 +442,7 @@ export type OrderUncheckedCreateInput = {
   totalMinor: number
   promotionId?: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -447,6 +461,7 @@ export type OrderUpdateInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
@@ -469,6 +484,7 @@ export type OrderUncheckedUpdateInput = {
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   promotionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -489,6 +505,7 @@ export type OrderCreateManyInput = {
   totalMinor: number
   promotionId?: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -504,6 +521,7 @@ export type OrderUpdateManyMutationInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -521,6 +539,7 @@ export type OrderUncheckedUpdateManyInput = {
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   promotionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -548,6 +567,7 @@ export type OrderCountOrderByAggregateInput = {
   totalMinor?: Prisma.SortOrder
   promotionId?: Prisma.SortOrder
   idempotencyKey?: Prisma.SortOrder
+  accessTokenHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -572,6 +592,7 @@ export type OrderMaxOrderByAggregateInput = {
   totalMinor?: Prisma.SortOrder
   promotionId?: Prisma.SortOrder
   idempotencyKey?: Prisma.SortOrder
+  accessTokenHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -589,6 +610,7 @@ export type OrderMinOrderByAggregateInput = {
   totalMinor?: Prisma.SortOrder
   promotionId?: Prisma.SortOrder
   idempotencyKey?: Prisma.SortOrder
+  accessTokenHash?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -746,6 +768,7 @@ export type OrderCreateWithoutUserInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   promotion?: Prisma.PromotionCreateNestedOneWithoutOrdersInput
@@ -766,6 +789,7 @@ export type OrderUncheckedCreateWithoutUserInput = {
   totalMinor: number
   promotionId?: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -815,6 +839,7 @@ export type OrderScalarWhereInput = {
   totalMinor?: Prisma.IntFilter<"Order"> | number
   promotionId?: Prisma.StringNullableFilter<"Order"> | string | null
   idempotencyKey?: Prisma.StringFilter<"Order"> | string
+  accessTokenHash?: Prisma.StringFilter<"Order"> | string
   createdAt?: Prisma.DateTimeFilter<"Order"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Order"> | Date | string
 }
@@ -830,6 +855,7 @@ export type OrderCreateWithoutPromotionInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutOrdersInput
@@ -850,6 +876,7 @@ export type OrderUncheckedCreateWithoutPromotionInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -894,6 +921,7 @@ export type OrderCreateWithoutItemsInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutOrdersInput
@@ -915,6 +943,7 @@ export type OrderUncheckedCreateWithoutItemsInput = {
   totalMinor: number
   promotionId?: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutOrderInput
@@ -948,6 +977,7 @@ export type OrderUpdateWithoutItemsInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
@@ -969,6 +999,7 @@ export type OrderUncheckedUpdateWithoutItemsInput = {
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   promotionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutOrderNestedInput
@@ -986,6 +1017,7 @@ export type OrderCreateWithoutPaymentsInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutOrdersInput
@@ -1007,6 +1039,7 @@ export type OrderUncheckedCreateWithoutPaymentsInput = {
   totalMinor: number
   promotionId?: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -1040,6 +1073,7 @@ export type OrderUpdateWithoutPaymentsInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
@@ -1061,6 +1095,7 @@ export type OrderUncheckedUpdateWithoutPaymentsInput = {
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   promotionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -1078,6 +1113,7 @@ export type OrderCreateWithoutRefundsInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   user?: Prisma.UserCreateNestedOneWithoutOrdersInput
@@ -1099,6 +1135,7 @@ export type OrderUncheckedCreateWithoutRefundsInput = {
   totalMinor: number
   promotionId?: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
   items?: Prisma.OrderItemUncheckedCreateNestedManyWithoutOrderInput
@@ -1132,6 +1169,7 @@ export type OrderUpdateWithoutRefundsInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
@@ -1153,6 +1191,7 @@ export type OrderUncheckedUpdateWithoutRefundsInput = {
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   promotionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -1171,6 +1210,7 @@ export type OrderCreateManyUserInput = {
   totalMinor: number
   promotionId?: string | null
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1186,6 +1226,7 @@ export type OrderUpdateWithoutUserInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   promotion?: Prisma.PromotionUpdateOneWithoutOrdersNestedInput
@@ -1206,6 +1247,7 @@ export type OrderUncheckedUpdateWithoutUserInput = {
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   promotionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -1225,6 +1267,7 @@ export type OrderUncheckedUpdateManyWithoutUserInput = {
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   promotionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1241,6 +1284,7 @@ export type OrderCreateManyPromotionInput = {
   taxMinor?: number
   totalMinor: number
   idempotencyKey: string
+  accessTokenHash: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1256,6 +1300,7 @@ export type OrderUpdateWithoutPromotionInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneWithoutOrdersNestedInput
@@ -1276,6 +1321,7 @@ export type OrderUncheckedUpdateWithoutPromotionInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   items?: Prisma.OrderItemUncheckedUpdateManyWithoutOrderNestedInput
@@ -1295,6 +1341,7 @@ export type OrderUncheckedUpdateManyWithoutPromotionInput = {
   taxMinor?: Prisma.IntFieldUpdateOperationsInput | number
   totalMinor?: Prisma.IntFieldUpdateOperationsInput | number
   idempotencyKey?: Prisma.StringFieldUpdateOperationsInput | string
+  accessTokenHash?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1361,6 +1408,7 @@ export type OrderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   totalMinor?: boolean
   promotionId?: boolean
   idempotencyKey?: boolean
+  accessTokenHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.Order$userArgs<ExtArgs>
@@ -1384,6 +1432,7 @@ export type OrderSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   totalMinor?: boolean
   promotionId?: boolean
   idempotencyKey?: boolean
+  accessTokenHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.Order$userArgs<ExtArgs>
@@ -1403,6 +1452,7 @@ export type OrderSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   totalMinor?: boolean
   promotionId?: boolean
   idempotencyKey?: boolean
+  accessTokenHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.Order$userArgs<ExtArgs>
@@ -1422,11 +1472,12 @@ export type OrderSelectScalar = {
   totalMinor?: boolean
   promotionId?: boolean
   idempotencyKey?: boolean
+  accessTokenHash?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "userId" | "email" | "status" | "currency" | "subtotalMinor" | "discountMinor" | "taxMinor" | "totalMinor" | "promotionId" | "idempotencyKey" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
+export type OrderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "number" | "userId" | "email" | "status" | "currency" | "subtotalMinor" | "discountMinor" | "taxMinor" | "totalMinor" | "promotionId" | "idempotencyKey" | "accessTokenHash" | "createdAt" | "updatedAt", ExtArgs["result"]["order"]>
 export type OrderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Order$userArgs<ExtArgs>
   promotion?: boolean | Prisma.Order$promotionArgs<ExtArgs>
@@ -1466,6 +1517,7 @@ export type $OrderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     totalMinor: number
     promotionId: string | null
     idempotencyKey: string
+    accessTokenHash: string
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["order"]>
@@ -1908,6 +1960,7 @@ export interface OrderFieldRefs {
   readonly totalMinor: Prisma.FieldRef<"Order", 'Int'>
   readonly promotionId: Prisma.FieldRef<"Order", 'String'>
   readonly idempotencyKey: Prisma.FieldRef<"Order", 'String'>
+  readonly accessTokenHash: Prisma.FieldRef<"Order", 'String'>
   readonly createdAt: Prisma.FieldRef<"Order", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Order", 'DateTime'>
 }

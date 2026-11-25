@@ -1,10 +1,9 @@
 import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import { createDb } from "@bleusim/database";
-import { buildApp } from "../src/app";
+import { makeApp } from "./helpers";
 
-const db = createDb();
-let app: Awaited<ReturnType<typeof buildApp>>;
-beforeAll(async () => { app = await buildApp({ db }); });
+let db: Awaited<ReturnType<typeof makeApp>>["db"];
+let app: Awaited<ReturnType<typeof makeApp>>["app"];
+beforeAll(async () => { ({ db, app } = await makeApp()); });
 afterAll(async () => { await app.close(); await db.$disconnect(); });
 
 describe("catalog API (requires seeded local Postgres)", () => {
@@ -33,5 +32,15 @@ describe("catalog API (requires seeded local Postgres)", () => {
   });
   it("refuses currencies the sandbox does not price", async () => {
     expect((await app.inject("/v1/destinations?currency=MAD")).statusCode).toBe(422);
+  });
+});
+describe("plan lookup", () => {
+  it("returns a plan by id", async () => {
+    const { makeApp } = await import("./helpers");
+    const { app, db } = await makeApp();
+    const r = await app.inject("/v1/plans/dev-jp-5-30");
+    expect(r.json()).toMatchObject({ id: "dev-jp-5-30", dataGb: 5, validityDays: 30, source: "DEV_FIXTURE" });
+    expect((await app.inject("/v1/plans/missing-plan")).statusCode).toBe(404);
+    await app.close(); await db.$disconnect();
   });
 });
