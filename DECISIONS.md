@@ -18,3 +18,8 @@
 | 2026-11-25 | Higgsfield: Badr approved spending the full credit balance on brand/hero assets | Badr, 2026-11-25 20:08 UTC |
 | 2026-11-25 | Back office lives at `/admin` inside apps/web for now (not a separate apps/admin) | Same session cookie and design system, one deploy; split later if the team or attack surface grows |
 | 2026-11-25 | Staff roles: SUPPORT (orders, eSIMs, retry provisioning), CATALOG_MANAGER (plans, view suppliers), FINANCE (orders, overview), ADMIN (all). Enforced in `apps/api/src/routes/admin.ts`; first admin only via `pnpm --filter @bleusim/api grant-role` | Least privilege; no HTTP path to self-promote |
+| 2026-11-25 | Seven languages (en, fr, es, de, ar, pt, it). English unprefixed (`/esim/japan`), others prefixed (`/fr/esim/japan`), `/en/...` 308-redirects to the clean URL. Routing in `apps/web/proxy.ts`, pages in `app/[lang]/` | One canonical URL per language; English URLs already shared stay stable |
+| 2026-11-25 | No automatic redirect by browser language; visitors pick with the switcher | Stable, crawlable URLs; no surprise redirects |
+| 2026-11-25 | Checkout, account, sign-in, orders and admin stay English-only for now (`app/(app)/`, own root layout `lang="en"`) | Ship localized discovery first; transactional copy needs careful review (T-132) |
+| 2026-11-25 | Arabic: `dir="rtl"`, IBM Plex Sans Arabic, Latin digits for prices (`ar-u-nu-latn`); layout uses logical start/end utilities | Readable prices across markets; one layout for both directions |
+| 2026-11-25 | Translations are machine-drafted (`apps/web/lib/i18n/dict/`) and need native review before launch (T-131) | Honest status; no unreviewed copy presented as final |

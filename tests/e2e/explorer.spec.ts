@@ -18,11 +18,11 @@ test.describe("Earth explorer", () => {
     await page.goto("/");
     const box = page.getByRole("combobox", { name: "Where are you going?" });
     await box.fill("USA");
-    await expect(page.getByRole("option").first()).toContainText("United States");
+    await expect(page.getByRole("listbox").getByRole("option").first()).toContainText("United States");
     await box.fill("Morroco");
-    await expect(page.getByRole("option").first()).toContainText("Morocco");
+    await expect(page.getByRole("listbox").getByRole("option").first()).toContainText("Morocco");
     await box.fill("Marrakech");
-    await expect(page.getByRole("option").first()).toContainText("Morocco");
+    await expect(page.getByRole("listbox").getByRole("option").first()).toContainText("Morocco");
   });
 
   test("region chip opens regional plans", async ({ page }) => {

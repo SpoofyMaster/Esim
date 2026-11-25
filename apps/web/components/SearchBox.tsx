@@ -2,6 +2,8 @@
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import { COUNTRIES, REGIONS, createSearch, flagEmoji, type SearchHit } from "@bleusim/geospatial";
 import { explorer } from "@/lib/store";
+import { useI18n } from "@/lib/i18n/client";
+import type { Dict, Locale } from "@/lib/i18n";
 
 const search = createSearch(COUNTRIES, REGIONS);
 const POPULAR = ["JP", "US", "MA", "FR", "TR", "TH", "GB", "AE"];
@@ -11,10 +13,10 @@ function readRecent(): string[] { try { return JSON.parse(localStorage.getItem(R
 function pushRecent(key: string) { try { const r = [key, ...readRecent().filter((k) => k !== key)].slice(0, 4); localStorage.setItem(RECENT_KEY, JSON.stringify(r)); } catch { /* storage unavailable */ } }
 
 function hitKey(h: SearchHit) { return h.kind === "country" ? `c:${h.iso2}` : h.kind === "region" ? `r:${h.id}` : "g"; }
-function keyToHit(k: string): SearchHit | null {
-  if (k === "g") return { kind: "global", id: "global", label: "Global", score: 0 };
-  if (k.startsWith("r:")) { const r = REGIONS.find((x) => x.id === k.slice(2)); return r ? { kind: "region", id: r.id, label: r.names.en, score: 0 } : null; }
-  const c = COUNTRIES.find((x) => x.iso2 === k.slice(2)); return c ? { kind: "country", iso2: c.iso2!, label: c.names.en, score: 0 } : null;
+function keyToHit(k: string, l: Locale, t: Dict): SearchHit | null {
+  if (k === "g") return { kind: "global", id: "global", label: t.common.global, score: 0 };
+  if (k.startsWith("r:")) { const r = REGIONS.find((x) => x.id === k.slice(2)); return r ? { kind: "region", id: r.id, label: r.names[l], score: 0 } : null; }
+  const c = COUNTRIES.find((x) => x.iso2 === k.slice(2)); return c ? { kind: "country", iso2: c.iso2!, label: c.names[l], score: 0 } : null;
 }
 
 export function SearchBox({ autoFocus = false, size = "lg" }: { autoFocus?: boolean; size?: "lg" | "md" }) {
@@ -23,18 +25,20 @@ export function SearchBox({ autoFocus = false, size = "lg" }: { autoFocus?: bool
   const [active, setActive] = useState(0);
   const [recent, setRecent] = useState<string[]>([]);
   const listId = useId();
+  const { locale, t } = useI18n();
+  const s = t.search;
   const inputRef = useRef<HTMLInputElement>(null);
   useEffect(() => setRecent(readRecent()), [open]);
 
   const results: { group: string; hits: SearchHit[] }[] = useMemo(() => {
-    if (q.trim()) return [{ group: "Destinations", hits: search(q, "en", 8) }];
+    if (q.trim()) return [{ group: s.results, hits: search(q, locale, 8) }];
     const groups = [];
-    const rec = recent.map(keyToHit).filter(Boolean) as SearchHit[];
-    if (rec.length) groups.push({ group: "Recent", hits: rec });
-    groups.push({ group: "Popular", hits: POPULAR.map((i) => keyToHit(`c:${i}`)!).filter(Boolean) });
-    groups.push({ group: "Regions & global", hits: [...REGIONS.slice(0, 3).map((r) => keyToHit(`r:${r.id}`)!), keyToHit("g")!] });
+    const rec = recent.map((k) => keyToHit(k, locale, t)).filter(Boolean) as SearchHit[];
+    if (rec.length) groups.push({ group: s.recent, hits: rec });
+    groups.push({ group: s.popular, hits: POPULAR.map((i) => keyToHit(`c:${i}`, locale, t)!).filter(Boolean) });
+    groups.push({ group: s.regions, hits: [...REGIONS.slice(0, 3).map((r) => keyToHit(`r:${r.id}`, locale, t)!), keyToHit("g", locale, t)!] });
     return groups;
-  }, [q, recent]);
+  }, [q, recent, locale, t]); // eslint-disable-line react-hooks/exhaustive-deps
   const flat = results.flatMap((g) => g.hits);
 
   function choose(h: SearchHit) {
@@ -50,14 +54,14 @@ export function SearchBox({ autoFocus = false, size = "lg" }: { autoFocus?: bool
   return (
     <div className="relative w-full" onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) setOpen(false); }}>
       <form role="search" onSubmit={(e) => { e.preventDefault(); const h = flat[active] ?? flat[0]; if (h) choose(h); }}
-        className={`glass flex items-center gap-3 rounded-2xl ${big ? "h-16 pl-5 pr-2" : "h-12 pl-4 pr-1.5"} transition-colors focus-within:border-cyan-400/50`}>
+        className={`glass flex items-center gap-3 rounded-2xl ${big ? "h-16 ps-5 pe-2" : "h-12 ps-4 pe-1.5"} transition-colors focus-within:border-cyan-400/50`}>
         <svg aria-hidden width="20" height="20" viewBox="0 0 24 24" fill="none" className="shrink-0 text-cyan-300"><circle cx="11" cy="11" r="7" stroke="currentColor" strokeWidth="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>
-        <label htmlFor={`${listId}-input`} className="sr-only">Where are you going?</label>
+        <label htmlFor={`${listId}-input`} className="sr-only">{s.label}</label>
         <input
           id={`${listId}-input`} ref={inputRef} autoFocus={autoFocus} value={q} autoComplete="off" spellCheck={false}
           role="combobox" aria-expanded={open} aria-controls={listId} aria-autocomplete="list"
           aria-activedescendant={open && flat[active] ? `${listId}-${active}` : undefined}
-          placeholder="Where are you going?"
+          placeholder={s.placeholder}
           onFocus={() => setOpen(true)}
           onChange={(e) => { setQ(e.target.value); setActive(0); setOpen(true); }}
           onKeyDown={(e) => {
@@ -68,14 +72,14 @@ export function SearchBox({ autoFocus = false, size = "lg" }: { autoFocus?: bool
           className={`min-w-0 flex-1 bg-transparent ${big ? "text-lg" : "text-base"} text-ice-50 placeholder:text-ice-400 outline-none`}
         />
         <button type="submit" className={`shrink-0 rounded-xl bg-blue-500 font-medium text-white transition hover:bg-blue-400 active:scale-[0.98] ${big ? "h-12 px-5" : "h-9 px-4 text-sm"}`}>
-          <span className={big ? "hidden sm:inline" : ""}>Find your eSIM</span>
-          {big && <span className="sm:hidden" aria-hidden>Search</span>}
-          {big && <span className="sr-only sm:hidden">Find your eSIM</span>}
+          <span className={big ? "hidden sm:inline" : ""}>{s.submit}</span>
+          {big && <span className="sm:hidden" aria-hidden>{s.submitShort}</span>}
+          {big && <span className="sr-only sm:hidden">{s.submit}</span>}
         </button>
       </form>
       {open && flat.length > 0 && (
         <div className="glass absolute inset-x-0 top-full z-30 mt-2 max-h-[min(60vh,420px)] overflow-auto rounded-2xl p-2" >
-          <ul id={listId} role="listbox" aria-label="Destinations">
+          <ul id={listId} role="listbox" aria-label={s.results}>
             {results.map((g) => (
               <li key={g.group} role="presentation">
                 <div className="px-3 pb-1 pt-2 text-[11px] font-medium uppercase tracking-[0.14em] text-ice-400">{g.group}</div>
@@ -92,9 +96,9 @@ export function SearchBox({ autoFocus = false, size = "lg" }: { autoFocus?: bool
                         </span>
                         <span className="flex-1">
                           <span className="block text-[15px] text-ice-50">{h.label}</span>
-                          {(h.sub || h.kind !== "country") && <span className="block text-xs text-ice-400">{h.sub ? `${h.sub}` : h.kind === "region" ? "Regional plans" : "Worldwide plans"}</span>}
+                          {(h.sub || h.kind !== "country") && <span className="block text-xs text-ice-400">{h.sub ? `${h.sub}` : h.kind === "region" ? s.regional : s.worldwide}</span>}
                         </span>
-                        <span aria-hidden className="text-xs text-ice-400">↵</span>
+                        <span aria-hidden className="text-xs text-ice-400 rtl:-scale-x-100">↵</span>
                       </li>
                     );
                   })}

@@ -1,0 +1,10 @@
+import type { Locale } from "./index";
+import en, { type Dict } from "./dict/en";
+import fr from "./dict/fr";
+import es from "./dict/es";
+import de from "./dict/de";
+import ar from "./dict/ar";
+import pt from "./dict/pt";
+import it from "./dict/it";
+const DICTS: Record<Locale, Dict> = { en, fr, es, de, ar, pt, it };
+export const getDict = (l: Locale): Dict => DICTS[l];

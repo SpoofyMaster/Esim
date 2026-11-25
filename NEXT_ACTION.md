@@ -1,10 +1,10 @@
-# Next action (updated 2026-11-25 21:00 UTC)
+# Next action (updated 2026-11-25 21:40 UTC)
 
 Done this step: SSR destination pages + SEO; Western Sahara merged into Morocco; repo on GitHub (SpoofyMaster/Esim) with CI; Higgsfield assets (600 credits) wired into pages.
 
 Next, in order:
 1. ~~Admin dashboard~~ done 2026-11-25 (/admin). Follow-ups: staff MFA, refunds UI (needs real payments), support tickets.
-2. i18n UI with Arabic RTL (milestone 13) — then add real hreflang alternates via `langAlternates()`.
+2. ~~i18n UI with Arabic RTL (milestone 13)~~ done 2026-11-25: 7 languages on the globe, search, panel and destination pages; hreflang + sitemap alternates. Follow-ups: native review of all translations (Arabic first), translate checkout/account/auth (English-only today), localized image alt text, mirror the globe offset in RTL.
 3. Email verification + password reset (T-072), Redis provisioning queue (T-042).
 4. Use the vertical Earth video + brand banner for app splash / OG images when the mobile app starts.
 

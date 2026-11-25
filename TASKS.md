@@ -29,3 +29,6 @@
 | T-070 | Accounts: email+password (scrypt), httpOnly session cookies, /me, logout, rate-limited auth | P0 | T-030 | Backend | register/login/logout tests | TESTED | vitest 6 + e2e |
 | T-071 | My eSIMs: live usage (recorded), install details (owner-only), purchase history, top-ups through sandbox payment | P0 | T-070 | Full-stack | e2e register→buy→top-up | TESTED | vitest + e2e 2 |
 | T-072 | Email verification + magic link, password reset, Apple/Google sign-in | P1 | T-070 | Backend | flows tested | PENDING (needs email provider) | — |
+| T-130 | i18n: 7 languages, locale routing, Arabic RTL, hreflang, sitemap alternates | P1 | T-090 | Frontend | /fr, /ar render localized; /en redirects; hreflang ×8 | TESTED | e2e i18n.spec 12/12 (desktop+mobile) |
+| T-131 | Native review of translations (ar first) | P1 | T-130 | Content | Reviewed by native speakers | NOT STARTED | — |
+| T-132 | Translate checkout / account / auth / emails | P2 | T-130 | Frontend | Same flows in 7 languages | NOT STARTED | — |
