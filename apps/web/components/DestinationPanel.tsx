@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { REGIONS, countryByIso2, flagEmoji } from "@bleusim/geospatial";
+
+const slug = (s: string) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+function detailsHref(s: NonNullable<Selection>) { if (s.kind === "country") { const c = countryByIso2(s.iso2); return c ? `/esim/${slug(c.names.en)}` : null; } return s.kind === "region" ? `/esim/region/${s.id}` : "/esim/global"; }
 import type { Plan } from "@bleusim/catalog";
 import { catalog, formatPrice } from "@/lib/catalog";
 import { explorer, useExplorer, type Selection } from "@/lib/store";
@@ -46,6 +49,7 @@ export function DestinationPanel() {
         <div className="min-w-0 flex-1">
           <p className="text-[11px] font-medium uppercase tracking-[0.16em] text-cyan-300">{kicker}</p>
           <h2 className="font-display text-2xl font-semibold tracking-tight text-white">{title}</h2>
+          {detailsHref(selection) && <a href={detailsHref(selection)!} className="text-xs text-cyan-300 underline-offset-2 hover:underline">Plan details and FAQ</a>}
         </div>
         <button onClick={() => explorer.select(null, false)} className="grid size-9 place-items-center rounded-full text-ice-300 hover:bg-white/10 hover:text-white" aria-label="Close destination panel">
           <svg width="16" height="16" viewBox="0 0 16 16" aria-hidden><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"/></svg>

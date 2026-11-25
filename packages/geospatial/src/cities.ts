@@ -1,7 +1,7 @@
 // Popular cities mapped to their country (ISO2). Coordinates from public geographic knowledge (city centres).
 export const CITIES: { name: string; iso2: string; lng: number; lat: number; alt?: string[] }[] = [
   { name: "Tokyo", iso2: "JP", lng: 139.69, lat: 35.69 }, { name: "Kyoto", iso2: "JP", lng: 135.77, lat: 35.01 }, { name: "Osaka", iso2: "JP", lng: 135.5, lat: 34.69 },
-  { name: "Marrakech", iso2: "MA", lng: -7.99, lat: 31.63, alt: ["Marrakesh"] }, { name: "Casablanca", iso2: "MA", lng: -7.59, lat: 33.57 }, { name: "Rabat", iso2: "MA", lng: -6.84, lat: 34.02 },
+  { name: "Marrakech", iso2: "MA", lng: -7.99, lat: 31.63, alt: ["Marrakesh"] }, { name: "Casablanca", iso2: "MA", lng: -7.59, lat: 33.57 }, { name: "Rabat", iso2: "MA", lng: -6.84, lat: 34.02 }, { name: "Laayoune", iso2: "MA", lng: -13.2, lat: 27.15, alt: ["El Aaiún", "Laâyoune", "العيون"] }, { name: "Dakhla", iso2: "MA", lng: -15.94, lat: 23.69, alt: ["الداخلة"] },
   { name: "New York", iso2: "US", lng: -74.0, lat: 40.71, alt: ["NYC"] }, { name: "Los Angeles", iso2: "US", lng: -118.24, lat: 34.05, alt: ["LA"] }, { name: "Miami", iso2: "US", lng: -80.19, lat: 25.76 }, { name: "Honolulu", iso2: "US", lng: -157.86, lat: 21.31, alt: ["Hawaii"] },
   { name: "Paris", iso2: "FR", lng: 2.35, lat: 48.86 }, { name: "London", iso2: "GB", lng: -0.13, lat: 51.51 }, { name: "Barcelona", iso2: "ES", lng: 2.17, lat: 41.39 }, { name: "Madrid", iso2: "ES", lng: -3.7, lat: 40.42 },
   { name: "Rome", iso2: "IT", lng: 12.5, lat: 41.9, alt: ["Roma"] }, { name: "Lisbon", iso2: "PT", lng: -9.14, lat: 38.72, alt: ["Lisboa"] }, { name: "Berlin", iso2: "DE", lng: 13.4, lat: 52.52 }, { name: "Amsterdam", iso2: "NL", lng: 4.9, lat: 52.37 },

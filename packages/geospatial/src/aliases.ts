@@ -4,6 +4,6 @@ export const EXTRA_ALIASES: Record<string, string[]> = {
   GB: ["UK", "Britain", "Great Britain", "England", "Scotland", "Wales", "Royaume-Uni", "Reino Unido"],
   AE: ["UAE", "Emirates", "EAU"],
   KR: ["Korea", "South Korea", "Corée du Sud"],
-  MA: ["Marokko", "Maroc", "Marruecos", "Marocco", "Marrocos", "Morroco", "Marocco"],
+  MA: ["Marokko", "Maroc", "Marruecos", "Marocco", "Marrocos", "Morroco", "Moroccan Sahara", "Sahara", "Western Sahara", "Sahara marocain", "الصحراء المغربية", "المغرب"],
   CZ: ["Czechia"], NL: ["Holland"], TR: ["Turkey", "Türkiye", "Turquie"], CI: ["Ivory Coast"], MK: ["Macedonia"], SZ: ["Swaziland"], CD: ["DRC", "Congo-Kinshasa"], CG: ["Congo-Brazzaville"], TL: ["East Timor"], VA: ["Vatican"], RU: ["Russia"], VN: ["Vietnam"],
 };

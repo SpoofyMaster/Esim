@@ -17,7 +17,7 @@
   - `components/globe/EarthScene.tsx` scene, camera flights, picking · `shaders.ts` GLSL · `geodata.ts` TopoJSON → borders, id-map, point-in-polygon picker
   - `components/Explorer.tsx` hero + globe + overlays · `SearchBox.tsx` combobox · `DestinationPanel.tsx` plans panel / bottom sheet
   - `lib/store.ts` explorer state + URL sync (`?d=jp`, `?r=europe`, `?g=1`)
-- `packages/geospatial` 241 Natural Earth countries, 7-language names, regions, cities, Fuse search (`pnpm --filter @bleusim/geospatial build:data` regenerates `data/`)
+- `packages/geospatial` 240 Natural Earth countries (Western Sahara merged into Morocco, see DECISIONS), 7-language names, regions, cities, Fuse search (`pnpm --filter @bleusim/geospatial build:data` regenerates `data/`)
 - `packages/catalog` catalog contract + DEV FIXTURE provider
 - `packages/design-tokens` colours, type, radius, motion (TS + CSS vars)
 - `apps/{mobile,admin,api}`, other packages: scaffold folders, not started
@@ -36,7 +36,7 @@ Headless WebGL needs `--use-angle=swiftshader --enable-unsafe-swiftshader` (alre
 ## Environment facts
 - Cloud container: npm registry reachable; saily.com, NASA, unpkg NOT reachable. Use Claude's built-in browser on Badr's Mac for web research.
 - Earth textures come from the `three-globe` npm package (NASA Blue/Black Marble derivatives). Country shapes from `world-atlas` (Natural Earth, public domain).
-- Durable copies: git bundle `/mnt/project-files/bleusim/bleusim.bundle`; snapshots on Badr's Mac `~/Projects/bleusim/source-<commit>` (see LATEST.txt). No GitHub repo yet.
+- Durable copies: git bundle `/mnt/project-files/bleusim/bleusim.bundle`; snapshots on Badr's Mac `~/Projects/bleusim/source-<commit>` (see LATEST.txt). GitHub: `SpoofyMaster/Esim` (private, branch `main`, CI in `.github/workflows/ci.yml`).
 
 ## Coding standards
 TypeScript strict, `noUncheckedIndexedAccess`. Accessible primitives (labels, roles, focus rings). Tokens only from `@bleusim/design-tokens`. Universe A (cinematic, dark) for globe/marketing; Universe B (clean, legible) for commerce/account/admin.

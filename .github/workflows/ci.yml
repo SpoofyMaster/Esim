@@ -1,0 +1,33 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+permissions: { contents: read }
+concurrency: { group: "ci-${{ github.ref }}", cancel-in-progress: true }
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env: { POSTGRES_USER: bleusim, POSTGRES_PASSWORD: bleusim_dev, POSTGRES_DB: bleusim }
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U bleusim" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      DATABASE_URL: postgresql://bleusim:bleusim_dev@localhost:5432/bleusim
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: pnpm }
+      - run: pnpm install --frozen-lockfile
+      - name: Migrate + seed sandbox catalog
+        run: pnpm --filter @bleusim/database migrate:deploy && pnpm --filter @bleusim/database seed
+      - name: Typecheck
+        run: pnpm -r typecheck
+      - name: Unit + API tests
+        run: pnpm --filter @bleusim/geospatial test && pnpm --filter @bleusim/api test
+      - name: Build web (fixture catalog)
+        run: pnpm --filter @bleusim/web build

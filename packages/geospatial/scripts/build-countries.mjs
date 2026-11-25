@@ -1,8 +1,8 @@
 // Builds packages/geospatial/data/countries.json from Natural Earth (via world-atlas, public domain)
 // and i18n-iso-countries (MIT) names. Geography only — no commercial coverage here.
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createRequire } from "node:module";
-import { feature } from "topojson-client";
+import { feature, mergeArcs } from "topojson-client";
 import { geoCentroid, geoBounds, geoArea } from "d3-geo";
 import countries from "i18n-iso-countries";
 
@@ -12,6 +12,19 @@ for (const l of LANGS) countries.registerLocale(require(`i18n-iso-countries/lang
 
 const topoPath = require.resolve("world-atlas/countries-50m.json");
 const topo = JSON.parse(readFileSync(topoPath, "utf8"));
+
+// Product decision (Badr, 2026-11-25): Morocco is shown with its Sahara provinces as one country.
+// Natural Earth ships "W. Sahara" (numeric 732) as a separate polygon; merge it into Morocco (504)
+// so there is no internal border, no separate hover/pick target and no separate search entry.
+{
+  const geoms = topo.objects.countries.geometries;
+  const ma = geoms.find((g) => g.id === "504");
+  const eh = geoms.find((g) => g.id === "732");
+  if (!ma || !eh) throw new Error("Morocco / W. Sahara geometry not found in world-atlas");
+  const merged = mergeArcs(topo, [ma, eh]);
+  ma.type = merged.type; ma.arcs = merged.arcs;
+  topo.objects.countries.geometries = geoms.filter((g) => g !== eh);
+}
 const fc = feature(topo, topo.objects.countries);
 
 // Natural Earth entities without an ISO numeric code in world-atlas.
@@ -47,6 +60,6 @@ function round(v) { return Math.round(v * 1000) / 1000; }
 
 mkdirSync(new URL("../data/", import.meta.url), { recursive: true });
 writeFileSync(new URL("../data/countries.json", import.meta.url), JSON.stringify(out));
-copyFileSync(topoPath, new URL("../data/countries-50m.topo.json", import.meta.url));
+writeFileSync(new URL("../data/countries-50m.topo.json", import.meta.url), JSON.stringify(topo));
 const missing = out.filter((c) => !c.iso2).map((c) => c.neName);
 console.log(`countries: ${out.length}, without ISO: ${missing.length} (${missing.join(", ")})`);

@@ -1,5 +1,6 @@
 import { Explorer } from "@/components/Explorer";
 import { COUNTRIES, flagEmoji } from "@bleusim/geospatial";
+import { slugOf } from "@/lib/server-catalog";
 import { DEV_COVERAGE } from "@bleusim/catalog";
 
 // Server-rendered destination directory below the globe: crawlable, and the full no-WebGL path.
@@ -14,7 +15,7 @@ export default function Home() {
         <ul className="mt-8 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
           {list.map((c) => (
             <li key={c.iso2}>
-              <a href={`/?d=${c.iso2!.toLowerCase()}`} className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] px-4 py-3 text-ice-100 transition hover:border-cyan-400/40 hover:bg-white/[0.05]">
+              <a href={`/esim/${slugOf(c)}`} className="flex items-center gap-3 rounded-xl border border-white/8 bg-white/[0.02] px-4 py-3 text-ice-100 transition hover:border-cyan-400/40 hover:bg-white/[0.05]">
                 <span aria-hidden className="text-xl">{flagEmoji(c.iso2!)}</span>{c.names.en}
               </a>
             </li>

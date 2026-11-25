@@ -29,8 +29,11 @@ async function upsertPlan(p: Plan, destinationId: string, sort: number) {
 async function main() {
   for (const c of COUNTRIES) {
     if (!c.iso2) continue;
-    await db.country.upsert({ where: { iso2: c.iso2 }, update: { names: c.names }, create: { iso2: c.iso2, iso3: c.iso3, names: c.names, lng: c.centroid[0], lat: c.centroid[1] } });
+    await db.country.upsert({ where: { iso2: c.iso2 }, update: { names: c.names, lng: c.centroid[0], lat: c.centroid[1] }, create: { iso2: c.iso2, iso3: c.iso3, names: c.names, lng: c.centroid[0], lat: c.centroid[1] } });
   }
+  // Geography rows that no longer exist (e.g. "EH", merged into Morocco) are removed.
+  const iso = COUNTRIES.flatMap((c) => (c.iso2 ? [c.iso2] : []));
+  await db.country.deleteMany({ where: { iso2: { notIn: iso } } });
   await db.supplier.upsert({ where: { id: "dev-sandbox" }, update: {}, create: { id: "dev-sandbox", name: "Development sandbox (not a real network)", adapter: "sandbox", enabled: true, isSandbox: true, priority: 1 } });
 
   for (const iso2 of DEV_COVERAGE) {
