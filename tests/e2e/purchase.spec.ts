@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 
 test.describe("sandbox purchase (needs API on :4000)", () => {
   test("globe search → plan → checkout → simulated payment → QR + manual details", async ({ page }) => {
-    await page.goto("/?nogl");
+    await page.goto("/explore?nogl");
     await page.getByRole("combobox", { name: "Where are you going?" }).fill("Japan");
     await page.keyboard.press("Enter");
     const panel = page.getByRole("complementary", { name: "Japan eSIM plans" });

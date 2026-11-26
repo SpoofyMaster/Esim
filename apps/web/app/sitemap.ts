@@ -15,6 +15,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   return [
     ...entries("/", "weekly", 1),
     ...entries("/destinations", "daily", 0.9),
+    ...entries("/explore", "weekly", 0.6),
+    ...["/privacy", "/terms", "/cookies"].flatMap((p) => entries(p, "yearly", 0.2)),
     ...entries("/esim/global", "daily", 0.8),
     ...REGIONS.flatMap((r) => entries(`/esim/region/${r.id}`, "daily", 0.8)),
     ...countries.flatMap((c) => entries(`/esim/${slugOf(c!)}`, "daily", 0.7)),

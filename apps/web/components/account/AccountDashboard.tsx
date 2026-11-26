@@ -37,7 +37,7 @@ export function AccountDashboard() {
       <a href="/login?next=/account" className="mt-6 inline-flex h-11 items-center rounded-xl bg-blue-500 px-6 font-medium text-white hover:bg-blue-400">Sign in</a>
     </div>
   );
-  if (err) return <p role="alert" className="text-red-700 dark:text-red-300">{err}</p>;
+  if (err) return <p role="alert" className="text-red-700">{err}</p>;
   if (!me || !esims) return <div aria-busy className="h-48 animate-pulse rounded-2xl bg-white/5" />;
 
   return (
@@ -47,7 +47,7 @@ export function AccountDashboard() {
           <h1 className="font-display text-3xl font-semibold tracking-tight">My eSIMs</h1>
           <p className="mt-1 text-sm text-[var(--fg-muted)]">{me.name ? `${me.name} · ` : ""}{me.email}</p>
         </div>
-        <button onClick={async () => { await api("/v1/auth/logout", { method: "POST" }); location.assign("/"); }} className="rounded-full border border-[var(--border)] px-4 py-2 text-sm hover:bg-white/5">Sign out</button>
+        <button onClick={async () => { await api("/v1/auth/logout", { method: "POST" }); location.assign("/"); }} className="rounded-full border border-[var(--border)] px-4 py-2 text-sm hover:bg-[var(--bg-subtle)]">Sign out</button>
       </div>
       {esims.some((e) => e.isSandbox) && <div className="mt-6"><SandboxBanner /></div>}
 
@@ -103,14 +103,14 @@ function EsimCard({ esim, onChanged }: { esim: Esim; onChanged: () => void }) {
           {esim.dataTotalMb !== null && <span className="text-[var(--fg-muted)]">{fmtData(esim.dataUsedMb)} of {fmtData(esim.dataTotalMb)} used</span>}
         </div>
         {esim.dataTotalMb !== null && (
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-black/10 dark:bg-white/10" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)} aria-label="Data used">
+          <div className="mt-2 h-2 overflow-hidden rounded-full bg-black/10" role="progressbar" aria-valuemin={0} aria-valuemax={100} aria-valuenow={Math.round(pct)} aria-label="Data used">
             <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-cyan-400" style={{ width: `${Math.max(pct, 1)}%` }} />
           </div>
         )}
         <p className="mt-2 text-xs text-[var(--fg-muted)]">{esim.usageLive ? "Usage updated just now" : "Showing last known usage"} · valid {esim.validityDays} days from activation</p>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        <button aria-expanded={panel === "install"} onClick={() => setPanel(panel === "install" ? "none" : "install")} className="rounded-full border border-[var(--border)] px-4 py-2 text-sm hover:bg-white/5">Install details</button>
+        <button aria-expanded={panel === "install"} onClick={() => setPanel(panel === "install" ? "none" : "install")} className="rounded-full border border-[var(--border)] px-4 py-2 text-sm hover:bg-[var(--bg-subtle)]">Install details</button>
         {esim.topUpAvailable && <button aria-expanded={panel === "topup"} onClick={() => setPanel(panel === "topup" ? "none" : "topup")} className="rounded-full bg-blue-500 px-4 py-2 text-sm font-medium text-white hover:bg-blue-400">Top up</button>}
       </div>
       {panel === "install" && <InstallDetails id={esim.id} />}
@@ -160,7 +160,7 @@ function TopUp({ esim, onDone }: { esim: Esim; onDone: () => void }) {
           </label>
         ))}
       </div>
-      {err && <p role="alert" className="mt-2 text-sm text-red-700 dark:text-red-300">{err}</p>}
+      {err && <p role="alert" className="mt-2 text-sm text-red-700">{err}</p>}
       <button disabled={busy || !chosen} onClick={buy} className="mt-3 h-10 rounded-xl bg-blue-500 px-5 text-sm font-medium text-white hover:bg-blue-400 disabled:opacity-60">{busy ? "Adding…" : "Pay (sandbox) and add data"}</button>
     </fieldset>
   );

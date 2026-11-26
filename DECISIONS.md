@@ -23,7 +23,11 @@
 | 2026-11-25 | Checkout, account, sign-in, orders and admin stay English-only for now (`app/(app)/`, own root layout `lang="en"`) | Ship localized discovery first; transactional copy needs careful review (T-132) |
 | 2026-11-25 | Arabic: `dir="rtl"`, IBM Plex Sans Arabic, Latin digits for prices (`ar-u-nu-latn`); layout uses logical start/end utilities | Readable prices across markets; one layout for both directions |
 | 2026-11-25 | Translations are machine-drafted (`apps/web/lib/i18n/dict/`) and need native review before launch (T-131) | Honest status; no unreviewed copy presented as final |
-| 2026-11-26 | Site is light-only (white background, BLEUSIM blue/cyan as the accent colour). The 3D Earth stays, framed in a dark "window" card in the hero. `dark:` utilities only apply under `data-theme="dark"` | Badr asked for a soft, white, Saily-like feel; the logo's blue plays the role Saily's yellow does |
-| 2026-11-26 | Home page order: hero (search + globe), What is an eSIM, destinations (Country/Region/Global tabs, 9 popular countries: US, JP, TH, GB, TR, PT, FR, DE, NL), why BLEUSIM, two feature cards, how it works, global band, FAQ, footer. Full country directory removed from home (still at /destinations) | Badr, 2026-11-26 |
-| 2026-11-26 | No reviews, ratings, phone-number product, referral offer or app-store badges on the home page | They don't exist yet; showing them would fabricate claims |
-| 2026-11-26 | Privacy Policy (/privacy), Terms of Service (/terms), Cookie Preferences (/cookies) are original English drafts, marked "Draft for review", with company details as highlighted placeholders | Need lawyer review + Badr's legal entity details before launch (see BLOCKERS) |
+
+## 2026-11-26 — Light homepage, globe moves to /explore (Badr's request)
+- Site is light (white, soft ice-blue panels, BLEUSIM blue CTAs) instead of the dark space theme; `data-theme="light"` is forced so OS dark mode doesn't darken pages. Brand blue/cyan plays the accent role Saily gives yellow (our logo colours, not theirs).
+- Homepage is a Saily-style marketing page with original copy in 7 languages: hero + search, what is an eSIM, 9 popular countries (US, JP, TH, GB, TR, PT, FR, DE, NL) with Country/Region/Global tabs, features, two image cards, 3D-globe card, how it works, FAQ, CTA, footer. The full directory list was removed from home (it stays at /destinations).
+- The 3D globe explorer now lives at `/explore`; old deep links `/?d=jp`, `/?r=…`, `/?g=1` redirect there (307).
+- No reviews/ratings/app-store sections: we have none yet and must not fabricate them.
+- Legal pages `/privacy`, `/terms`, `/cookies` are original DRAFTS in English (bracketed placeholders highlighted, draft banner shown) and need a lawyer before launch. Cookie page has working preferences (localStorage `bleusim.cookieConsent`); no analytics/marketing cookies exist today.
+- Round flags: `public/flags/*.svg` from the `flag-icons` package (MIT, licence in `public/flags/LICENSE.txt`).

@@ -62,7 +62,7 @@ export function CheckoutForm() {
               <input type="checkbox" required checked={compat} onChange={(e) => setCompat(e.target.checked)} className="mt-0.5 size-4 accent-[var(--accent)]" />
               <span>My phone supports eSIM and is carrier-unlocked. <a href="/#devices" className="text-[var(--accent)] underline">Check devices</a></span>
             </label>
-            {err && <p role="alert" className="text-sm text-red-700 dark:text-red-300">{err}</p>}
+            {err && <p role="alert" className="text-sm text-red-700">{err}</p>}
             <button disabled={busy} className="h-12 w-full rounded-xl bg-blue-500 font-medium text-white transition hover:bg-blue-400 disabled:opacity-60">
               {busy ? "Creating order…" : `Continue to payment · ${formatPrice(plan.price.amount, plan.price.currency)}`}
             </button>
@@ -71,10 +71,10 @@ export function CheckoutForm() {
           <section aria-labelledby="pay-h" className="mt-6 rounded-2xl border border-[var(--border)] p-6">
             <h2 id="pay-h" className="font-medium">Sandbox payment</h2>
             <p className="mt-1 text-sm text-[var(--fg-muted)]">A real card form (Stripe) replaces this step once payment keys are configured. Choose an outcome to test the flow.</p>
-            {err && <p role="alert" className="mt-3 text-sm text-red-700 dark:text-red-300">{err}</p>}
+            {err && <p role="alert" className="mt-3 text-sm text-red-700">{err}</p>}
             <div className="mt-4 flex flex-col gap-2 sm:flex-row">
               <button disabled={busy} onClick={() => pay("succeeded")} className="h-11 flex-1 rounded-xl bg-blue-500 font-medium text-white hover:bg-blue-400 disabled:opacity-60">Simulate successful payment</button>
-              <button disabled={busy} onClick={() => pay("failed")} className="h-11 flex-1 rounded-xl border border-[var(--border)] hover:bg-white/5 disabled:opacity-60">Simulate declined payment</button>
+              <button disabled={busy} onClick={() => pay("failed")} className="h-11 flex-1 rounded-xl border border-[var(--border)] hover:bg-[var(--bg-subtle)] disabled:opacity-60">Simulate declined payment</button>
             </div>
           </section>
         )}

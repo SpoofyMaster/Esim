@@ -17,5 +17,5 @@ export default async function Page({ params }: P) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   const plans = await serverCatalog.global();
-  return <DestinationPage lang={lang} kind="global" name={getDict(lang).common.global} path="/esim/global" globeHref="/?g=1" plans={plans} image={DESTINATION_IMAGES.global} />;
+  return <DestinationPage lang={lang} kind="global" name={getDict(lang).common.global} path="/esim/global" globeHref="/explore?g=1" plans={plans} image={DESTINATION_IMAGES.global} />;
 }

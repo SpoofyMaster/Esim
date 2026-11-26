@@ -8,12 +8,12 @@ import { SandboxBanner } from "./Shell";
 interface Order { number: string; status: string; email: string; total: { minor: number; currency: string }; items: { plan: { destination: { en: string }; dataMb: number | null; validityDays: number; source: string }; esim: { iccid: string; isSandbox: boolean; lpa: string } | null }[] }
 
 const STATUS: Record<string, { label: string; tone: string }> = {
-  FULFILLED: { label: "Ready to install", tone: "text-emerald-700 dark:text-emerald-300" },
-  PAYMENT_FAILED: { label: "Payment declined", tone: "text-red-700 dark:text-red-300" },
-  PROVISIONING: { label: "Preparing your eSIM", tone: "text-blue-600 dark:text-cyan-300" },
-  PAID: { label: "Payment received", tone: "text-blue-600 dark:text-cyan-300" },
-  PENDING_PAYMENT: { label: "Waiting for payment", tone: "text-amber-700 dark:text-amber-300" },
-  PROVISIONING_FAILED: { label: "We hit a problem issuing your eSIM", tone: "text-red-700 dark:text-red-300" },
+  FULFILLED: { label: "Ready to install", tone: "text-emerald-700" },
+  PAYMENT_FAILED: { label: "Payment declined", tone: "text-red-700" },
+  PROVISIONING: { label: "Preparing your eSIM", tone: "text-blue-600" },
+  PAID: { label: "Payment received", tone: "text-blue-600" },
+  PENDING_PAYMENT: { label: "Waiting for payment", tone: "text-amber-700" },
+  PROVISIONING_FAILED: { label: "We hit a problem issuing your eSIM", tone: "text-red-700" },
 };
 
 export function OrderView({ id }: { id: string }) {

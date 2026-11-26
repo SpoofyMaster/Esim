@@ -77,7 +77,7 @@ export function DestinationPage({ lang, kind, name, path, globeHref, iso2, plans
         </div>
       </header>
       <div className="mt-6 flex flex-wrap gap-3">
-        <a href={L(globeHref)} className="inline-flex h-10 items-center rounded-full border border-[var(--border)] px-4 text-sm hover:bg-white/5">{t.viewOnGlobe}</a>
+        <a href={L(globeHref)} className="inline-flex h-10 items-center rounded-full border border-[var(--border)] px-4 text-sm hover:bg-[var(--bg-subtle)]">{t.viewOnGlobe}</a>
       </div>
 
       {plans.length > 0 ? <PlanTable lang={lang} plans={plans} title={fmt(t.choosePlan, { name })} /> : (
@@ -104,7 +104,7 @@ export function DestinationPage({ lang, kind, name, path, globeHref, iso2, plans
         <section aria-labelledby="cov-h" className="mt-12">
           <h2 id="cov-h" className="font-display text-2xl font-semibold tracking-tight">{t.covered}</h2>
           <ul className="mt-4 flex flex-wrap gap-2 text-sm">
-            {coveredCountries.map((cc) => <li key={cc!.iso2}><a href={L(`/esim/${slugOf(cc!)}`)} className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 hover:bg-white/5"><span aria-hidden>{flagEmoji(cc!.iso2!)}</span>{cc!.names[lang]}</a></li>)}
+            {coveredCountries.map((cc) => <li key={cc!.iso2}><a href={L(`/esim/${slugOf(cc!)}`)} className="inline-flex items-center gap-1.5 rounded-full border border-[var(--border)] px-3 py-1.5 hover:bg-[var(--bg-subtle)]"><span aria-hidden>{flagEmoji(cc!.iso2!)}</span>{cc!.names[lang]}</a></li>)}
           </ul>
         </section>
       )}
