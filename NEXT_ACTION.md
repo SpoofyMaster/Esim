@@ -1,4 +1,6 @@
-# Next action (updated 2026-11-25 21:40 UTC)
+# Next action (updated 2026-11-26 18:45 UTC)
+
+Done 2026-11-26: light redesign (Mac version chosen by Badr over 635ad45): white theme, new home, globe at /explore, legal drafts at /privacy /terms /cookies. Open: B-8 legal details.
 
 Done this step: SSR destination pages + SEO; Western Sahara merged into Morocco; repo on GitHub (SpoofyMaster/Esim) with CI; Higgsfield assets (600 credits) wired into pages.
 
