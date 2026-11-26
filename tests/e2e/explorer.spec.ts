@@ -74,6 +74,11 @@ test.describe("Earth explorer", () => {
     await page.getByRole("combobox", { name: "Where are you going?" }).fill("Thailand");
     await page.keyboard.press("Enter");
     await expect(page.getByRole("complementary", { name: "Thailand eSIM plans" })).toBeVisible();
-    await expect(page.getByRole("link", { name: /Japan/ })).toBeVisible();
+    await page.getByRole("button", { name: "Close destination panel" }).click();
+    // Popular destinations stay reachable as plain links (tabs: Country / Region / Global).
+    const dest = page.locator("#destinations");
+    await expect(dest.getByRole("link", { name: /Japan/ })).toHaveAttribute("href", "/esim/japan");
+    await dest.getByRole("tab", { name: "Region" }).click();
+    await expect(dest.getByRole("link", { name: /Europe/ })).toHaveAttribute("href", "/esim/region/europe");
   });
 });

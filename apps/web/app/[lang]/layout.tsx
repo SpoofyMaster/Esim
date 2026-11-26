@@ -27,14 +27,14 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
     icons: { icon: "/brand/favicon.svg" },
   };
 }
-export const viewport: Viewport = { themeColor: "#020B1F", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#FFFFFF", width: "device-width", initialScale: 1 };
 
 export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ lang: string }> }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
   return (
-    <html lang={lang} dir={dirOf(lang)}>
-      <body className="bg-space-900 text-ice-50 min-h-dvh"><I18nProvider locale={lang} t={getDict(lang)}>{children}</I18nProvider></body>
+    <html lang={lang} dir={dirOf(lang)} data-theme="light">
+      <body className="min-h-dvh bg-white text-ice-900"><I18nProvider locale={lang} t={getDict(lang)}>{children}</I18nProvider></body>
     </html>
   );
 }

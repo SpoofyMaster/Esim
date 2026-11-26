@@ -3,7 +3,7 @@ import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
 
 // English is served unprefixed (/esim/japan → internally /en/esim/japan); /en/... redirects to the clean URL.
 // Other languages keep their prefix (/fr/esim/japan). Checkout, account and admin are English-only routes.
-const ENGLISH_ONLY = ["/checkout", "/account", "/login", "/register", "/order", "/admin"];
+const ENGLISH_ONLY = ["/checkout", "/account", "/login", "/register", "/order", "/admin", "/privacy", "/terms", "/cookies"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

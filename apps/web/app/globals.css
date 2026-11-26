@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "@bleusim/design-tokens/tokens.css";
 
+/* The site is light-only: dark: utilities apply only inside an explicit data-theme="dark" container. */
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
 @theme {
   --color-space-950: #010714; --color-space-900: #020B1F; --color-space-850: #06152E; --color-space-800: #0A1E3F; --color-space-700: #122B55; --color-space-600: #1D3A6B;
   --color-blue-600: #0047D6; --color-blue-500: #0057FF; --color-blue-400: #2F7BFF; --color-blue-300: #6FA3FF;
@@ -11,15 +14,15 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html { background: var(--color-space-900); color-scheme: dark; }
+html { background: #FFFFFF; color-scheme: light; overflow-x: clip; }
 body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 [dir="rtl"] body { font-family: var(--font-arabic); }
 :focus-visible { outline: 2px solid var(--color-cyan-400); outline-offset: 2px; border-radius: 6px; }
 
 .glass {
-  background: linear-gradient(180deg, rgba(10, 30, 63, 0.72), rgba(6, 21, 46, 0.78));
-  border: 1px solid rgba(125, 220, 255, 0.14);
-  box-shadow: 0 1px 0 rgba(255,255,255,0.06) inset, 0 24px 60px -20px rgba(0, 0, 0, 0.6);
+  background: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(13, 21, 38, 0.08);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.9) inset, 0 24px 60px -24px rgba(2, 11, 31, 0.28);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
 }
@@ -32,3 +35,23 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
   .reveal, .reveal-fade { animation: none; }
   * { scroll-behavior: auto !important; }
 }
+
+/* Soft brand shapes and scroll reveals (light theme). */
+@keyframes float { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -14px, 0); } }
+@keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 rgba(24, 178, 107, 0.5); } 100% { box-shadow: 0 0 0 10px rgba(24, 178, 107, 0); } }
+.float-slow { animation: float 7s ease-in-out infinite; }
+.float-slower { animation: float 10s ease-in-out infinite; }
+.pulse-dot { animation: pulse-dot 1.8s ease-out infinite; }
+.in-view { opacity: 0; transform: translateY(18px); transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo); }
+.in-view.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .float-slow, .float-slower, .pulse-dot { animation: none; }
+  .in-view { opacity: 1; transform: none; transition: none; }
+}
+
+/* Long-form legal text */
+.legal p + p, .legal p + ul, .legal ul + p, .legal table + p { margin-top: 0.9rem; }
+.legal ul { list-style: disc; padding-inline-start: 1.25rem; margin-top: 0.6rem; }
+.legal li + li { margin-top: 0.35rem; }
+.legal a { color: var(--color-blue-600); text-decoration: underline; text-underline-offset: 2px; }
+.legal strong { color: var(--color-ice-900); font-weight: 600; }

@@ -1,4 +1,6 @@
-# Next action (updated 2026-11-25 21:40 UTC)
+# Next action (updated 2026-11-26 13:40 UTC)
+
+Done 2026-11-26: light redesign (white theme, new home sections, footer), legal drafts at /privacy /terms /cookies with a working cookie preference. Open: B-7 legal details.
 
 Done this step: SSR destination pages + SEO; Western Sahara merged into Morocco; repo on GitHub (SpoofyMaster/Esim) with CI; Higgsfield assets (600 credits) wired into pages.
 

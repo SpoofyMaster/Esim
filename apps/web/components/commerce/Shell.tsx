@@ -1,5 +1,6 @@
 import { Logo } from "@/components/brand/Logo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { SiteFooter } from "@/components/SiteFooter";
 import { localePath, type Locale } from "@/lib/i18n";
 import { getDict } from "@/lib/i18n/dicts";
 // Universe B shell: calm, legible, minimal chrome. Localized pages pass `lang` and get the language switcher.
@@ -14,6 +15,7 @@ export function CommerceShell({ children, step, lang }: { children: React.ReactN
         </div>
       </header>
       <main className="mx-auto max-w-3xl px-5 py-10">{children}</main>
+      {lang && <SiteFooter lang={lang} />}
     </div>
   );
 }

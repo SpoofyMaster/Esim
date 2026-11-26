@@ -10,12 +10,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
   icons: { icon: "/brand/favicon.svg" },
 };
-export const viewport: Viewport = { themeColor: "#020B1F", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#FFFFFF", width: "device-width", initialScale: 1 };
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" dir="ltr">
-      <body className="bg-space-900 text-ice-50 min-h-dvh">{children}</body>
+    <html lang="en" dir="ltr" data-theme="light">
+      <body className="min-h-dvh bg-white text-ice-900">{children}</body>
     </html>
   );
 }

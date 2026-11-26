@@ -6,10 +6,9 @@ import { DEV_COVERAGE, regionCoverage, catalog, formatPrice } from "@/lib/catalo
 import { explorer, selectionFromUrl, useExplorer } from "@/lib/store";
 import { SearchBox } from "./SearchBox";
 import { DestinationPanel } from "./DestinationPanel";
-import { Logo } from "./brand/Logo";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { SiteHeader } from "./SiteHeader";
 import { useI18n } from "@/lib/i18n/client";
-import { fmt, intlLocale, localePath } from "@/lib/i18n";
+import { fmt, intlLocale } from "@/lib/i18n";
 
 const EarthScene = dynamic(() => import("./globe/EarthScene"), { ssr: false });
 
@@ -49,62 +48,52 @@ export function Explorer() {
   }, [selection]);
 
   const showGlobe = env?.webgl && !webglLost;
-  const heroHidden = !!selection;
 
   return (
-    <section className="relative h-dvh min-h-[620px] w-full overflow-hidden bg-space-900" aria-label={t.home.exploreLabel}>
-      {/* Globe layer */}
-      <div className="absolute inset-0 reveal-fade" style={{ animationDelay: "0.1s" }}>
-        {showGlobe && env && <EarthScene coverage={DEV_COVERAGE} highlight={highlight} quality={env.quality} reducedMotion={env.reduced} />}
-        {env && !showGlobe && <StaticEarth />}
-      </div>
-      {/* Vignette for legibility */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 bg-[radial-gradient(120%_80%_at_50%_45%,transparent_40%,rgba(2,11,31,0.85)_100%)]" />
-      <div aria-hidden className={`pointer-events-none absolute inset-y-0 start-0 w-full bg-gradient-to-r rtl:bg-gradient-to-l from-space-900/90 via-space-900/30 to-transparent transition-opacity duration-700 md:w-2/3 ${heroHidden ? "opacity-0" : "opacity-100"}`} />
+    <>
+      <SiteHeader />
+      <section aria-label={t.home.exploreLabel} className="relative overflow-hidden">
+        {/* Soft brand shapes: the blue/cyan of the logo plays the role of an accent colour on white. */}
+        <div aria-hidden className="pointer-events-none absolute -top-40 end-[-10%] size-[620px] rounded-full bg-[radial-gradient(circle_at_center,rgba(57,198,255,0.28),transparent_65%)] float-slower" />
+        <div aria-hidden className="pointer-events-none absolute -bottom-48 start-[-12%] size-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,87,255,0.14),transparent_65%)] float-slow" />
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-10 px-5 pb-16 pt-6 md:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] lg:gap-14 lg:pb-24 lg:pt-10">
+          <div className="relative z-10 min-w-0">
+            <p className="reveal inline-flex items-center gap-2 rounded-full border border-blue-500/15 bg-blue-500/[0.06] px-3 py-1 text-xs font-medium text-blue-600" style={{ animationDelay: "0.1s" }}>
+              <span aria-hidden className="size-1.5 rounded-full bg-cyan-400" />{t.landing.heroKicker}
+            </p>
+            <h1 className="reveal mt-5 font-display text-[40px] font-semibold leading-[1.05] tracking-[-0.03em] text-ice-900 md:text-[60px]" style={{ animationDelay: "0.2s" }}>
+              {t.home.title}
+            </h1>
+            <p className="reveal mt-4 max-w-lg text-lg text-ice-600 md:text-xl" style={{ animationDelay: "0.3s" }}>{t.home.subtitle}</p>
+            <div className="reveal mt-8 max-w-xl" style={{ animationDelay: "0.4s" }}><SearchBox /></div>
+            <div className="reveal mt-4 flex flex-wrap gap-2" style={{ animationDelay: "0.5s" }}>
+              {REGIONS.slice(0, 4).map((r) => (
+                <button key={r.id} onClick={() => explorer.select({ kind: "region", id: r.id })} className="rounded-full border border-ice-200 bg-white px-3.5 py-1.5 text-sm text-ice-700 transition hover:border-blue-500/40 hover:text-blue-600">
+                  {r.names[locale]}
+                </button>
+              ))}
+              <button onClick={() => explorer.select({ kind: "global" })} className="rounded-full border border-ice-200 bg-white px-3.5 py-1.5 text-sm text-ice-700 transition hover:border-blue-500/40 hover:text-blue-600">{t.common.global}</button>
+            </div>
+          </div>
 
-      {/* Navigation */}
-      <header className="reveal absolute inset-x-0 top-0 z-30 flex items-center justify-between px-5 py-4 md:px-10 md:py-6" style={{ animationDelay: "0.35s" }}>
-        <a href={localePath(locale, "/")} aria-label={t.common.home} className="flex items-center"><Logo className="h-7 w-auto md:h-8" /></a>
-        <nav aria-label="Primary" className={`hidden items-center gap-1 text-sm text-ice-200 md:flex ${heroHidden ? "lg:hidden" : ""}`}>
-          {[[t.home.navDestinations, "#destinations"], [t.home.navHow, "#how"], [t.home.navDevices, "#devices"], [t.home.navHelp, "#help"]].map(([l, h]) => (
-            <a key={l} href={h} className="rounded-full px-4 py-2 transition hover:bg-white/10 hover:text-white">{l}</a>
-          ))}
-        </nav>
-        {heroHidden && <div className="reveal absolute left-1/2 top-4 hidden w-[min(440px,36vw)] -translate-x-1/2 lg:block md:top-5"><SearchBox size="md" /></div>}
-        <div className="flex items-center gap-2">
-          <LanguageSwitcher />
-          <a href="/account" className="whitespace-nowrap rounded-full border border-white/15 px-3 py-2 text-sm md:px-4 text-ice-100 transition hover:border-white/35 hover:text-white">{t.common.myEsims}</a>
+          {/* The planet, framed like a window onto space. */}
+          <div className="reveal-fade relative min-w-0" style={{ animationDelay: "0.15s" }}>
+            <div aria-hidden className="absolute -inset-3 rounded-[2.4rem] bg-gradient-to-br from-cyan-300/40 via-blue-400/10 to-transparent blur-2xl" />
+            <div className="relative h-[380px] overflow-hidden rounded-[2rem] bg-space-900 shadow-[0_40px_80px_-30px_rgba(0,40,120,0.45)] ring-1 ring-ice-900/5 sm:h-[460px] lg:h-[580px]">
+              {showGlobe && env && <EarthScene coverage={DEV_COVERAGE} highlight={highlight} quality={env.quality} reducedMotion={env.reduced} />}
+              {env && !showGlobe && <StaticEarth />}
+              {showGlobe && (
+                <p className={`pointer-events-none absolute inset-x-0 bottom-4 px-4 text-center text-xs tracking-wide text-ice-300 transition-opacity ${ready && !selection ? "opacity-100" : "opacity-0"}`}>
+                  {t.home.hint}
+                </p>
+              )}
+            </div>
+          </div>
         </div>
-      </header>
-
-      {/* Hero copy + search */}
-      <div className={`absolute inset-x-0 top-[18%] z-20 px-5 transition-all duration-700 md:start-10 md:end-auto md:top-[24%] md:w-[560px] md:px-0 ${heroHidden ? "pointer-events-none -translate-y-3 opacity-0" : ""}`}>
-        <p className="reveal mb-4 text-xs font-medium uppercase tracking-[0.22em] text-cyan-300" style={{ animationDelay: "0.5s" }}>{t.home.tagline}</p>
-        <h1 className="reveal font-display text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] text-white md:text-[64px]" style={{ animationDelay: "0.6s" }}>
-          {t.home.title}
-        </h1>
-        <p className="reveal mt-4 max-w-md text-lg text-ice-300 md:text-xl" style={{ animationDelay: "0.72s" }}>{t.home.subtitle}</p>
-        <div className="reveal mt-8" style={{ animationDelay: "0.82s" }}><SearchBox /></div>
-        <div className="reveal mt-4 flex flex-wrap gap-2" style={{ animationDelay: "0.92s" }}>
-          {REGIONS.slice(0, 4).map((r) => (
-            <button key={r.id} onClick={() => explorer.select({ kind: "region", id: r.id })} className="rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 text-sm text-ice-200 transition hover:border-cyan-400/50 hover:text-white">
-              {r.names[locale]}
-            </button>
-          ))}
-          <button onClick={() => explorer.select({ kind: "global" })} className="rounded-full border border-white/12 bg-white/[0.04] px-3.5 py-1.5 text-sm text-ice-200 transition hover:border-cyan-400/50 hover:text-white">{t.common.global}</button>
-        </div>
-      </div>
-
-      {/* Explore hint */}
-      {showGlobe && !selection && (
-        <p className={`reveal pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-center text-xs tracking-wide text-ice-400 transition-opacity ${ready ? "opacity-100" : "opacity-0"}`} style={{ animationDelay: "1.4s" }}>
-          {t.home.hint}
-        </p>
-      )}
-
+      </section>
       {showGlobe && <HoverTip prices={prices} />}
       <DestinationPanel />
-    </section>
+    </>
   );
 }
 
@@ -121,9 +110,9 @@ function HoverTip({ prices }: { prices: Record<string, { amount: number; currenc
   const c = countryByIso2(iso);
   const p = prices[iso];
   return (
-    <div role="status" className="glass pointer-events-none fixed z-40 rounded-xl px-3 py-2 text-sm" style={{ left: pos.x + 16, top: pos.y + 16 }}>
-      <div className="flex items-center gap-2 font-medium text-white"><span aria-hidden>{flagEmoji(iso)}</span>{c?.names[locale]}</div>
-      <div className="text-xs text-ice-300">{p ? <>{fmt(t.home.from, { price: formatPrice(p.amount, p.currency, intlLocale(locale)) })} <span className="text-amber-300/80">· {t.common.sandbox}</span></> : t.common.notAvailable}</div>
+    <div role="status" className="glass pointer-events-none fixed z-40 rounded-xl px-3 py-2 text-sm text-ice-900" style={{ left: pos.x + 16, top: pos.y + 16 }}>
+      <div className="flex items-center gap-2 font-medium text-ice-900"><span aria-hidden>{flagEmoji(iso)}</span>{c?.names[locale]}</div>
+      <div className="text-xs text-ice-600">{p ? <>{fmt(t.home.from, { price: formatPrice(p.amount, p.currency, intlLocale(locale)) })} <span className="text-amber-700">· {t.common.sandbox}</span></> : t.common.notAvailable}</div>
     </div>
   );
 }

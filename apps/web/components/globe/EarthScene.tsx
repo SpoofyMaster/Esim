@@ -276,10 +276,10 @@ function ViewOffset() {
   const { camera, size } = useThree();
   const cur = useRef({ x: 0, y: 0 });
   useFrame((_, dt) => {
+    // The globe now lives in its own card, so it stays centred; only a small lift on phones when the sheet is open.
     const sel = !!explorer.get().selection;
-    const desktop = size.width >= 1024;
-    const tx = desktop ? (sel ? -size.width * 0.12 : size.width * 0.2) : 0;
-    const ty = desktop ? 0 : sel ? -size.height * 0.26 : size.height * 0.24;
+    const tx = 0;
+    const ty = size.width < 768 && sel ? -size.height * 0.18 : 0;
     cur.current.x = THREE.MathUtils.damp(cur.current.x, tx, 3.5, dt);
     cur.current.y = THREE.MathUtils.damp(cur.current.y, ty, 3.5, dt);
     const cam = camera as THREE.PerspectiveCamera;
