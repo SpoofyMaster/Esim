@@ -6,6 +6,7 @@
   --color-blue-600: #0047D6; --color-blue-500: #0057FF; --color-blue-400: #2F7BFF; --color-blue-300: #6FA3FF;
   --color-cyan-500: #1FB4F2; --color-cyan-400: #39C6FF; --color-cyan-300: #7DDCFF; --color-cyan-200: #BDEEFF;
   --color-ice-50: #F4F8FF; --color-ice-100: #E8F0FE; --color-ice-200: #D3E0F7; --color-ice-300: #B4C6E6; --color-ice-400: #8A9EC4; --color-ice-500: #61759C; --color-ice-600: #44567A; --color-ice-700: #2C3A57; --color-ice-900: #0D1526;
+  --color-pink-50: #FFF1F8; --color-pink-100: #FFE3F1; --color-pink-300: #FF9ACF; --color-pink-500: #FF3EA5; --color-pink-600: #E0218A; --color-pink-700: #B0136A;
   --font-display: "Sora Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -29,6 +30,10 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
 .reveal { animation: rise 0.9s var(--ease-out-expo) both; }
 .reveal-fade { animation: fade 1.4s ease both; }
+
+/* App screen scaling: unitless ratio of container width to the design width (tan(atan2) gives a number). */
+.app-screen-scale { --s: tan(atan2(100cqw, var(--design-w))); transform: scale(var(--s)); transform-origin: top left; height: calc(100cqh / var(--s)); }
+[dir="rtl"] .app-screen-scale { transform-origin: top right; }
 
 /* Light site: scroll reveals, floating UI chips and drifting colour blobs. */
 [data-reveal="hidden"] { opacity: 0; transform: translateY(28px); }

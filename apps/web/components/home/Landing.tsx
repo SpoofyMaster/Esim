@@ -3,6 +3,10 @@ import { SearchBox } from "@/components/SearchBox";
 import { Symbol } from "@/components/brand/Logo";
 import { Reveal } from "@/components/site/Reveal";
 import { DestinationTabs, type TabDef } from "./DestinationTabs";
+import { HandPhone, StoreButtons } from "./AppPhone";
+
+/** Hero photo: "studio" (soft blue backdrop + CSS confetti) or "confetti" (confetti in the photo). */
+const HERO_VARIANT: "studio" | "confetti" = "confetti";
 import { slugOf } from "@/lib/slug";
 import { fmt, localePath, type Locale } from "@/lib/i18n";
 import { getDict } from "@/lib/i18n/dicts";
@@ -12,7 +16,7 @@ const HERO_CHIPS = ["US", "JP", "TH", "MA", "FR"];
 
 /* ---------- small building blocks ---------- */
 function Kicker({ children, center = false }: { children: React.ReactNode; center?: boolean }) {
-  return <p className={`text-[15px] font-medium text-ice-600 ${center ? "text-center" : ""}`}>{children}</p>;
+  return <p className={`text-[15px] font-semibold text-pink-700 ${center ? "text-center" : ""}`}>{children}</p>;
 }
 function H2({ children, id, center = false }: { children: React.ReactNode; id?: string; center?: boolean }) {
   return <h2 id={id} className={`mt-3 font-display text-[32px] font-semibold leading-[1.1] tracking-[-0.02em] text-ice-900 md:text-[44px] ${center ? "text-center" : ""}`}>{children}</h2>;
@@ -58,12 +62,12 @@ export function Landing({ lang, tabs }: { lang: Locale; tabs: TabDef[] }) {
           <div className="drift absolute -top-40 end-[-10%] size-[620px] rounded-full bg-[radial-gradient(circle_at_center,rgba(57,198,255,0.28),transparent_65%)]" />
           <div className="drift absolute -bottom-48 start-[-12%] size-[560px] rounded-full bg-[radial-gradient(circle_at_center,rgba(0,87,255,0.14),transparent_65%)]" style={{ animationDelay: "-6s" }} />
         </div>
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 pb-16 pt-10 md:px-8 md:pb-24 md:pt-16 lg:grid-cols-[1.05fr_1fr]">
+        <div className="mx-auto grid max-w-6xl items-center gap-12 grid-cols-1 px-5 pb-16 pt-10 md:px-8 md:pb-24 md:pt-16 lg:grid-cols-[1.05fr_1fr]">
           <div>
             <p className="reveal inline-flex items-center gap-2 rounded-full bg-ice-50 px-3.5 py-1.5 text-sm font-medium text-ice-700" style={{ animationDelay: "0.05s" }}>
               <span className="pulse-dot size-2 rounded-full bg-[var(--success)]" />{t.heroKicker}
             </p>
-            <h1 className="reveal mt-5 font-display text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] text-ice-900 md:text-[60px]" style={{ animationDelay: "0.12s" }}>{t.heroTitle}</h1>
+            <h1 aria-label={t.heroTitle} className="reveal mt-5 font-display text-[40px] font-semibold leading-[1.04] tracking-[-0.03em] text-ice-900 md:text-[60px]" style={{ animationDelay: "0.12s" }}><Highlight text={t.heroTitle} word={d.app.heroTitleHighlight} /></h1>
             <p className="reveal mt-5 max-w-xl text-lg leading-relaxed text-ice-600" style={{ animationDelay: "0.2s" }}>{t.heroBody}</p>
             <div className="reveal relative z-20 mt-8 max-w-xl" style={{ animationDelay: "0.28s" }}><SearchBox tone="light" navigate /></div>
             <div className="reveal mt-5 flex flex-wrap items-center gap-2" style={{ animationDelay: "0.36s" }}>
@@ -77,13 +81,16 @@ export function Landing({ lang, tabs }: { lang: Locale; tabs: TabDef[] }) {
                 );
               })}
             </div>
+            <div className="reveal mt-8" style={{ animationDelay: "0.44s" }}><StoreButtons lang={lang} /></div>
           </div>
 
-          <div className="reveal relative mx-auto w-full max-w-[480px]" style={{ animationDelay: "0.2s" }}>
-            <div aria-hidden className="absolute -inset-6 -z-10 rounded-[48px] bg-gradient-to-br from-cyan-200/60 via-ice-100 to-blue-300/30 blur-2xl" />
-            <img src={img("airport-window-traveller-4x5")} alt={t.heroImageAlt} width={1200} height={1500} fetchPriority="high" className="aspect-[4/5] w-full rounded-[36px] object-cover shadow-[0_40px_80px_-40px_rgba(13,21,38,0.55)]" />
+          <div className="reveal relative mx-auto w-full max-w-[480px] py-6" style={{ animationDelay: "0.2s" }}>
+            <div aria-hidden className="absolute -inset-4 -z-10 rounded-[48px] bg-gradient-to-br from-cyan-200/60 via-ice-100 to-pink-100/70 blur-2xl" />
+            {HERO_VARIANT === "studio" && <Confetti />}
+            <div className="overflow-hidden rounded-[36px] bg-[#DCE8F7] shadow-[0_40px_80px_-40px_rgba(13,21,38,0.55)]"><HandPhone lang={lang} variant={HERO_VARIANT} className="origin-[50%_42%] scale-[1.28]" /></div>
+            <p className="mt-4 text-center text-xs font-medium text-ice-500">{d.app.conceptChip}</p>
             {/* floating eSIM status card (illustrative UI) */}
-            <div aria-hidden className="float absolute -start-4 top-8 w-[250px] rounded-2xl bg-white/95 p-4 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur md:-start-12">
+            <div aria-hidden className="float absolute -left-3 bottom-[7%] hidden w-[220px] sm:block md:-left-12 rounded-2xl bg-white/95 p-4 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur md:-start-12">
               <div className="flex items-center gap-2.5">
                 <Flag iso="JP" />
                 <span className="flex-1 font-medium text-ice-900">{country("JP").names[lang]}</span>
@@ -92,7 +99,7 @@ export function Landing({ lang, tabs }: { lang: Locale; tabs: TabDef[] }) {
               <div className="mt-4 flex justify-between text-xs text-ice-600"><span>{t.heroRemaining}</span><span dir="ltr" className="font-medium text-ice-900">3.6 / 5 GB</span></div>
               <div className="mt-2 h-2 overflow-hidden rounded-full bg-ice-100"><div className="fill-bar h-full w-[72%] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 rtl:ms-auto" style={{ animationDelay: "0.9s" }} /></div>
             </div>
-            <div aria-hidden className="float-slow absolute -end-3 bottom-10 flex items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur md:-end-8">
+            <div aria-hidden className="float-slow absolute -right-3 top-[14%] hidden sm:flex md:-right-8 items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur md:-end-8">
               <span className="grid size-9 place-items-center rounded-full bg-blue-500 text-white"><Symbol className="size-6" /></span>
               <span><span className="block text-xs text-ice-600">BLEUSIM</span><span className="block text-sm font-medium text-ice-900">5G · {t.heroConnected}</span></span>
             </div>
@@ -260,7 +267,7 @@ export function Landing({ lang, tabs }: { lang: Locale; tabs: TabDef[] }) {
       {/* CTA */}
       <section aria-labelledby="cta-h">
         <div className="mx-auto max-w-6xl px-5 pb-20 md:px-8">
-          <Reveal className="relative overflow-hidden rounded-[36px] bg-gradient-to-br from-blue-500 to-cyan-400 px-8 py-14 text-center md:py-20">
+          <Reveal className="relative overflow-hidden rounded-[36px] bg-[linear-gradient(120deg,#0057FF_0%,#2F7BFF_45%,#39C6FF_75%,#FF3EA5_115%)] px-8 py-14 text-center md:py-20">
             <svg aria-hidden viewBox="0 0 800 400" className="pointer-events-none absolute inset-0 h-full w-full opacity-30" preserveAspectRatio="none">
               <ellipse cx="400" cy="420" rx="520" ry="200" fill="none" stroke="white" strokeWidth="1.5" />
               <ellipse cx="400" cy="460" rx="680" ry="260" fill="none" stroke="white" strokeWidth="1" />
@@ -272,6 +279,47 @@ export function Landing({ lang, tabs }: { lang: Locale; tabs: TabDef[] }) {
         </div>
       </section>
     </main>
+  );
+}
+
+/* ---------- pink accent helpers ---------- */
+/** Colours one phrase of the headline pink (large text, AA for large type) with a soft underline swash. */
+function Highlight({ text, word }: { text: string; word: string }) {
+  const i = text.indexOf(word);
+  if (!word || i < 0) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, i)}
+      <span className="relative whitespace-nowrap text-pink-500">
+        {word}
+        <svg aria-hidden viewBox="0 0 200 12" preserveAspectRatio="none" className="absolute -bottom-1 start-0 h-2.5 w-full text-pink-300"><path d="M2 9C50 3 120 2 198 7" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" /></svg>
+      </span>
+      {text.slice(i + word.length)}
+    </>
+  );
+}
+const CONFETTI: [string, string, string, string][] = [
+  // [left %, top %, colour class, shape classes]
+  ["4%", "6%", "bg-pink-500", "h-1.5 w-5 rotate-[30deg] rounded-full"],
+  ["18%", "0%", "bg-cyan-400", "size-2 rounded-full"],
+  ["78%", "2%", "bg-blue-500", "h-1.5 w-5 -rotate-[25deg] rounded-full"],
+  ["92%", "14%", "bg-pink-500", "size-2.5 rounded-full"],
+  ["0%", "30%", "bg-blue-500", "size-2 rounded-full"],
+  ["96%", "40%", "bg-cyan-400", "h-1.5 w-4 rotate-[60deg] rounded-full"],
+  ["2%", "64%", "bg-pink-300", "h-1.5 w-5 -rotate-[40deg] rounded-full"],
+  ["94%", "70%", "bg-pink-500", "h-1.5 w-5 rotate-[15deg] rounded-full"],
+  ["10%", "88%", "bg-cyan-400", "size-2.5 rounded-full"],
+  ["86%", "92%", "bg-blue-500", "size-2 rounded-full"],
+  ["30%", "96%", "bg-pink-500", "size-1.5 rounded-full"],
+  ["64%", "-2%", "bg-pink-300", "size-2 rounded-full"],
+];
+function Confetti() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0">
+      {CONFETTI.map(([l, t, c, shape], i) => (
+        <span key={i} className={`absolute ${c} ${shape} ${i % 2 ? "float" : "float-slow"}`} style={{ insetInlineStart: l, top: t, animationDelay: `${-i * 0.7}s` }} />
+      ))}
+    </div>
   );
 }
 

@@ -31,3 +31,8 @@
 - No reviews/ratings/app-store sections: we have none yet and must not fabricate them.
 - Legal pages `/privacy`, `/terms`, `/cookies` are original DRAFTS in English (bracketed placeholders highlighted, draft banner shown) and need a lawyer before launch. Cookie page has working preferences (localStorage `bleusim.cookieConsent`); no analytics/marketing cookies exist today.
 - Round flags: `public/flags/*.svg` from the `flag-icons` package (MIT, licence in `public/flags/LICENSE.txt`).
+
+## 2026-11-26 — Pink accent, app concept in the hero, store buttons
+- Pink (#FF3EA5, tint #FFE3F1, text #B0136A) is an accent only: one highlighted phrase in the hero headline (large text, AA-large), section kickers, confetti, "Coming soon" badges, app-screen details. Blue stays the main colour.
+- Hero visual: Higgsfield photo of a hand holding a phone with a transparent screen (`hand-phone-confetti`, Badr's credits, 2026-11-26); the BLEUSIM app screen is coded (`components/home/AppPhone.tsx`), translated, placed behind the photo and scaled with container units. Labelled "App concept · coming soon". `hand-phone-studio` is kept as an alternative (`HERO_VARIANT`).
+- App Store / Google Play buttons are look-alikes that are NOT links (no href, aria-disabled, "Coming soon") until the apps exist. No ratings, download counts or user numbers.
