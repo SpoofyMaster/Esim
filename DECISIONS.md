@@ -36,3 +36,11 @@
 - Pink (#FF3EA5, tint #FFE3F1, text #B0136A) is an accent only: one highlighted phrase in the hero headline (large text, AA-large), section kickers, confetti, "Coming soon" badges, app-screen details. Blue stays the main colour.
 - Hero visual: Higgsfield photo of a hand holding a phone with a transparent screen (`hand-phone-confetti`, Badr's credits, 2026-11-26); the BLEUSIM app screen is coded (`components/home/AppPhone.tsx`), translated, placed behind the photo and scaled with container units. Labelled "App concept · coming soon". `hand-phone-studio` is kept as an alternative (`HERO_VARIANT`).
 - App Store / Google Play buttons are look-alikes that are NOT links (no href, aria-disabled, "Coming soon") until the apps exist. No ratings, download counts or user numbers.
+
+## 2026-11-26 — Mobile app (apps/mobile)
+- Expo SDK 58 + Expo Router + TypeScript (per spec §22), in the pnpm workspace; reuses `@bleusim/geospatial`, `@bleusim/catalog` and `@bleusim/api-client`.
+- Tabs: Home / My eSIMs / Help / Profile with a floating pill tab bar. Screens: search (countries, regions, cities), plans (best choice + list + activation info + coverage), email sign-in against the API, install/compat/network guide.
+- Checkout and legal pages open the website in an in-app browser; Apple/Google sign-in and chat/feedback are shown as "Coming soon" (no provider setup yet). Sandbox prices are labelled.
+- 7 languages; Arabic mirrors the layout with Yoga `direction: "rtl"` on the root view (works in Expo Go and builds, no restart). The tree is keyed by language so fonts/direction re-apply cleanly.
+- Flags are 96px PNGs rendered from flag-icons (MIT). App icon: BLEUSIM planet on blue gradient.
+- Run: `cd apps/mobile && npx expo start` (needs a `pnpm` on PATH for `expo install`). Dev builds reach the website at localhost:3000 and the API at localhost:4000.

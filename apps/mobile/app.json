@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "BLEUSIM",
+    "slug": "bleusim",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.bleusim.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0047D6",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false,
+      "package": "com.bleusim.app"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-image",
+      [
+        "expo-localization",
+        {
+          "supportsRTL": true
+        }
+      ],
+      "expo-font",
+      "expo-web-browser",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "imageWidth": 160,
+          "backgroundColor": "#F4F7FC"
+        }
+      ]
+    ],
+    "scheme": "bleusim",
+    "backgroundColor": "#F4F7FC",
+    "extra": {
+      "webUrl": "https://bleusim.com",
+      "supportsRTL": true
+    }
+  }
+}
