@@ -44,7 +44,7 @@ export default function Checkout() {
 
   return (
     <KeyboardAvoidingView style={{ flex: 1, backgroundColor: C.bg }} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-      <View style={[s.head, { paddingTop: insets.top + 8 }]}>
+      <View style={[s.head, { paddingTop: Platform.OS === "ios" ? 16 : insets.top + 8 }]}>
         <Tap onPress={() => router.back()} accessibilityRole="button" accessibilityLabel={t.common.back} style={s.round}><Icon name={rtl ? "chevronRight" : "chevronLeft"} size={22} /></Tap>
         <Txt v="h3" style={{ flex: 1, textAlign: "center" }}>{t.checkout.title}</Txt>
         <View style={{ width: 48 }} />

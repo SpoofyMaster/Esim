@@ -11,7 +11,7 @@ const ar: Dict = {
     "from": "ابتداءً من {price}",
     "countries": "{n} دولة",
     "days": "{n} يومًا",
-    "gb": "{n} GB",
+    "gb": "\u2066{n} GB\u2069",
     "unlimited": "غير محدود",
     "global": "عالمي",
     "soon": "قريبًا",

@@ -1,6 +1,6 @@
 // Order confirmation: waits for provisioning, then shows the eSIM QR code and activation code.
 import { useEffect, useState } from "react";
-import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Platform, ScrollView, StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { SvgXml } from "react-native-svg";
 import QRCode from "qrcode";
@@ -40,7 +40,7 @@ export default function OrderScreen() {
   const esim = order?.items[0]?.esim;
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: C.bg }} contentContainerStyle={{ padding: 20, paddingTop: insets.top + 32, paddingBottom: insets.bottom + 32, gap: 18 }}>
+    <ScrollView style={{ flex: 1, backgroundColor: C.bg }} contentContainerStyle={{ padding: 20, paddingTop: Platform.OS === "ios" ? 32 : insets.top + 32, paddingBottom: insets.bottom + 32, gap: 18 }}>
       <View style={{ alignItems: "center", gap: 12 }}>
         <IconBubble name={esim ? "check" : "sim"} tone={esim ? "green" : "blue"} size={68} />
         <Txt v="title" accessibilityRole="header" style={{ textAlign: "center" }}>{esim ? t.order.title : t.order.pending}</Txt>

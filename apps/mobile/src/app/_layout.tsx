@@ -41,8 +41,8 @@ function Root() {
         <Stack.Screen name="plans/[dest]" options={{ presentation: "modal" }} />
         <Stack.Screen name="signin" options={{ presentation: "modal" }} />
         <Stack.Screen name="guide" />
-        <Stack.Screen name="checkout" />
-        <Stack.Screen name="order/[id]" options={{ gestureEnabled: false }} />
+        <Stack.Screen name="checkout" options={{ presentation: "modal" }} />
+        <Stack.Screen name="order/[id]" options={{ presentation: "modal", gestureEnabled: false }} />
       </Stack>
     </View>
   );

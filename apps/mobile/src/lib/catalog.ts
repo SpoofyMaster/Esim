@@ -17,7 +17,9 @@ export const catalog = {
 };
 export type { Plan, DestinationSummary };
 
-export const formatPrice = (amount: number, currency: string, l: Locale) => new Intl.NumberFormat(intlLocale(l), { style: "currency", currency }).format(amount);
+/** In Arabic the price is shown as a left-to-right island ("$31.09"), not "US$" reordered by the RTL text. */
+export const formatPrice = (amount: number, currency: string, l: Locale) =>
+  l === "ar" ? `\u2066${new Intl.NumberFormat("en-US", { style: "currency", currency }).format(amount)}\u2069` : new Intl.NumberFormat(intlLocale(l), { style: "currency", currency }).format(amount);
 export const cheapest = (plans: Plan[]) => plans.reduce<Plan | null>((a, b) => (!a || b.price.amount < a.price.amount ? b : a), null);
 
 /** Display name for "JP", "region:europe" or "global". */

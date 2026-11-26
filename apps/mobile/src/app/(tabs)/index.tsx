@@ -43,9 +43,9 @@ export default function Home() {
 
           {/* hero card */}
           <LinearGradient colors={["#0047D6", "#0057FF", "#39C6FF"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={s.hero}>
-            <View style={[s.orbit, rtl && { right: undefined, left: -60 }]} />
-            <View style={[s.dot, { top: 22, right: 70, backgroundColor: C.pink }]} />
-            <View style={[s.dot, { top: 64, right: 26, width: 6, height: 6, backgroundColor: "#fff" }]} />
+            <View style={[s.orbit, rtl && { right: undefined, left: -70, top: -78 }]} />
+            <View style={[s.dot, rtl ? { top: 14, left: 120 } : { top: 22, right: 70 }, { backgroundColor: C.pink }]} />
+            {!rtl && <View style={[s.dot, { top: 64, right: 26, width: 6, height: 6, backgroundColor: "#fff" }]} />}
             <View style={s.heroHead}><Logo size={30} /><Txt v="caption" style={{ color: "rgba(255,255,255,0.85)" }}>{t.home.kicker}</Txt></View>
             <Txt v="title" style={{ color: "#fff", marginTop: 16 }}>{t.home.title}</Txt>
             <Txt v="body" style={{ color: "rgba(255,255,255,0.88)", marginTop: 8 }}>{t.home.subtitle}</Txt>
