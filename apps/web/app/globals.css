@@ -31,10 +31,6 @@ body { font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
 .reveal { animation: rise 0.9s var(--ease-out-expo) both; }
 .reveal-fade { animation: fade 1.4s ease both; }
 
-/* App screen scaling: unitless ratio of container width to the design width (tan(atan2) gives a number). */
-.app-screen-scale { --s: tan(atan2(100cqw, var(--design-w))); transform: scale(var(--s)); transform-origin: top left; height: calc(100cqh / var(--s)); }
-[dir="rtl"] .app-screen-scale { transform-origin: top right; }
-
 /* Light site: scroll reveals, floating UI chips and drifting colour blobs. */
 [data-reveal="hidden"] { opacity: 0; transform: translateY(28px); }
 [data-reveal] { transition: opacity 0.9s var(--ease-out-expo), transform 0.9s var(--ease-out-expo); transition-delay: var(--reveal-delay, 0s); }

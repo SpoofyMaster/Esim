@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { getLocales } from "expo-localization";
+import * as Linking from "expo-linking";
 import { LOCALES, type Locale } from "@bleusim/geospatial";
 import en, { type Dict } from "./en";
 import fr from "./fr";
@@ -37,6 +38,13 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
       .catch(() => {})
       .finally(() => setReady(true));
   }, []);
+  // Deep links can pick the language, e.g. bleusim://?lang=ar (used by marketing links and store screenshots).
+  const url = Linking.useURL();
+  useEffect(() => {
+    if (!url) return;
+    const l = Linking.parse(url).queryParams?.lang;
+    if (typeof l === "string" && (LOCALES as string[]).includes(l)) { AsyncStorage.setItem(KEY, l).catch(() => {}); setL(l as Locale); }
+  }, [url]);
   const setLocale = useCallback(async (l: Locale) => { await AsyncStorage.setItem(KEY, l).catch(() => {}); setL(l); }, []);
   const value = useMemo(() => ({ locale, t: DICTS[locale], rtl: locale === "ar", setLocale }), [locale, setLocale]);
   if (!ready) return null;

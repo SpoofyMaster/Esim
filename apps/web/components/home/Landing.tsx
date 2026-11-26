@@ -90,7 +90,7 @@ export function Landing({ lang, tabs }: { lang: Locale; tabs: TabDef[] }) {
             <div className="overflow-hidden rounded-[36px] bg-[#DCE8F7] shadow-[0_40px_80px_-40px_rgba(13,21,38,0.55)]"><HandPhone lang={lang} variant={HERO_VARIANT} className="origin-[50%_42%] scale-[1.28]" /></div>
             <p className="mt-4 text-center text-xs font-medium text-ice-500">{d.app.conceptChip}</p>
             {/* floating eSIM status card (illustrative UI) */}
-            <div aria-hidden className="float absolute -left-3 bottom-[7%] hidden w-[220px] sm:block md:-left-12 rounded-2xl bg-white/95 p-4 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur md:-start-12">
+            <div aria-hidden className="float absolute -left-3 bottom-[7%] hidden w-[220px] sm:block md:-left-12 rounded-2xl bg-white/95 p-4 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur">
               <div className="flex items-center gap-2.5">
                 <Flag iso="JP" />
                 <span className="flex-1 font-medium text-ice-900">{country("JP").names[lang]}</span>
@@ -99,7 +99,7 @@ export function Landing({ lang, tabs }: { lang: Locale; tabs: TabDef[] }) {
               <div className="mt-4 flex justify-between text-xs text-ice-600"><span>{t.heroRemaining}</span><span dir="ltr" className="font-medium text-ice-900">3.6 / 5 GB</span></div>
               <div className="mt-2 h-2 overflow-hidden rounded-full bg-ice-100"><div className="fill-bar h-full w-[72%] rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 rtl:ms-auto" style={{ animationDelay: "0.9s" }} /></div>
             </div>
-            <div aria-hidden className="float-slow absolute -right-3 top-[14%] hidden sm:flex md:-right-8 items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur md:-end-8">
+            <div aria-hidden className="float-slow absolute -right-3 top-[14%] hidden sm:flex md:-right-8 items-center gap-3 rounded-2xl bg-white/95 px-4 py-3 shadow-[0_24px_50px_-20px_rgba(13,21,38,0.45)] backdrop-blur">
               <span className="grid size-9 place-items-center rounded-full bg-blue-500 text-white"><Symbol className="size-6" /></span>
               <span><span className="block text-xs text-ice-600">BLEUSIM</span><span className="block text-sm font-medium text-ice-900">5G · {t.heroConnected}</span></span>
             </div>
