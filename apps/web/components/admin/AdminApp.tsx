@@ -96,7 +96,7 @@ function useList<T>(path: string, key: string) {
 }
 
 function ListState({ rows, err, empty }: { rows: unknown[] | null; err: string | null; empty: string }) {
-  if (err) return <p role="alert" className="text-red-700 dark:text-red-300">{err}</p>;
+  if (err) return <p role="alert" className="text-red-700">{err}</p>;
   if (!rows) return <div aria-busy className="h-32 animate-pulse rounded-2xl bg-[var(--bg-subtle)]" />;
   if (rows.length === 0) return <p className="text-[var(--fg-muted)]">{empty}</p>;
   return null;
@@ -123,13 +123,13 @@ function Overview() {
   const [o, setO] = useState<O | null>(null);
   const [err, setErr] = useState<string | null>(null);
   useEffect(() => { api<O>("/v1/admin/overview").then(setO).catch((e) => setErr(e.message)); }, []);
-  if (err) return <p role="alert" className="text-red-700 dark:text-red-300">{err}</p>;
+  if (err) return <p role="alert" className="text-red-700">{err}</p>;
   if (!o) return <div aria-busy className="h-32 animate-pulse rounded-2xl bg-[var(--bg-subtle)]" />;
   const totalOrders = Object.values(o.orders).reduce((a, b) => a + b, 0);
   const esims = o.esims.reduce((a, b) => a + b.count, 0);
   return (
     <div>
-      {o.sandboxOnly && <p role="note" className="mb-6 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200">Sandbox only: every enabled supplier is a test sandbox, so these orders and amounts are test data, not real sales.</p>}
+      {o.sandboxOnly && <p role="note" className="mb-6 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-amber-900">Sandbox only: every enabled supplier is a test sandbox, so these orders and amounts are test data, not real sales.</p>}
       <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Stat k="Orders" v={String(totalOrders)} />
         <Stat k="eSIMs" v={String(esims)} />
@@ -190,7 +190,7 @@ function Orders({ canRetry }: { canRetry: boolean }) {
   );
 }
 const StatusPill = ({ s }: { s: string }) => {
-  const tone = s === "FULFILLED" ? "bg-emerald-500/15 text-emerald-800 dark:text-emerald-300" : s.includes("FAILED") ? "bg-red-500/15 text-red-800 dark:text-red-300" : "bg-[var(--bg-subtle)] text-[var(--fg-muted)]";
+  const tone = s === "FULFILLED" ? "bg-emerald-500/15 text-emerald-800" : s.includes("FAILED") ? "bg-red-500/15 text-red-800" : "bg-[var(--bg-subtle)] text-[var(--fg-muted)]";
   return <span className={`rounded-full px-2 py-0.5 text-xs ${tone}`}>{label(s)}</span>;
 };
 
@@ -274,7 +274,7 @@ function Plans() {
         <Table head={["Plan", "Destination", "Data · days", "Price", "Cost", "Margin", "On sale"]}>
           {l.rows.map((p) => (
             <tr key={p.id}>
-              <Td className="font-mono text-xs">{p.id}{p.source === "DEV_FIXTURE" && <span className="ml-1 rounded bg-amber-500/15 px-1 text-amber-800 dark:text-amber-300">fixture</span>}</Td>
+              <Td className="font-mono text-xs">{p.id}{p.source === "DEV_FIXTURE" && <span className="ml-1 rounded bg-amber-500/15 px-1 text-amber-800">fixture</span>}</Td>
               <Td>{p.destination.names.en}</Td>
               <Td>{p.dataMb === null ? "Unlimited" : `${p.dataMb / 1024} GB`} · {p.validityDays}</Td>
               <Td><PriceEdit p={p} onSave={(minor) => patch(p.id, { priceMinor: minor })} /></Td>

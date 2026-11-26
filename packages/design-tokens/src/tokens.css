@@ -4,6 +4,7 @@
   --blue-600:#0047D6; --blue-500:#0057FF; --blue-400:#2F7BFF; --blue-300:#6FA3FF;
   --cyan-500:#1FB4F2; --cyan-400:#39C6FF; --cyan-300:#7DDCFF; --cyan-200:#BDEEFF;
   --ice-50:#F4F8FF; --ice-100:#E8F0FE; --ice-200:#D3E0F7; --ice-300:#B4C6E6; --ice-400:#8A9EC4; --ice-500:#61759C; --ice-600:#44567A; --ice-700:#2C3A57; --ice-900:#0D1526;
+  --pink-100:#FFE3F1; --pink-500:#FF3EA5; --pink-700:#B0136A; /* accent only: highlights, confetti, badges */
   --success:#18B26B; --warning:#F5A524; --danger:#E5484D;
   --font-display:"Sora Variable","Sora",ui-sans-serif,system-ui,sans-serif;
   --font-body:"Inter Variable","Inter",ui-sans-serif,system-ui,sans-serif;

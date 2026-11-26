@@ -24,5 +24,5 @@ export default async function Page({ params }: P) {
   const r = regionById(id);
   if (!r || !isLocale(lang)) notFound();
   const plans = await serverCatalog.region(r.id);
-  return <DestinationPage lang={lang} kind="region" name={r.names[lang]} path={`/esim/region/${r.id}`} globeHref={`/?r=${r.id}`} plans={plans} image={DESTINATION_IMAGES[`region:${r.id}`]} />;
+  return <DestinationPage lang={lang} kind="region" name={r.names[lang]} path={`/esim/region/${r.id}`} globeHref={`/explore?r=${r.id}`} plans={plans} image={DESTINATION_IMAGES[`region:${r.id}`]} />;
 }

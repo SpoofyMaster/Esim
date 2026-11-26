@@ -30,7 +30,7 @@ export function AuthForm({ mode }: { mode: "login" | "register" }) {
           <input id="password" type="password" required minLength={10} autoComplete={isReg ? "new-password" : "current-password"} value={password} onChange={(e) => setPassword(e.target.value)} className={field} aria-describedby={isReg ? "pw-hint" : undefined} />
           {isReg && <p id="pw-hint" className="mt-1.5 text-xs text-[var(--fg-muted)]">At least 10 characters.</p>}
         </div>
-        {err && <p role="alert" className="text-sm text-red-700 dark:text-red-300">{err}</p>}
+        {err && <p role="alert" className="text-sm text-red-700">{err}</p>}
         <button disabled={busy} className="h-12 w-full rounded-xl bg-blue-500 font-medium text-white hover:bg-blue-400 disabled:opacity-60">{busy ? "Please wait…" : isReg ? "Create account" : "Sign in"}</button>
       </form>
       <p className="mt-6 text-center text-sm text-[var(--fg-muted)]">

@@ -3,12 +3,19 @@ import { DEFAULT_LOCALE, isLocale } from "@/lib/i18n";
 
 // English is served unprefixed (/esim/japan → internally /en/esim/japan); /en/... redirects to the clean URL.
 // Other languages keep their prefix (/fr/esim/japan). Checkout, account and admin are English-only routes.
-const ENGLISH_ONLY = ["/checkout", "/account", "/login", "/register", "/order", "/admin", "/privacy", "/terms", "/cookies"];
+const ENGLISH_ONLY = ["/checkout", "/account", "/login", "/register", "/order", "/admin"];
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   if (ENGLISH_ONLY.some((p) => pathname === p || pathname.startsWith(p + "/"))) return NextResponse.next();
   const seg = pathname.split("/")[1];
+  // Old globe deep links (/?d=jp, /fr?r=europe, /?g=1) now live on /explore.
+  const sp = request.nextUrl.searchParams;
+  if ((pathname === "/" || (isLocale(seg) && pathname === `/${seg}`)) && (sp.has("d") || sp.has("r") || sp.has("g"))) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === "/" ? "/explore" : `${pathname}/explore`;
+    return NextResponse.redirect(url, 307);
+  }
   if (seg === DEFAULT_LOCALE) {
     const url = request.nextUrl.clone();
     url.pathname = pathname.slice(3) || "/";

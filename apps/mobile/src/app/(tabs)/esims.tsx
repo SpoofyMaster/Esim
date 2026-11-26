@@ -1,60 +1,79 @@
-// My eSIMs: sign-in prompt when signed out, otherwise the user's eSIMs with usage.
-import { ScrollView, View } from "react-native";
+import { ActivityIndicator, StyleSheet, View } from "react-native";
 import { router } from "expo-router";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
+import * as WebBrowser from "expo-web-browser";
+import { Screen } from "@/components/Screen";
+import { Badge, Button, Card, Flag, IconBubble, Txt } from "@/components/ui";
+import { useAsync } from "@/lib/catalog";
+import { api, useSession } from "@/lib/session";
+import { WEB_URL } from "@/lib/config";
+import { C, R } from "@/lib/theme";
+import { fmt, intlLocale, useI18n } from "@/i18n";
 import type { Locale } from "@bleusim/geospatial";
-import { useI18n, fmt } from "../../i18n";
-import { useAuth, api } from "../../lib/auth";
-import { useAsync } from "../../lib/catalog";
-import { C, R } from "../../lib/theme";
-import { Button, Card, ErrorState, IconBubble, Loading, SandboxBadge, T } from "../../components/ui";
-import { SignInPanel } from "../../components/SignInPanel";
 
-interface Esim { id: string; status: string; isSandbox: boolean; destination: { names: Record<Locale, string> }; dataTotalMb: number | null; dataUsedMb: number; validityDays: number; orderNumber: string }
-const gb = (mb: number) => `${(mb / 1024).toFixed(mb < 1024 ? 2 : 1)} GB`;
+interface Esim { id: string; status: string; isSandbox: boolean; destination: { id: string; kind: string; names: Partial<Record<Locale, string>> }; dataTotalMb: number | null; dataUsedMb: number; expiresAt: string | null; activatedAt: string | null }
 
 export default function Esims() {
   const { t, locale } = useI18n();
-  const { user } = useAuth();
-  const insets = useSafeAreaInsets();
-  const list = useAsync(async () => {
-    if (!user) return [];
-    const r = await api("/me/esims");
-    if (!r.ok) throw new Error(String(r.status));
-    return ((await r.json()) as { esims: Esim[] }).esims;
-  }, [user?.id]);
+  const { user, ready } = useSession();
+  const esims = useAsync(() => (user ? api<{ esims: Esim[] }>("/me/esims").then((d) => d.esims) : Promise.resolve([])), [user?.id]);
+  const gb = (mb: number) => `${(mb / 1024).toFixed(mb >= 10240 ? 0 : 1)} GB`;
 
+  if (!ready) return <Screen title={t.esims.title}><ActivityIndicator color={C.blue} /></Screen>;
   if (!user) {
     return (
-      <ScrollView style={{ backgroundColor: C.bg }} contentContainerStyle={{ padding: 24, paddingTop: insets.top + 24, paddingBottom: 140, flexGrow: 1, justifyContent: "center" }} keyboardShouldPersistTaps="handled">
-        <SignInPanel title={t.auth.esimsTitle} />
-      </ScrollView>
+      <Screen title={t.esims.title}>
+        <Empty icon="sim" title={t.esims.signedOutTitle} body={t.esims.signedOutBody} />
+        <Button title={t.home.signIn} kind="dark" onPress={() => router.push("/signin")} />
+        <Button title={t.esims.browse} kind="ghost" onPress={() => router.push("/search")} />
+      </Screen>
     );
   }
   return (
-    <ScrollView style={{ backgroundColor: C.bg }} contentContainerStyle={{ padding: 16, paddingTop: insets.top + 24, paddingBottom: 140, gap: 12 }}>
-      <T v="display" accessibilityRole="header" style={{ marginBottom: 8 }}>{t.esims.title}</T>
-      {list.loading ? <Loading /> : list.error ? <ErrorState onRetry={list.reload} /> : !list.data?.length ? (
-        <Card style={{ padding: 24, alignItems: "center", gap: 12 }}>
-          <IconBubble name="card-outline" size={56} />
-          <T v="h2" style={{ textAlign: "center" }}>{t.esims.empty}</T>
-          <T v="sub" style={{ textAlign: "center" }}>{t.esims.emptyBody}</T>
-          <Button label={t.esims.browse} onPress={() => router.push("/search")} style={{ alignSelf: "stretch" }} />
-        </Card>
-      ) : list.data.map((e) => {
-        const pct = e.dataTotalMb ? Math.min(1, e.dataUsedMb / e.dataTotalMb) : 0;
+    <Screen title={t.esims.title}>
+      {esims.loading && <ActivityIndicator color={C.blue} />}
+      {!!esims.error && <><Txt v="body">{t.common.loadError}</Txt><Button title={t.common.retry} kind="ghost" onPress={esims.reload} /></>}
+      {!esims.loading && esims.data?.length === 0 && (<><Empty icon="sim" title={t.esims.emptyTitle} body={t.esims.emptyBody} /><Button title={t.esims.browse} onPress={() => router.push("/search")} /></>)}
+      {esims.data?.map((e) => {
+        const total = e.dataTotalMb;
+        const left = total === null ? null : Math.max(total - e.dataUsedMb, 0);
+        const pct = total ? left! / total : 1;
+        const name = e.destination.names[locale] ?? e.destination.names.en ?? e.destination.id;
         return (
-          <Card key={e.id} style={{ padding: 16, gap: 10 }}>
-            <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8 }}>
-              <T v="h2" style={{ flex: 1 }}>{e.destination.names[locale] ?? e.destination.names.en}</T>
-              {e.isSandbox ? <SandboxBadge /> : null}
+          <LinearGradient key={e.id} colors={["#0047D6", "#0057FF", "#39C6FF"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={s.esim}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              {e.destination.kind === "COUNTRY" ? <Flag iso={e.destination.id.toUpperCase()} size={34} /> : <IconBubble name="globe" size={34} />}
+              <Txt v="h3" style={{ color: "#fff", flex: 1 }}>{name}</Txt>
+              <Badge text={e.status} tone="green" />
             </View>
-            <T v="sub">{t.esims.status[e.status] ?? e.status} · {e.orderNumber}</T>
-            {e.dataTotalMb ? <View style={{ height: 8, borderRadius: R.pill, backgroundColor: C.soft, overflow: "hidden" }}><View style={{ width: `${pct * 100}%`, height: "100%", backgroundColor: C.blue }} /></View> : null}
-            <T v="caption">{e.dataTotalMb ? fmt(t.esims.used, { used: gb(e.dataUsedMb), total: gb(e.dataTotalMb) }) : fmt(t.esims.usedUnlimited, { used: gb(e.dataUsedMb) })}</T>
-          </Card>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 18 }}>
+              <Txt v="small" style={{ color: "rgba(255,255,255,0.85)" }}>{t.esims.remaining}</Txt>
+              <Txt v="label" style={{ color: "#fff" }}>{total === null ? t.common.unlimited : fmt(t.esims.of, { used: gb(left!), total: gb(total) })}</Txt>
+            </View>
+            <View style={s.track}><View style={[s.fill, { width: `${Math.round(pct * 100)}%` }]} /></View>
+            <Txt v="caption" style={{ color: "rgba(255,255,255,0.85)", marginTop: 8 }}>
+              {e.expiresAt ? fmt(t.esims.expires, { date: new Intl.DateTimeFormat(intlLocale(locale), { dateStyle: "medium" }).format(new Date(e.expiresAt)) }) : t.esims.notActivated}
+            </Txt>
+            {e.isSandbox && <Txt v="caption" style={{ color: "#FFE3F1", marginTop: 6 }}>{t.esims.sandbox}</Txt>}
+            <Button title={t.esims.install} kind="ghost" style={{ marginTop: 14, backgroundColor: "#fff", height: 46 }} onPress={() => WebBrowser.openBrowserAsync(`${WEB_URL}/account`)} />
+          </LinearGradient>
         );
       })}
-    </ScrollView>
+    </Screen>
   );
 }
+
+function Empty({ icon, title, body }: { icon: "sim"; title: string; body: string }) {
+  return (
+    <Card style={{ padding: 24, alignItems: "center", gap: 10 }}>
+      <IconBubble name={icon} size={64} />
+      <Txt v="h2" style={{ textAlign: "center", marginTop: 6 }}>{title}</Txt>
+      <Txt v="body" style={{ textAlign: "center", color: C.muted }}>{body}</Txt>
+    </Card>
+  );
+}
+const s = StyleSheet.create({
+  esim: { borderRadius: R.xl, padding: 20 },
+  track: { height: 8, borderRadius: 4, backgroundColor: "rgba(255,255,255,0.25)", marginTop: 8, overflow: "hidden" },
+  fill: { height: "100%", borderRadius: 4, backgroundColor: "#fff" },
+});

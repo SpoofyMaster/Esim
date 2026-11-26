@@ -1,12 +1,12 @@
-# Next action (updated 2026-11-26 20:00 UTC)
+# Next action (updated 2026-11-26 21:45 UTC)
 
-Done 2026-11-26: mobile app `apps/mobile` (Expo SDK 58): Home, Search, Plans, Checkout → sandbox payment → Order with QR (verified end to end against the local API), My eSIMs, Help + guides, Profile, 7 languages with Arabic RTL. Web preview export runs in CI.
-Mobile next: run on a real phone with Expo Go (Badr's Mac), Apple/Google/Microsoft sign-in (needs developer accounts, ask Badr), token auth for native instead of the session cookie, push notifications for low data, EAS builds + store listings (ask Badr before any signup or submission).
+Mobile app: Badr chose to merge both versions (2026-11-26). Base = the Mac app on main (simulator-tested); PR #1 adds in-app checkout → order QR, destination/region photos, all round flags, sandbox labels, web export in CI.
+Mobile next: run on a real phone, Apple/Google sign-in (needs developer accounts, ask Badr), token auth for native, EAS builds + store listings (ask Badr before any signup or submission).
 
 ---
-# Next action (updated 2026-11-26 13:40 UTC)
+# Next action (updated 2026-11-26 18:45 UTC)
 
-Done 2026-11-26: light redesign (white theme, new home sections, footer), legal drafts at /privacy /terms /cookies with a working cookie preference. Open: B-7 legal details.
+Done 2026-11-26: light redesign (Mac version chosen by Badr over 635ad45): white theme, new home, globe at /explore, legal drafts at /privacy /terms /cookies. Open: B-8 legal details.
 
 Done this step: SSR destination pages + SEO; Western Sahara merged into Morocco; repo on GitHub (SpoofyMaster/Esim) with CI; Higgsfield assets (600 credits) wired into pages.
 

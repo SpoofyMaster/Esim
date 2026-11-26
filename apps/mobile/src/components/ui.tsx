@@ -1,158 +1,100 @@
-// BLEUSIM mobile UI primitives: text, cards, rows, buttons, flags, badges.
-import { type ReactNode } from "react";
 import { ActivityIndicator, Pressable, StyleSheet, Text, View, type PressableProps, type StyleProp, type TextProps, type TextStyle, type ViewStyle } from "react-native";
 import { Image } from "expo-image";
-import { LinearGradient } from "expo-linear-gradient";
-import { Ionicons } from "@expo/vector-icons";
 import * as Haptics from "expo-haptics";
-import { Platform } from "react-native";
-import { C, F, R, shadow } from "../lib/theme";
-import { FLAGS } from "../lib/flags.generated";
-import { useI18n } from "../i18n";
+import { FLAGS } from "@/lib/flags";
+import { C, F, R, shadow } from "@/lib/theme";
+import { useI18n } from "@/i18n";
+import { Icon, type IconName } from "./Icon";
 
-type Variant = "display" | "h1" | "h2" | "title" | "body" | "sub" | "caption" | "label";
+type Variant = "display" | "title" | "h2" | "h3" | "body" | "bodyMedium" | "label" | "small" | "caption";
 const V: Record<Variant, TextStyle> = {
-  display: { fontFamily: F.display, fontSize: 30, lineHeight: 36, letterSpacing: -0.6, color: C.ink },
-  h1: { fontFamily: F.display, fontSize: 24, lineHeight: 30, letterSpacing: -0.4, color: C.ink },
-  h2: { fontFamily: F.displaySemi, fontSize: 19, lineHeight: 25, letterSpacing: -0.2, color: C.ink },
-  title: { fontFamily: F.bodySemi, fontSize: 16, lineHeight: 21, color: C.ink },
-  body: { fontFamily: F.body, fontSize: 15, lineHeight: 22, color: C.ink2 },
-  sub: { fontFamily: F.body, fontSize: 14, lineHeight: 19, color: C.muted },
-  caption: { fontFamily: F.body, fontSize: 12, lineHeight: 16, color: C.muted },
-  label: { fontFamily: F.bodySemi, fontSize: 13, lineHeight: 17, color: C.ink, letterSpacing: 0.2 },
+  display: { fontFamily: F.displayBold, fontSize: 32, lineHeight: 38, letterSpacing: -0.8, color: C.ink },
+  title: { fontFamily: F.display, fontSize: 28, lineHeight: 34, letterSpacing: -0.6, color: C.ink },
+  h2: { fontFamily: F.display, fontSize: 21, lineHeight: 27, letterSpacing: -0.3, color: C.ink },
+  h3: { fontFamily: F.semibold, fontSize: 17, lineHeight: 22, color: C.ink },
+  body: { fontFamily: F.body, fontSize: 16, lineHeight: 23, color: C.ink2 },
+  bodyMedium: { fontFamily: F.medium, fontSize: 16, lineHeight: 22, color: C.ink },
+  label: { fontFamily: F.semibold, fontSize: 15, lineHeight: 20, color: C.ink },
+  small: { fontFamily: F.body, fontSize: 14, lineHeight: 19, color: C.muted },
+  caption: { fontFamily: F.medium, fontSize: 12, lineHeight: 16, color: C.muted },
 };
-
-const arabicFor = (family?: string) =>
-  !family ? F.arabic : /Bold|Semi|Sora/.test(family) ? F.arabicBold : /Medium/.test(family) ? F.arabicMedium : F.arabic;
-
-export function T({ v = "body", style, ...p }: TextProps & { v?: Variant }) {
+/** Text with brand fonts; Arabic falls back to the system Arabic font with matching weight. */
+export function Txt({ v = "body", style, ...p }: TextProps & { v?: Variant }) {
   const { rtl } = useI18n();
-  const flat: TextStyle = StyleSheet.flatten([V[v], style]) ?? {};
-  // Arabic: IBM Plex Sans Arabic (weight mapped from the Latin family), no negative tracking, more line height.
-  const ar: TextStyle | undefined = rtl ? { fontFamily: arabicFor(flat.fontFamily), letterSpacing: 0, lineHeight: flat.lineHeight ? flat.lineHeight + 4 : undefined } : undefined;
-  return <Text {...p} style={[{ textAlign: rtl ? "right" : "left", writingDirection: rtl ? "rtl" : "ltr" }, flat, ar]} />;
+  const base = V[v];
+  const ar: TextStyle | undefined = rtl ? { fontFamily: undefined, fontWeight: v === "display" ? "800" : v === "title" || v === "h2" ? "700" : v === "h3" || v === "label" ? "600" : v === "bodyMedium" || v === "caption" ? "500" : "400", letterSpacing: 0, writingDirection: "rtl" } : undefined;
+  return <Text {...p} style={[base, ar, { textAlign: "auto" } as TextStyle, style]} />;
 }
 
-export const tap = () => { if (Platform.OS !== "web") void Haptics.selectionAsync(); };
+export function Flag({ iso, size = 40 }: { iso: string; size?: number }) {
+  const src = FLAGS[iso.toUpperCase()];
+  if (!src) return <View style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: C.fill }} />;
+  return <Image source={src} style={{ width: size, height: size, borderRadius: size / 2, borderWidth: StyleSheet.hairlineWidth, borderColor: "rgba(13,21,38,0.12)" }} contentFit="cover" />;
+}
 
-export function Press({ style, onPress, children, ...p }: PressableProps & { style?: StyleProp<ViewStyle>; children?: ReactNode }) {
+export function Tap({ onPress, haptic = true, style, ...p }: PressableProps & { haptic?: boolean; style?: StyleProp<ViewStyle> }) {
   return (
-    <Pressable {...p} onPress={(e) => { tap(); onPress?.(e); }} style={({ pressed }) => [style, pressed && { opacity: 0.86, transform: [{ scale: 0.985 }] }]}>
-      {children}
-    </Pressable>
+    <Pressable
+      {...p}
+      onPress={(e) => { if (haptic) Haptics.selectionAsync().catch(() => {}); onPress?.(e); }}
+      style={({ pressed }) => [style, pressed && { opacity: 0.85, transform: [{ scale: 0.985 }] }]}
+    />
   );
 }
 
-export function Card({ children, style, onPress, accessibilityLabel }: { children: ReactNode; style?: StyleProp<ViewStyle>; onPress?: () => void; accessibilityLabel?: string }) {
-  if (onPress) return <Press accessibilityRole="button" accessibilityLabel={accessibilityLabel} onPress={onPress} style={[s.card, style]}>{children}</Press>;
+export function Card({ children, style }: { children: React.ReactNode; style?: StyleProp<ViewStyle> }) {
   return <View style={[s.card, style]}>{children}</View>;
 }
 
-export function Chevron({ color = C.faint, size = 20 }: { color?: string; size?: number }) {
+/** Row card like a settings cell: leading visual, title/subtitle, trailing chevron or badge. */
+export function RowCard({ title, sub, leading, trailing, onPress, disabled, a11y }: { title: string; sub?: string; leading?: React.ReactNode; trailing?: React.ReactNode; onPress?: () => void; disabled?: boolean; a11y?: string }) {
   const { rtl } = useI18n();
-  return <Ionicons name={rtl ? "chevron-back" : "chevron-forward"} size={size} color={color} />;
-}
-
-export function Flag({ iso2, size = 36 }: { iso2: string; size?: number }) {
-  const src = FLAGS[iso2.toUpperCase()];
-  const box = { width: size, height: size, borderRadius: size / 2 };
-  if (!src) return <View style={[box, s.flagFallback]}><Text style={{ fontFamily: F.bodySemi, fontSize: size * 0.32, color: C.ink2 }}>{iso2.toUpperCase()}</Text></View>;
-  return <Image source={src} style={[box, s.flagRing]} contentFit="cover" accessibilityIgnoresInvertColors />;
-}
-
-export function IconBubble({ name, color = C.blue, bg = C.blueSoft, size = 44 }: { name: keyof typeof Ionicons.glyphMap; color?: string; bg?: string; size?: number }) {
-  return <View style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: bg, alignItems: "center", justifyContent: "center" }}><Ionicons name={name} size={size * 0.48} color={color} /></View>;
-}
-
-/** List row: leading visual, title + subtitle, trailing chevron (or custom). */
-export function Row({ lead, title, sub, trail, onPress, style, testID }: { lead?: ReactNode; title: string; sub?: string; trail?: ReactNode; onPress?: () => void; style?: StyleProp<ViewStyle>; testID?: string }) {
   return (
-    <Card onPress={onPress} style={[s.row, style]} accessibilityLabel={sub ? `${title}, ${sub}` : title}>
-      <View testID={testID} style={s.rowInner}>
-        {lead}
-        <View style={{ flex: 1, gap: 2 }}>
-          <T v="title" numberOfLines={2}>{title}</T>
-          {sub ? <T v="sub" numberOfLines={2}>{sub}</T> : null}
-        </View>
-        {trail ?? (onPress ? <Chevron /> : null)}
+    <Tap onPress={disabled ? undefined : onPress} disabled={disabled} accessibilityRole="button" accessibilityLabel={a11y ?? (sub ? `${title}, ${sub}` : title)} accessibilityState={{ disabled: !!disabled }} style={[s.card, s.row]}>
+      {leading}
+      <View style={{ flex: 1 }}>
+        <Txt v="h3">{title}</Txt>
+        {!!sub && <Txt v="small" style={{ marginTop: 2 }}>{sub}</Txt>}
       </View>
-    </Card>
+      {trailing ?? <Icon name={rtl ? "chevronLeft" : "chevronRight"} size={20} color={C.faint} />}
+    </Tap>
   );
 }
 
-export function Button({ label, onPress, kind = "primary", icon, disabled, loading, style, testID }: {
-  label: string; onPress?: () => void; kind?: "primary" | "dark" | "light" | "ghost"; icon?: ReactNode; disabled?: boolean; loading?: boolean; style?: StyleProp<ViewStyle>; testID?: string;
-}) {
-  const fg = kind === "light" || kind === "ghost" ? C.ink : C.white;
-  const inner = (
-    <View style={s.btnInner}>
-      {loading ? <ActivityIndicator color={fg} /> : icon}
-      <T v="title" style={{ color: fg, fontSize: 16, textAlign: "center" }} numberOfLines={1}>{label}</T>
-    </View>
-  );
+export function IconBubble({ name, tone = "blue", size = 48 }: { name: IconName; tone?: "blue" | "pink" | "green"; size?: number }) {
+  const bg = tone === "pink" ? C.pinkSoft : tone === "green" ? C.greenSoft : C.blueSoft;
+  const fg = tone === "pink" ? C.pinkInk : tone === "green" ? C.greenInk : C.blue;
+  return <View style={{ width: size, height: size, borderRadius: size / 2, backgroundColor: bg, alignItems: "center", justifyContent: "center" }}><Icon name={name} size={size * 0.48} color={fg} /></View>;
+}
+
+export function Button({ title, onPress, kind = "primary", icon, loading, disabled, style }: { title: string; onPress?: () => void; kind?: "primary" | "dark" | "ghost"; icon?: React.ReactNode; loading?: boolean; disabled?: boolean; style?: StyleProp<ViewStyle> }) {
+  const bg = kind === "primary" ? C.blue : kind === "dark" ? C.ink : "transparent";
+  const fg = kind === "ghost" ? C.ink : "#fff";
   return (
-    <Press testID={testID} accessibilityRole="button" accessibilityLabel={label} accessibilityState={{ disabled: !!disabled, busy: !!loading }} disabled={disabled || loading} onPress={onPress}
-      style={[s.btn, kind === "dark" && { backgroundColor: C.navy }, kind === "light" && { backgroundColor: C.white, borderWidth: 1, borderColor: C.line }, kind === "ghost" && { backgroundColor: "transparent" }, disabled && { opacity: 0.45 }, style]}>
-      {kind === "primary" ? <LinearGradient colors={[C.blue, "#2F7BFF"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={[StyleSheet.absoluteFill, { borderRadius: R.pill }]} /> : null}
-      {inner}
-    </Press>
+    <Tap onPress={disabled || loading ? undefined : onPress} accessibilityRole="button" accessibilityState={{ disabled: !!disabled, busy: !!loading }}
+      style={[s.btn, { backgroundColor: bg, opacity: disabled ? 0.5 : 1 }, kind === "ghost" && { borderWidth: 1, borderColor: C.border }, kind === "primary" && shadow.blue, style]}>
+      {loading ? <ActivityIndicator color={fg} /> : <>{icon}<Txt v="label" style={{ color: fg, fontSize: 17 }}>{title}</Txt></>}
+    </Tap>
   );
 }
 
-export function SandboxBadge({ style }: { style?: StyleProp<ViewStyle> }) {
-  const { t } = useI18n();
-  return (
-    <View style={[s.badge, style]} accessibilityLabel={t.common.sandboxNote}>
-      <Ionicons name="flask-outline" size={12} color="#9A6400" />
-      <Text style={s.badgeText}>{t.common.sandbox.toUpperCase()}</Text>
-    </View>
-  );
+export function Badge({ text, tone = "pink" }: { text: string; tone?: "pink" | "green" | "blue" | "amber" }) {
+  const m = { pink: [C.pinkSoft, C.pinkInk], green: [C.greenSoft, C.greenInk], blue: [C.blueSoft, C.blueDark], amber: [C.amberSoft, C.amberInk] }[tone];
+  return <View style={{ backgroundColor: m[0], borderRadius: R.pill, paddingHorizontal: 10, paddingVertical: 4, alignSelf: "flex-start" }}><Txt v="caption" style={{ color: m[1] }}>{text}</Txt></View>;
 }
 
-export function Note({ icon = "information-circle-outline", children, tone = "info" }: { icon?: keyof typeof Ionicons.glyphMap; children: ReactNode; tone?: "info" | "warn" | "error" }) {
-  const bg = tone === "warn" ? C.amberSoft : tone === "error" ? "#FDECEC" : C.soft;
-  const fg = tone === "warn" ? "#8A5A00" : tone === "error" ? C.danger : C.blueDeep;
+export function SandboxNote({ text }: { text: string }) {
   return (
-    <View style={[s.note, { backgroundColor: bg }]}>
-      <Ionicons name={icon} size={18} color={fg} style={{ marginTop: 1 }} />
-      <View style={{ flex: 1 }}>{children}</View>
+    <View style={s.note} accessibilityRole="text">
+      <Icon name="info" size={16} color={C.amberInk} />
+      <Txt v="caption" style={{ color: C.amberInk, flex: 1 }}>{text}</Txt>
     </View>
   );
 }
 
-export function SectionTitle({ title, sub, style }: { title: string; sub?: string; style?: StyleProp<ViewStyle> }) {
-  return (
-    <View style={[{ gap: 2, marginBottom: 12 }, style]}>
-      <T v="h2" accessibilityRole="header">{title}</T>
-      {sub ? <T v="sub">{sub}</T> : null}
-    </View>
-  );
-}
-
-export function Loading() {
-  const { t } = useI18n();
-  return <View style={{ padding: 32, alignItems: "center" }} accessibilityLabel={t.common.loading}><ActivityIndicator color={C.blue} /></View>;
-}
-
-export function ErrorState({ onRetry }: { onRetry: () => void }) {
-  const { t } = useI18n();
-  return (
-    <View style={{ padding: 24, alignItems: "center", gap: 12 }}>
-      <T v="body">{t.common.error}</T>
-      <Button kind="light" label={t.common.retry} onPress={onRetry} />
-    </View>
-  );
-}
-
-export const s = StyleSheet.create({
+const s = StyleSheet.create({
   card: { backgroundColor: C.card, borderRadius: R.lg, ...shadow.card },
-  row: { paddingVertical: 16, paddingHorizontal: 16 },
-  rowInner: { flexDirection: "row", alignItems: "center", gap: 14 },
-  flagRing: { borderWidth: StyleSheet.hairlineWidth, borderColor: "rgba(11,21,48,0.12)" },
-  flagFallback: { backgroundColor: C.soft, alignItems: "center", justifyContent: "center" },
-  btn: { minHeight: 56, borderRadius: R.pill, backgroundColor: C.blue, justifyContent: "center", paddingHorizontal: 22, overflow: "hidden" },
-  btnInner: { flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 10 },
-  badge: { flexDirection: "row", alignItems: "center", gap: 4, alignSelf: "flex-start", backgroundColor: C.amberSoft, borderRadius: R.pill, paddingHorizontal: 8, paddingVertical: 3 },
-  badgeText: { fontFamily: F.bodyBold, fontSize: 10, letterSpacing: 0.8, color: "#9A6400" },
-  note: { flexDirection: "row", gap: 10, padding: 14, borderRadius: R.md },
+  row: { flexDirection: "row", alignItems: "center", gap: 14, paddingHorizontal: 18, paddingVertical: 16, minHeight: 72 },
+  btn: { height: 56, borderRadius: R.pill, alignItems: "center", justifyContent: "center", flexDirection: "row", gap: 10, paddingHorizontal: 24 },
+  note: { flexDirection: "row", gap: 8, alignItems: "center", backgroundColor: C.amberSoft, borderRadius: R.sm, paddingHorizontal: 12, paddingVertical: 10 },
 });

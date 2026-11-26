@@ -34,34 +34,13 @@ test.describe("languages: routing, hreflang, RTL", () => {
 
   test("home in Spanish: hero, search in Spanish, switcher goes to German", async ({ page }) => {
     await page.goto("/es?nogl");
-    await expect(page.getByRole("heading", { level: 1, name: "El mundo es tuyo para explorarlo." })).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1, name: "Datos móviles para cada viaje, listos antes de aterrizar." })).toBeVisible();
     const box = page.getByRole("combobox", { name: "¿A dónde vas?" });
     await box.fill("Alemania");
     await expect(page.getByRole("listbox").getByRole("option", { name: /Alemania/ }).first()).toBeVisible();
-    const menu = page.getByRole("button", { name: "Abrir menú" });
-    if (await menu.isVisible()) await menu.click();
-    await page.locator('[data-testid="language-switcher"]:visible').first().selectOption("de");
+    await page.getByTestId("language-switcher").first().selectOption("de");
     await expect(page).toHaveURL(/\/de(\?nogl)?$/);
     await expect(page.locator("html")).toHaveAttribute("lang", "de");
-  });
-
-  test("legal pages and footer links", async ({ page }) => {
-    await page.goto("/fr?nogl");
-    const footer = page.getByRole("contentinfo");
-    await expect(footer.getByRole("link", { name: "Politique de confidentialité" })).toHaveAttribute("href", "/privacy");
-    for (const [path, h1] of [["/privacy", "Privacy Policy"], ["/terms", "Terms of Service"], ["/cookies", "Cookie Preferences"]]) {
-      await page.goto(path);
-      await expect(page.getByRole("heading", { level: 1, name: h1 })).toBeVisible();
-      await expect(page.getByText("Draft for review.")).toBeVisible();
-    }
-  });
-
-  test("functional storage can be switched off", async ({ page }) => {
-    await page.goto("/cookies");
-    const toggle = page.getByRole("checkbox", { name: "Allow functional storage" });
-    await expect(toggle).toBeChecked();
-    await toggle.uncheck({ force: true });
-    expect(await page.evaluate(() => localStorage.getItem("bleusim.prefs"))).toContain('"functional":false');
   });
 
   test("sitemap lists every language version with alternates", async ({ request }) => {

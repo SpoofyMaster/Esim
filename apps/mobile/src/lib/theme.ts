@@ -1,45 +1,41 @@
-// Mobile theme: BLEUSIM design tokens plus the light "Universe B" surfaces and the pink accent.
-import { color as tokens, radius } from "@bleusim/design-tokens";
-
+// BLEUSIM mobile tokens (mirror packages/design-tokens): light, soft ice background, blue primary, pink accent.
 export const C = {
-  bg: "#F3F6FC",
-  card: tokens.white,
-  ink: "#0B1530",
-  ink2: tokens.ice[700],
-  muted: tokens.ice[500],
-  faint: tokens.ice[400],
-  line: "#E4EAF5",
-  soft: "#EAF1FF",
-  blue: tokens.blue[500],
-  blueDeep: tokens.blue[600],
-  blueSoft: "#DCE8FF",
-  cyan: tokens.cyan[400],
+  bg: "#F4F7FC",
+  card: "#FFFFFF",
+  ink: "#0D1526",
+  ink2: "#2C3A57",
+  muted: "#44567A",
+  faint: "#8A9EC4",
+  border: "#E3EBF7",
+  fill: "#E9EFF8",
+  blue: "#0057FF",
+  blueDark: "#0047D6",
+  blueSoft: "#E6EEFF",
+  cyan: "#39C6FF",
+  navy: "#06152E",
   pink: "#FF3EA5",
-  pinkSoft: "#FFE3F2",
-  navy: tokens.space[900],
-  navy2: tokens.space[850],
-  white: tokens.white,
-  success: tokens.success,
-  warning: tokens.warning,
-  danger: tokens.danger,
-  amberSoft: "#FFF4DB",
+  pinkSoft: "#FFE3F1",
+  pinkInk: "#B0136A",
+  green: "#18B26B",
+  greenSoft: "#E7F7EF",
+  greenInk: "#0E7A4A",
+  amberSoft: "#FFF5DB",
+  amberInk: "#7A5200",
 } as const;
 
-export const R = radius;
+export const R = { sm: 12, md: 18, lg: 24, xl: 32, pill: 999 } as const;
 
+/** Latin fonts; Arabic uses the system font (set per locale in Txt). */
 export const F = {
-  display: "Sora_700Bold",
-  displaySemi: "Sora_600SemiBold",
+  display: "Sora_600SemiBold",
+  displayBold: "Sora_700Bold",
   body: "Inter_400Regular",
-  bodyMedium: "Inter_500Medium",
-  bodySemi: "Inter_600SemiBold",
-  bodyBold: "Inter_700Bold",
-  arabic: "IBMPlexSansArabic_400Regular",
-  arabicMedium: "IBMPlexSansArabic_500Medium",
-  arabicBold: "IBMPlexSansArabic_700Bold",
+  medium: "Inter_500Medium",
+  semibold: "Inter_600SemiBold",
 } as const;
 
 export const shadow = {
-  card: { shadowColor: "#0B1530", shadowOpacity: 0.06, shadowRadius: 16, shadowOffset: { width: 0, height: 6 }, elevation: 2 },
-  float: { shadowColor: "#0B1530", shadowOpacity: 0.14, shadowRadius: 24, shadowOffset: { width: 0, height: 10 }, elevation: 8 },
+  card: { shadowColor: "#0D1526", shadowOpacity: 0.06, shadowRadius: 14, shadowOffset: { width: 0, height: 6 }, elevation: 2 },
+  float: { shadowColor: "#0D1526", shadowOpacity: 0.14, shadowRadius: 24, shadowOffset: { width: 0, height: 12 }, elevation: 8 },
+  blue: { shadowColor: "#0057FF", shadowOpacity: 0.35, shadowRadius: 18, shadowOffset: { width: 0, height: 10 }, elevation: 6 },
 } as const;

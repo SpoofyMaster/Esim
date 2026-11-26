@@ -11,7 +11,7 @@ export function PlanTable({ plans, title, lang = "en" }: { plans: Plan[]; title:
   return (
     <section aria-labelledby="plans-h" className="mt-10">
       <h2 id="plans-h" className="font-display text-2xl font-semibold tracking-tight">{title}</h2>
-      {fixture && <p role="note" className="mt-2 text-sm text-amber-900 dark:text-amber-200">{t.page.sandboxTable}</p>}
+      {fixture && <p role="note" className="mt-2 text-sm text-amber-900">{t.page.sandboxTable}</p>}
       <div className="mt-5 overflow-x-auto rounded-2xl border border-[var(--border)]">
         <table className="w-full min-w-[520px] text-start text-sm">
           <thead className="bg-[var(--bg-subtle)] text-[var(--fg-muted)]"><tr><th scope="col" className="px-4 py-3 text-start font-medium">{t.page.tableData}</th><th scope="col" className="text-start font-medium">{t.page.tableValidity}</th><th scope="col" className="text-start font-medium">{t.page.tablePrice}</th><th scope="col" className="sr-only">{t.page.buy}</th></tr></thead>
