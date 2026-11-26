@@ -7,6 +7,7 @@ const es: Dict = {
     "profile": "Perfil"
   },
   "common": {
+    sandboxBadge: "Sandbox",
     "from": "Desde {price}",
     "countries": "{n} países",
     "days": "{n} días",
@@ -60,7 +61,7 @@ const es: Dict = {
     "laterA": "El plan empieza cuando tu eSIM se conecta por primera vez en tu destino. Tienes {n} días tras la compra; después, empieza automáticamente.",
     "coverage": "Países cubiertos",
     "continue": "Continuar · {price}",
-    "checkoutNote": "El pago se abre de forma segura en la web de BLEUSIM. Prueba: sin pago real.",
+    "checkoutNote": "Pago seguro en la app. Sandbox: sin pago real.",
     "none": "Aún no vendemos planes para {name}.",
     "seeGlobal": "Ver planes globales"
   },
@@ -121,6 +122,30 @@ const es: Dict = {
     "passwordHint": "Al menos 10 caracteres",
     "offline": "No se puede conectar con el servidor de BLEUSIM. El inicio de sesión necesita la API en este entorno.",
     "failed": "No se pudo iniciar sesión. Revisa tu correo y contraseña."
+  },
+  checkout: {
+    title: "Pago",
+    yourPlan: "Tu plan",
+    email: "Email para tu eSIM",
+    emailHint: "Enviamos el código QR y los pasos de instalación a esta dirección.",
+    emailInvalid: "Introduce un email válido.",
+    total: "Total",
+    pay: "Pagar {price}",
+    processing: "Procesando…",
+    sandboxPayment: "Pago sandbox: no se mueve dinero y la eSIM es un perfil de prueba.",
+    offline: "No se puede conectar con el servidor de BLEUSIM. El pago necesita la API en este entorno.",
+    failed: "El pago no se completó. No se cobró nada.",
+    legal: "Al pagar aceptas los Términos del servicio y la Política de privacidad.",
+  },
+  order: {
+    title: "Tu eSIM está lista",
+    pending: "Estamos preparando tu eSIM",
+    number: "Pedido {n}",
+    scan: "Escanea este código QR desde otra pantalla o instálala en este teléfono con el código de activación.",
+    lpa: "Código de activación",
+    steps: "Cómo instalarla",
+    home: "Volver al inicio",
+    sandbox: "eSIM sandbox: este código QR no se conecta a una red real.",
   },
   "guide": {
     "title": "Cómo funciona la eSIM",

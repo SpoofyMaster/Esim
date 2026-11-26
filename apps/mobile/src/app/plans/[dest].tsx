@@ -2,12 +2,12 @@ import { useEffect, useMemo, useState } from "react";
 import { ActivityIndicator, ScrollView, StyleSheet, View } from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import * as WebBrowser from "expo-web-browser";
+import { Image } from "expo-image";
+import { LinearGradient } from "expo-linear-gradient";
 import { COUNTRIES } from "@bleusim/geospatial";
 import { Badge, Button, Flag, IconBubble, SandboxNote, Tap, Txt } from "@/components/ui";
 import { Icon } from "@/components/Icon";
-import { catalog, destName, formatPrice, useAsync, type Plan } from "@/lib/catalog";
-import { WEB_URL } from "@/lib/config";
+import { catalog, destImage, destName, formatPrice, useAsync, type Plan } from "@/lib/catalog";
 import { C, R, shadow } from "@/lib/theme";
 import { fmt, useI18n } from "@/i18n";
 
@@ -18,6 +18,7 @@ export default function Plans() {
   const { data: plans, loading, error, reload } = useAsync(() => catalog.plans(dest), [dest]);
   const name = destName(dest, locale, t.common.global);
   const isCountry = !dest.startsWith("region:") && dest !== "global";
+  const img = destImage(dest);
 
   // Best choice: unlimited if offered, else the largest data plan; then the rest by data.
   const ordered = useMemo(() => {
@@ -40,13 +41,24 @@ export default function Plans() {
       <View style={s.head}>
         <Tap onPress={() => router.back()} accessibilityRole="button" accessibilityLabel={t.common.close} style={s.round}><Icon name="close" size={22} /></Tap>
         <Txt v="h3" style={{ flex: 1, textAlign: "center" }}>{t.plans.title}</Txt>
-        <View style={{ width: 48 }} />
+        <View style={{ minWidth: 48, alignItems: "flex-end" }}>{sandbox ? <Badge text={t.common.sandboxBadge} tone="amber" /> : null}</View>
       </View>
       <ScrollView contentContainerStyle={{ padding: 20, paddingBottom: insets.bottom + 140, gap: 12 }}>
-        <View style={s.dest}>
-          {isCountry ? <Flag iso={dest} size={40} /> : <IconBubble name={dest === "global" ? "globe" : "layers"} tone={dest === "global" ? "pink" : "blue"} size={40} />}
-          <Txt v="h2" style={{ flex: 1 }}>{name}</Txt>
-        </View>
+        {img ? (
+          <View style={s.banner}>
+            <Image source={img} style={StyleSheet.absoluteFill} contentFit="cover" transition={200} accessibilityIgnoresInvertColors />
+            <LinearGradient colors={["transparent", "rgba(6,21,46,0.82)"]} style={s.bannerShade} />
+            <View style={s.bannerRow}>
+              {isCountry ? <Flag iso={dest} size={36} /> : <IconBubble name={dest === "global" ? "globe" : "layers"} tone={dest === "global" ? "pink" : "blue"} size={36} />}
+              <Txt v="h2" accessibilityRole="header" style={{ flex: 1, color: "#fff" }}>{name}</Txt>
+            </View>
+          </View>
+        ) : (
+          <View style={s.dest}>
+            {isCountry ? <Flag iso={dest} size={40} /> : <IconBubble name={dest === "global" ? "globe" : "layers"} tone={dest === "global" ? "pink" : "blue"} size={40} />}
+            <Txt v="h2" accessibilityRole="header" style={{ flex: 1 }}>{name}</Txt>
+          </View>
+        )}
 
         {loading && <ActivityIndicator style={{ marginTop: 40 }} color={C.blue} />}
         {!!error && <View style={{ alignItems: "center", gap: 12, marginTop: 30 }}><Txt v="body">{t.common.loadError}</Txt><Button title={t.common.retry} kind="ghost" onPress={reload} /></View>}
@@ -110,7 +122,7 @@ export default function Plans() {
 
       {chosen && (
         <View style={[s.footer, { paddingBottom: insets.bottom + 12 }]}>
-          <Button title={fmt(t.plans.continue, { price: price(chosen) })} onPress={() => WebBrowser.openBrowserAsync(`${WEB_URL}/checkout?plan=${encodeURIComponent(chosen.id)}`)} />
+          <Button title={fmt(t.plans.continue, { price: price(chosen) })} onPress={() => router.push({ pathname: "/checkout", params: { dest, plan: chosen.id } })} />
           <Txt v="caption" style={{ textAlign: "center", marginTop: 8 }}>{t.plans.checkoutNote}</Txt>
         </View>
       )}
@@ -128,6 +140,9 @@ function Inc({ icon, text }: { icon: "signal" | "refresh" | "info"; text: string
 const s = StyleSheet.create({
   head: { flexDirection: "row", alignItems: "center", paddingHorizontal: 16, paddingTop: 16, paddingBottom: 8, gap: 8 },
   round: { width: 48, height: 48, borderRadius: 24, backgroundColor: C.card, alignItems: "center", justifyContent: "center", borderWidth: 1, borderColor: C.border },
+  banner: { height: 156, borderRadius: R.lg, overflow: "hidden", backgroundColor: C.navy },
+  bannerShade: { position: "absolute", left: 0, right: 0, bottom: 0, height: 100 },
+  bannerRow: { position: "absolute", left: 16, right: 16, bottom: 14, flexDirection: "row", alignItems: "center", gap: 12 },
   dest: { flexDirection: "row", alignItems: "center", gap: 14, backgroundColor: C.fill, borderRadius: R.lg, padding: 16 },
   bestWrap: { borderRadius: R.lg, backgroundColor: C.card, borderWidth: 2, borderColor: C.border, overflow: "hidden" },
   bestOn: { borderColor: C.ink },

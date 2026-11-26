@@ -1,6 +1,7 @@
 # Progress log
 
 ## 2026-11-26 — Mobile app
+- Merge (Badr: compare both, then merge): base = Mac app on main; added in-app checkout → order QR (sandbox purchase verified against local API), destination/region photo banners + region carousel, 235 round flags, Sandbox badges, react-native-web export in CI. Fixed the catalog API URL (`/v1/v1`). QA screenshots replaced in `documentation/qa/2026-11-26-mobile/`.
 - `apps/mobile`: Expo SDK 58 / Expo Router app inspired by the structure of Badr's Saily iPhone screenshots (no copied copy or assets). Floating pill tab bar (Home, My eSIMs, Help, Profile), Earth hero + search, plans with best-choice card, sandbox checkout, order QR, sign-in panel, 7 languages + Arabic RTL, 235 round flags, Higgsfield imagery, app icon.
 - Verified: `tsc` clean; web export; 13 iPhone-size screenshots (`documentation/qa/2026-11-26-mobile/`); sandbox purchase Japan unlimited → order BS-… with QR against the local API + Postgres.
 

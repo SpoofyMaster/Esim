@@ -7,6 +7,7 @@ const fr: Dict = {
     "profile": "Profil"
   },
   "common": {
+    sandboxBadge: "Sandbox",
     "from": "Dès {price}",
     "countries": "{n} pays",
     "days": "{n} jours",
@@ -60,7 +61,7 @@ const fr: Dict = {
     "laterA": "Le forfait démarre à la première connexion à destination. Vous avez {n} jours après l’achat ; ensuite, il démarre automatiquement.",
     "coverage": "Pays couverts",
     "continue": "Continuer · {price}",
-    "checkoutNote": "Le paiement s’ouvre en toute sécurité sur le site BLEUSIM. Test : aucun vrai paiement.",
+    "checkoutNote": "Paiement sécurisé dans l’app. Sandbox : aucun paiement réel.",
     "none": "Nous ne vendons pas encore de forfaits pour {name}.",
     "seeGlobal": "Voir les forfaits mondiaux"
   },
@@ -121,6 +122,30 @@ const fr: Dict = {
     "passwordHint": "Au moins 10 caractères",
     "offline": "Serveur BLEUSIM injoignable. La connexion nécessite l’API dans cet environnement.",
     "failed": "Échec de la connexion. Vérifiez votre e-mail et votre mot de passe."
+  },
+  checkout: {
+    title: "Paiement",
+    yourPlan: "Votre forfait",
+    email: "E-mail pour votre eSIM",
+    emailHint: "Nous envoyons le QR code et les étapes d’installation à cette adresse.",
+    emailInvalid: "Saisissez une adresse e-mail valide.",
+    total: "Total",
+    pay: "Payer {price}",
+    processing: "Traitement…",
+    sandboxPayment: "Paiement sandbox : aucun argent n’est débité et l’eSIM est un profil de test.",
+    offline: "Impossible de joindre le serveur BLEUSIM. Le paiement nécessite l’API dans cet environnement.",
+    failed: "Le paiement n’a pas abouti. Rien n’a été débité.",
+    legal: "En payant, vous acceptez les Conditions d’utilisation et la Politique de confidentialité.",
+  },
+  order: {
+    title: "Votre eSIM est prête",
+    pending: "Nous préparons votre eSIM",
+    number: "Commande {n}",
+    scan: "Scannez ce QR code depuis un autre écran, ou installez-la sur ce téléphone avec le code d’activation ci-dessous.",
+    lpa: "Code d’activation",
+    steps: "Comment l’installer",
+    home: "Retour à l’accueil",
+    sandbox: "eSIM sandbox : ce QR code ne se connecte à aucun vrai réseau.",
   },
   "guide": {
     "title": "Comment marche l’eSIM",

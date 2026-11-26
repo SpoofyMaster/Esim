@@ -3,9 +3,10 @@ import { createApiClient } from "@bleusim/api-client";
 import { COUNTRIES, REGIONS, type Locale } from "@bleusim/geospatial";
 import { useEffect, useState } from "react";
 import { intlLocale } from "@/i18n";
+import { MEDIA } from "./media";
 
 // Catalog from the API when EXPO_PUBLIC_API_URL is set; otherwise the labelled DEV FIXTURE (sandbox) catalog.
-const remote = process.env.EXPO_PUBLIC_API_URL ? createApiClient(`${process.env.EXPO_PUBLIC_API_URL}/v1`).catalog : null;
+const remote = process.env.EXPO_PUBLIC_API_URL ? createApiClient(process.env.EXPO_PUBLIC_API_URL).catalog : null; // the client adds /v1 itself
 async function withFallback<T>(fn: (c: CatalogProvider) => Promise<T>): Promise<T> {
   if (remote) { try { return await fn(remote); } catch { /* API down → fixture */ } }
   return fn(devFixtureCatalog);
@@ -37,4 +38,11 @@ export function useAsync<T>(fn: () => Promise<T>, deps: unknown[]) {
     return () => { live = false; };
   }, [...deps, n]); // eslint-disable-line react-hooks/exhaustive-deps
   return { ...state, reload: () => setN((x) => x + 1) };
+}
+
+/** Illustrative photo (Higgsfield) for "JP", "region:europe" or "global", when one exists. */
+export function destImage(dest: string): number | undefined {
+  if (dest === "global") return MEDIA["global"];
+  if (dest.startsWith("region:")) return MEDIA[`region-${dest.slice(7)}`];
+  return MEDIA[`dest-${dest.toLowerCase()}`];
 }

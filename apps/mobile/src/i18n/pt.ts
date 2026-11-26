@@ -7,6 +7,7 @@ const pt: Dict = {
     "profile": "Perfil"
   },
   "common": {
+    sandboxBadge: "Sandbox",
     "from": "Desde {price}",
     "countries": "{n} países",
     "days": "{n} dias",
@@ -60,7 +61,7 @@ const pt: Dict = {
     "laterA": "O plano começa quando o eSIM se liga pela primeira vez no destino. Tem {n} dias após a compra; depois disso, começa automaticamente.",
     "coverage": "Países cobertos",
     "continue": "Continuar · {price}",
-    "checkoutNote": "O pagamento abre em segurança no site da BLEUSIM. Teste: sem pagamento real.",
+    "checkoutNote": "Pagamento seguro na app. Sandbox: sem pagamento real.",
     "none": "Ainda não vendemos planos para {name}.",
     "seeGlobal": "Ver planos globais"
   },
@@ -121,6 +122,30 @@ const pt: Dict = {
     "passwordHint": "Pelo menos 10 caracteres",
     "offline": "Não é possível ligar ao servidor BLEUSIM. O início de sessão precisa da API neste ambiente.",
     "failed": "Falha ao iniciar sessão. Verifique o e-mail e a palavra-passe."
+  },
+  checkout: {
+    title: "Pagamento",
+    yourPlan: "O seu plano",
+    email: "Email para o seu eSIM",
+    emailHint: "Enviamos o código QR e os passos de instalação para este endereço.",
+    emailInvalid: "Introduza um email válido.",
+    total: "Total",
+    pay: "Pagar {price}",
+    processing: "A processar…",
+    sandboxPayment: "Pagamento sandbox: não há movimento de dinheiro e o eSIM é um perfil de teste.",
+    offline: "Não é possível contactar o servidor BLEUSIM. O pagamento precisa da API neste ambiente.",
+    failed: "O pagamento não foi concluído. Nada foi cobrado.",
+    legal: "Ao pagar, aceita os Termos de Serviço e a Política de Privacidade.",
+  },
+  order: {
+    title: "O seu eSIM está pronto",
+    pending: "Estamos a preparar o seu eSIM",
+    number: "Encomenda {n}",
+    scan: "Leia este código QR a partir de outro ecrã, ou instale neste telemóvel com o código de ativação abaixo.",
+    lpa: "Código de ativação",
+    steps: "Como instalar",
+    home: "Voltar ao início",
+    sandbox: "eSIM sandbox: este código QR não liga a uma rede real.",
   },
   "guide": {
     "title": "Como funciona o eSIM",
