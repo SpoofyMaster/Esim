@@ -47,7 +47,7 @@ export function Card({ children, style }: { children: React.ReactNode; style?: S
 }
 
 /** Row card like a settings cell: leading visual, title/subtitle, trailing chevron or badge. */
-export function RowCard({ title, sub, leading, trailing, onPress, disabled, a11y }: { title: string; sub?: string; leading?: React.ReactNode; trailing?: React.ReactNode; onPress?: () => void; disabled?: boolean; a11y?: string }) {
+export function RowCard({ title, sub, leading, trailing, badge, onPress, disabled, a11y }: { title: string; sub?: string; leading?: React.ReactNode; trailing?: React.ReactNode; badge?: React.ReactNode; onPress?: () => void; disabled?: boolean; a11y?: string }) {
   const { rtl } = useI18n();
   return (
     <Tap onPress={disabled ? undefined : onPress} disabled={disabled} accessibilityRole="button" accessibilityLabel={a11y ?? (sub ? `${title}, ${sub}` : title)} accessibilityState={{ disabled: !!disabled }} style={[s.card, s.row]}>
@@ -55,6 +55,7 @@ export function RowCard({ title, sub, leading, trailing, onPress, disabled, a11y
       <View style={{ flex: 1 }}>
         <Txt v="h3">{title}</Txt>
         {!!sub && <Txt v="small" style={{ marginTop: 2 }}>{sub}</Txt>}
+        {!!badge && <View style={{ marginTop: 8 }}>{badge}</View>}
       </View>
       {trailing ?? <Icon name={rtl ? "chevronLeft" : "chevronRight"} size={20} color={C.faint} />}
     </Tap>

@@ -14,10 +14,10 @@ export default function Help() {
     <Screen title={t.help.title}>
       <RowCard title={t.help.start} sub={t.help.startSub} leading={<IconBubble name="rocket" />} onPress={() => router.push({ pathname: "/guide", params: { focus: "steps" } })} />
       <RowCard title={t.help.center} leading={<IconBubble name="question" />} trailing={<Icon name="external" size={20} color={C.faint} />} onPress={() => web("/#faq")} />
-      <RowCard title={t.help.chat} leading={<IconBubble name="chat" />} trailing={<Badge text={t.common.soon} />} disabled />
+      <RowCard title={t.help.chat} leading={<IconBubble name="chat" />} badge={<Badge text={t.common.soon} />} trailing={<></>} disabled />
       <RowCard title={t.help.refund} sub={t.help.refundSub} leading={<IconBubble name="refund" />} trailing={<Icon name="external" size={20} color={C.faint} />} onPress={() => web("/terms#refunds")} />
       <RowCard title={t.help.network} sub={t.help.networkSub} leading={<IconBubble name="signal" />} onPress={() => router.push({ pathname: "/guide", params: { focus: "network" } })} />
-      <RowCard title={t.help.feedback} sub={t.help.feedbackSub} leading={<IconBubble name="flag" tone="pink" />} trailing={<Badge text={t.common.soon} />} disabled />
+      <RowCard title={t.help.feedback} sub={t.help.feedbackSub} leading={<IconBubble name="flag" tone="pink" />} badge={<Badge text={t.common.soon} />} trailing={<></>} disabled />
     </Screen>
   );
 }

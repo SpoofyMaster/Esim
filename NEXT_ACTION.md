@@ -1,3 +1,9 @@
+# Next action (updated 2026-11-26 21:45 UTC)
+
+Mobile app: Badr chose to merge both versions (2026-11-26). Base = the Mac app on main (simulator-tested); PR #1 adds in-app checkout → order QR, destination/region photos, all round flags, sandbox labels, web export in CI.
+Mobile next: run on a real phone, Apple/Google sign-in (needs developer accounts, ask Badr), token auth for native, EAS builds + store listings (ask Badr before any signup or submission).
+
+---
 # Next action (updated 2026-11-26 18:45 UTC)
 
 Done 2026-11-26: light redesign (Mac version chosen by Badr over 635ad45): white theme, new home, globe at /explore, legal drafts at /privacy /terms /cookies. Open: B-8 legal details.
