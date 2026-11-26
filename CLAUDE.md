@@ -20,7 +20,8 @@
 - `packages/geospatial` 240 Natural Earth countries (Western Sahara merged into Morocco, see DECISIONS), 7-language names, regions, cities, Fuse search (`pnpm --filter @bleusim/geospatial build:data` regenerates `data/`)
 - `packages/catalog` catalog contract + DEV FIXTURE provider
 - `packages/design-tokens` colours, type, radius, motion (TS + CSS vars)
-- `apps/{mobile,admin,api}`, other packages: scaffold folders, not started
+- `apps/mobile` Expo SDK 58 + Expo Router app (iOS/Android/web preview), see `apps/mobile/README.md`. Routes in `src/app`, strings in `src/i18n` (7 languages).
+- `apps/api` Fastify API; other packages as listed
 - `research/` Saily audit · `documentation/qa/` screenshots · `tests/` Playwright e2e + visual script
 
 ## Commands

@@ -31,3 +31,5 @@ jobs:
         run: pnpm --filter @bleusim/geospatial test && pnpm --filter @bleusim/api test
       - name: Build web (fixture catalog)
         run: pnpm --filter @bleusim/web build
+      - name: Export mobile app (web)
+        run: cd apps/mobile && CI=1 EXPO_OFFLINE=1 npx expo export --platform web --output-dir dist

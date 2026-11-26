@@ -1,3 +1,9 @@
+# Next action (updated 2026-11-26 20:00 UTC)
+
+Done 2026-11-26: mobile app `apps/mobile` (Expo SDK 58): Home, Search, Plans, Checkout → sandbox payment → Order with QR (verified end to end against the local API), My eSIMs, Help + guides, Profile, 7 languages with Arabic RTL. Web preview export runs in CI.
+Mobile next: run on a real phone with Expo Go (Badr's Mac), Apple/Google/Microsoft sign-in (needs developer accounts, ask Badr), token auth for native instead of the session cookie, push notifications for low data, EAS builds + store listings (ask Badr before any signup or submission).
+
+---
 # Next action (updated 2026-11-26 13:40 UTC)
 
 Done 2026-11-26: light redesign (white theme, new home sections, footer), legal drafts at /privacy /terms /cookies with a working cookie preference. Open: B-7 legal details.
